@@ -1,15 +1,11 @@
 package gui.layout.main.hotel_main;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
 
-import javax.swing.Icon;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import gui.buttons.AdminBtn;
 import gui.buttons.FloorGuideBtn;
