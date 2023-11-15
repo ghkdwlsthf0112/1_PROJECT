@@ -7,30 +7,30 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JButton;
 
-public class AdminBtn extends JButton{
-//	
-	public AdminBtn() {
-		decorate();
+public class ChkOutBtn extends JButton{
+//	setBounds(15, 655, 365, 170);
+	public ChkOutBtn() {
+
 	}
-	
-	public AdminBtn(String text) {
+    
+    public ChkOutBtn(String text) {
         super(text);
         decorate();
     }
 
-    public AdminBtn(Action action) {
+    public ChkOutBtn(Action action) {
         super(action);
         decorate();
     }
 
-    public AdminBtn(Icon icon) {
+    public ChkOutBtn(Icon icon) {
         super(icon);
         setPressedIcon(icon);
         setRolloverSelectedIcon(icon);
         decorate();
     }
 
-    public AdminBtn(String text, Icon icon) {
+    public ChkOutBtn(String text, Icon icon) {
         super(text, icon);
         decorate();
     }
@@ -39,6 +39,5 @@ public class AdminBtn extends JButton{
         setBorderPainted(false);
         setOpaque(false);
         setBackground(new Color(0,0,0,0));
-        setBounds(720, 10, 20, 20);
     }
 }

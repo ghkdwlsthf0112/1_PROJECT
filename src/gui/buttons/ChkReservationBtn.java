@@ -7,32 +7,31 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JButton;
 
-public class HomeBtn extends JButton{
+public class ChkReservationBtn extends JButton {
+//	setBounds(388, 655, 365, 170);
 
-	
-	
-	public HomeBtn() {
+	public ChkReservationBtn() {
 		decorate();
 	}
 
-	public HomeBtn(String text) {
+	public ChkReservationBtn(String text) {
 		super(text);
 		decorate();
 	}
 
-	public HomeBtn(Action action) {
+	public ChkReservationBtn(Action action) {
 		super(action);
 		decorate();
 	}
 
-	public HomeBtn(Icon icon) {
+	public ChkReservationBtn(Icon icon) {
 		super(icon);
 		setPressedIcon(icon);
 		setRolloverSelectedIcon(icon);
 		decorate();
 	}
 
-	public HomeBtn(String text, Icon icon) {
+	public ChkReservationBtn(String text, Icon icon) {
 		super(text, icon);
 		decorate();
 	}
@@ -40,6 +39,6 @@ public class HomeBtn extends JButton{
 	protected void decorate() {
 		setBorderPainted(false);
 		setOpaque(false);
-		setBackground(new Color(0, 0, 0, 0));
+		setBackground(new Color(0, 0, 0));
 	}
 }

@@ -1,36 +1,38 @@
 package gui.buttons;
 
 import java.awt.Color;
-import java.awt.Font;
+import java.awt.Dimension;
 
 import javax.swing.Action;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-public class AdminBtn extends JButton{
-//	
-	public AdminBtn() {
-		decorate();
+import image.getImages;
+
+public class ChkInBtn extends JButton{
+	public ChkInBtn() {
+
 	}
-	
-	public AdminBtn(String text) {
+    
+    public ChkInBtn(String text) {
         super(text);
         decorate();
     }
 
-    public AdminBtn(Action action) {
+    public ChkInBtn(Action action) {
         super(action);
         decorate();
     }
-
-    public AdminBtn(Icon icon) {
+    
+    public ChkInBtn(Icon icon) {
         super(icon);
         setPressedIcon(icon);
         setRolloverSelectedIcon(icon);
         decorate();
     }
 
-    public AdminBtn(String text, Icon icon) {
+    public ChkInBtn(String text, Icon icon) {
         super(text, icon);
         decorate();
     }
@@ -39,6 +41,5 @@ public class AdminBtn extends JButton{
         setBorderPainted(false);
         setOpaque(false);
         setBackground(new Color(0,0,0,0));
-        setBounds(720, 10, 20, 20);
     }
 }
