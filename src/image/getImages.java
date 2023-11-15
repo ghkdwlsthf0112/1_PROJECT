@@ -24,7 +24,7 @@ public class getImages extends Label{
 			
 			// 2. 불러온 이미지로부터 사이즈 조절된 새로운 인스턴스를 받을 수 있다
 			Image scaledImage =
-					bufferedImage.getScaledInstance(x, y, Image.SCALE_DEFAULT);
+					bufferedImage.getScaledInstance(x, y, Image.SCALE_SMOOTH);
 			// 3. 크기 조절된 이미지를 라벨에 붙인다
 			ImageIcon image = new ImageIcon(scaledImage);
 			return image;
