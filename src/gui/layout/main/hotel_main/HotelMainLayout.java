@@ -15,6 +15,7 @@ import gui.buttons.AdminBtn;
 import gui.buttons.FloorGuideBtn;
 import gui.buttons.HomeBtn;
 import gui.buttons.PrevBtn;
+import gui.layout.FrameBasicSet;
 import gui.buttons.ChkInBtn;
 import gui.buttons.ChkOutBtn;
 import gui.buttons.ChkReservationBtn;
@@ -76,7 +77,6 @@ public class HotelMainLayout extends JFrame {
 
 		add(imageLabel);
 
-		// 기본셋팅
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocation(550, 10);
 		setSize(768, 1024);
@@ -84,8 +84,4 @@ public class HotelMainLayout extends JFrame {
 		setResizable(false);
 	}
 	
-
-	public static void main(String[] args) {
-		new HotelMainLayout();
-	}
 }
