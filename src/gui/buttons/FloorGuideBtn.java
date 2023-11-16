@@ -40,5 +40,6 @@ public class FloorGuideBtn extends JButton{
 		setBorderPainted(false);
 		setOpaque(false);
 		setBackground(new Color(0, 0, 0, 0));
+		setBounds(130, 920, 80, 40);
 	}
 }

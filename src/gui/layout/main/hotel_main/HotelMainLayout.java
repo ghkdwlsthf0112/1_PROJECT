@@ -1,24 +1,23 @@
 package gui.layout.main.hotel_main;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
 
-import javax.swing.Icon;
+
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
+import actions.ChkReservationBtnActionListener;
+import actions.PrevBtnActionListener;
 import gui.buttons.AdminBtn;
-import gui.buttons.FloorGuideBtn;
-import gui.buttons.HomeBtn;
-import gui.buttons.PrevBtn;
-import gui.layout.FrameBasicSet;
 import gui.buttons.ChkInBtn;
 import gui.buttons.ChkOutBtn;
 import gui.buttons.ChkReservationBtn;
+import gui.buttons.FloorGuideBtn;
+import gui.buttons.HomeBtn;
+import gui.buttons.PrevBtn;
 import image.getImages;
 
 public class HotelMainLayout extends JFrame {
@@ -32,14 +31,15 @@ public class HotelMainLayout extends JFrame {
 	static ImageIcon homeBtnImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/home_white.png");
 	static ImageIcon guideBtnImage = new getImages().getImageIcon(80, 40, "src/image/icon_image/btn/RoomInfomationMap_white.png");
 
-	static JButton b1 = new ChkInBtn(checkInImage);
-	static JButton b2 = new ChkOutBtn(checkOutImage);
-	static JButton b3 = new ChkReservationBtn(chkResvImage);
-	static JButton b4 = new AdminBtn();
-	static JButton b5 = new PrevBtn(backImage);
-	static JButton b6 = new HomeBtn(homeBtnImage);
-	static JButton b7 = new FloorGuideBtn(guideBtnImage);
-
+	public JButton b1 = new ChkInBtn(checkInImage);
+	public JButton b2 = new ChkOutBtn(checkOutImage);
+	ActionListener ChkReservationBtnActionListener;
+	public JButton b3 = new ChkReservationBtn(chkResvImage);
+	public JButton b4 = new AdminBtn();
+	ActionListener PrevBtnActionListener;
+	public JButton b5 = new PrevBtn(backImage);
+	public JButton b6 = new HomeBtn(homeBtnImage);
+	JButton b7 = new FloorGuideBtn(guideBtnImage);
 	public HotelMainLayout() {
 		super("델루나호텔");
 		setLayout(null);
@@ -53,30 +53,25 @@ public class HotelMainLayout extends JFrame {
 		imageLabel.add(b1);
 
 		// 체크아웃 버튼
-		b2.setBounds(25, 615, 340, 170);
 		imageLabel.add(b2);
 
 		// 예약확인 버튼
-		b3.setBounds(380, 615, 340, 170);
+		b3.addActionListener(new ChkReservationBtnActionListener(this));
 		imageLabel.add(b3);
 
 		// 관리자 버튼 안보이는 버튼
 		imageLabel.add(b4);
 
 		// 뒤로가기 버튼
-		b5.setBounds(30, 920, 40, 40);
+		b5.addActionListener(new PrevBtnActionListener(this));
 		imageLabel.add(b5);
-
 		// 홈버튼
-		b6.setBounds(80, 920, 40, 40);
 		imageLabel.add(b6);
 
 		// 안내도 버튼
-		b7.setBounds(130, 920, 80, 40);
 		imageLabel.add(b7);
 
 		add(imageLabel);
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocation(550, 10);
 		setSize(768, 1024);

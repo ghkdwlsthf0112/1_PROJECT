@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.SwingConstants;
 
 import gui.layout.main.cover.CoverLayout;
 import gui.layout.main.hotel_main.HotelMainLayout;
@@ -21,8 +20,7 @@ public class CoverBtnActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == coverBtn) {
 			new HotelMainLayout();
-			mainFrame.setVisible(false);
-			
+			mainFrame.dispose();			
 		}
 	}
 	public CoverBtnActionListener(CoverLayout mainFrame) {
