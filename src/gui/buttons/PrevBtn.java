@@ -40,6 +40,7 @@ public class PrevBtn extends JButton{
 		setBorderPainted(false);
 		setOpaque(false);
 		setBackground(new Color(0, 0, 0, 0));
+		setBounds(30, 920, 40, 40);
 	}
 	
 }
