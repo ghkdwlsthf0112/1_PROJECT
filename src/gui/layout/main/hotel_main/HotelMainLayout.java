@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 
 import actions.ChkInBtnActionListener;
 import actions.ChkReservationBtnActionListener;
+import actions.FloorGuideBtnActionListener;
 import actions.PrevBtnActionListener;
 import gui.buttons.AdminBtn;
 import gui.buttons.ChkInBtn;
@@ -32,16 +33,18 @@ public class HotelMainLayout extends JFrame {
 	static ImageIcon homeBtnImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/home_white.png");
 	static ImageIcon guideBtnImage = new getImages().getImageIcon(80, 40, "src/image/icon_image/btn/RoomInfomationMap_white.png");
 
-	ActionListener ChkInBtnActionListener;
 	public JButton b1 = new ChkInBtn(checkInImage);
+	ActionListener ChkInBtnActionListener;
 	public JButton b2 = new ChkOutBtn(checkOutImage);
-	ActionListener ChkReservationBtnActionListener;
 	public JButton b3 = new ChkReservationBtn(chkResvImage);
+	ActionListener ChkReservationBtnActionListener;
 	public JButton b4 = new AdminBtn();
-	ActionListener PrevBtnActionListener;
 	public JButton b5 = new PrevBtn(backImage);
+	ActionListener PrevBtnActionListener;
 	public JButton b6 = new HomeBtn(homeBtnImage);
-	JButton b7 = new FloorGuideBtn(guideBtnImage);
+	public JButton b7 = new FloorGuideBtn(guideBtnImage);
+	ActionListener FloorGuideBtnActionListener;
+	
 	public HotelMainLayout() {
 		super("델루나호텔");
 		setLayout(null);
@@ -72,6 +75,7 @@ public class HotelMainLayout extends JFrame {
 		imageLabel.add(b6);
 
 		// 안내도 버튼
+		b7.addActionListener(new FloorGuideBtnActionListener(this));
 		imageLabel.add(b7);
 
 		add(imageLabel);

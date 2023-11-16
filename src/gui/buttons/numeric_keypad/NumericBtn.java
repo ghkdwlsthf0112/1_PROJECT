@@ -5,8 +5,12 @@ import java.awt.Color;
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JButton;
+import javax.swing.JTextField;
+
+import actions.NumberBtnActionListener;
 
 public class NumericBtn extends JButton{
+
 	public NumericBtn() {
 	}
     
@@ -29,6 +33,8 @@ public class NumericBtn extends JButton{
 
     public NumericBtn(String text, Icon icon) {
         super(text, icon);
+        setPressedIcon(icon);
+        setRolloverSelectedIcon(icon);
         decorate();
     }
 
@@ -36,6 +42,5 @@ public class NumericBtn extends JButton{
         setBorderPainted(false);
         setOpaque(false);
         setBackground(new Color(0,0,0,0));
-        setBounds(0, 0, 100, 100);
     }
 }
