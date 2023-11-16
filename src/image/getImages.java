@@ -33,4 +33,20 @@ public class getImages extends Label{
 		}
 		return null;
 	}
+	
+	// 사진 크기 조정이 필요없다면...
+	public ImageIcon getImageIcon(String imageRoute) {
+		try {
+			// 1. 이미지의 크기를 수정하기위해 불러온다
+			BufferedImage bufferedImage =
+					ImageIO.read(new File(imageRoute));
+			
+			// 2. 크기 조절된 이미지를 라벨에 붙인다
+			ImageIcon image = new ImageIcon(bufferedImage);
+			return image;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
