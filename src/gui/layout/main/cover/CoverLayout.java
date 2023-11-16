@@ -33,8 +33,7 @@ public class CoverLayout extends JFrame {
 		
 		coverBtn.setBounds(0, 0, 768, 1024);
 		
-		CoverBtnActionListener = new CoverBtnActionListener(this);
-		coverBtn.addActionListener(CoverBtnActionListener);
+		coverBtn.addActionListener(new CoverBtnActionListener(this));
 		add(coverBtn);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,7 +43,4 @@ public class CoverLayout extends JFrame {
 		setResizable(false);
 	}
 	
-	public static void main(String[] args) {
-		new CoverLayout();
-	}
 }
