@@ -19,8 +19,8 @@ public class CheckInLayout extends JFrame {
 	
 	static ImageIcon mainImage = new getImages().getImageIcon(768, 1024, "src/image/background_image/background5.png");
 	
-	static ImageIcon CheckInReservation = new getImages().getImageIcon(648, 150, "src/image/icon_image/btn/CheckInReservation.png");
-	static ImageIcon FieldCheckIn = new getImages().getImageIcon(648, 150, "src/image/icon_image/btn/FieldCheckIn.png");	
+	static ImageIcon CheckInReservation = new getImages().getImageIcon(710, 170, "src/image/icon_image/btn/CheckInReservation.png");
+	static ImageIcon FieldCheckIn = new getImages().getImageIcon(710, 170, "src/image/icon_image/btn/FieldCheckIn.png");	
 	static ImageIcon backImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/back.png");
 	static ImageIcon homeBtnImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/home.png");
 	ActionListener HomeBtnActionListener;
@@ -39,10 +39,10 @@ public class CheckInLayout extends JFrame {
 		imageLabel.setBounds(0, 0, 768, 1024);
 		imageLabel.setIcon(mainImage);
 		
-		b1.setBounds(25, 450, 700, 200);
+		b1.setBounds(25, 440, 700, 170);
 		imageLabel.add(b1);
 		
-		b2.setBounds(25, 700, 700, 200);
+		b2.setBounds(25, 615, 700, 170);
 		imageLabel.add(b2);
 		
 		b3.setBounds(30, 920, 40, 40);

@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import actions.ChkInBtnActionListener;
 import actions.ChkReservationBtnActionListener;
 import actions.PrevBtnActionListener;
 import gui.buttons.AdminBtn;
@@ -31,6 +32,7 @@ public class HotelMainLayout extends JFrame {
 	static ImageIcon homeBtnImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/home_white.png");
 	static ImageIcon guideBtnImage = new getImages().getImageIcon(80, 40, "src/image/icon_image/btn/RoomInfomationMap_white.png");
 
+	ActionListener ChkInBtnActionListener;
 	public JButton b1 = new ChkInBtn(checkInImage);
 	public JButton b2 = new ChkOutBtn(checkOutImage);
 	ActionListener ChkReservationBtnActionListener;
@@ -50,6 +52,7 @@ public class HotelMainLayout extends JFrame {
 
 		// 예약하기 버튼
 		b1.setBounds(25, 440, 700, 170);
+		b1.addActionListener(new ChkInBtnActionListener(this));
 		imageLabel.add(b1);
 
 		// 체크아웃 버튼
