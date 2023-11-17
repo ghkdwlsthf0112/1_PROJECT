@@ -7,6 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import actions.ChkReservationBtnActionListener;
+import actions.FloorGuideBtnActionListener;
 import actions.HomeBtnActionListener;
 import actions.PrevBtnActionListener;
 import gui.buttons.ChkInBtn;
@@ -20,12 +22,13 @@ public class CheckInLayout extends JFrame {
 	static ImageIcon mainImage = new getImages().getImageIcon(768, 1024, "src/image/background_image/background5.png");
 	
 	static ImageIcon CheckInReservation = new getImages().getImageIcon(710, 170, "src/image/icon_image/btn/CheckInReservation.png");
+	ActionListener ChkReservationBtnActionListener;
 	static ImageIcon FieldCheckIn = new getImages().getImageIcon(710, 170, "src/image/icon_image/btn/FieldCheckIn.png");	
 	static ImageIcon backImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/back.png");
 	static ImageIcon homeBtnImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/home.png");
 	ActionListener HomeBtnActionListener;
 	static ImageIcon guideBtnImage = new getImages().getImageIcon(80, 40, "src/image/icon_image/btn/RoomInfomationMap.png");
-	
+	ActionListener FloorGuideBtnActionListener;
 	
 	public JButton b1 = new ChkInBtn(CheckInReservation);
 	public JButton b2 = new ChkInBtn(FieldCheckIn);
@@ -40,6 +43,7 @@ public class CheckInLayout extends JFrame {
 		imageLabel.setIcon(mainImage);
 		
 		b1.setBounds(25, 440, 700, 170);
+		b1.addActionListener(new ChkReservationBtnActionListener(this));
 		imageLabel.add(b1);
 		
 		b2.setBounds(25, 615, 700, 170);
@@ -54,6 +58,7 @@ public class CheckInLayout extends JFrame {
 		imageLabel.add(b4);
 
 		b5.setBounds(130, 920, 80, 40);
+		b5.addActionListener(new FloorGuideBtnActionListener(this));
 		imageLabel.add(b5);
 
 		add(imageLabel);

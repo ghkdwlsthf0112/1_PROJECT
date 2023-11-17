@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import gui.layout.login.member_login_window.MemberLoginLayout;
 import gui.layout.login.non_member_check_in.NonMemberCheckLayout;
 import gui.layout.main.check_in_window.CheckInLayout;
 import gui.layout.main.hotel_main.HotelMainLayout;
@@ -49,6 +50,11 @@ public class HomeBtnActionListener implements ActionListener{
 	public HomeBtnActionListener(CheckInLayout mainFrame) {
 		this.mainFrame = mainFrame;
 		this.HomeBtn = mainFrame.b4;	
+	}
+	
+	public HomeBtnActionListener(MemberLoginLayout mainFrame) {
+		this.mainFrame = mainFrame;
+		this.HomeBtn = mainFrame.b2;	
 	}
 
 }

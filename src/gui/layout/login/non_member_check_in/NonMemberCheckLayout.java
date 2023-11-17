@@ -1,6 +1,5 @@
 package gui.layout.login.non_member_check_in;
 
-import java.awt.Color;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
@@ -10,9 +9,14 @@ import javax.swing.JLabel;
 
 import actions.FloorGuideBtnActionListener;
 import actions.HomeBtnActionListener;
-import gui.buttons.ChkInBtn;
+
+import actions.MemberBtnActionListener;
+import actions.NonMemberBtnActionListener;
+import actions.PrevBtnActionListener;
 import gui.buttons.FloorGuideBtn;
 import gui.buttons.HomeBtn;
+import gui.buttons.MemberBtn;
+import gui.buttons.NonmemberBtn;
 import gui.buttons.PrevBtn;
 import image.getImages;
 
@@ -25,8 +29,12 @@ public class NonMemberCheckLayout extends JFrame {
 	static ImageIcon homeImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/home_white.png");
 	static ImageIcon guideImage = new getImages().getImageIcon(80, 40, "src/image/icon_image/btn/RoomInfomationMap_white.png");
 	
-	public JButton b1 = new ChkInBtn (memberImage);
-	public JButton b2 = new ChkInBtn (nonmemberImage);
+
+	ActionListener MemberBtnActionListener;
+	public JButton b1 = new MemberBtn (memberImage);
+	ActionListener NonMemberBtnActionListener;
+	public JButton b2 = new NonmemberBtn (nonmemberImage);
+	ActionListener PrevBtnActionListener;
 	public JButton b3 = new PrevBtn(backImage);
 	public JButton b4 = new HomeBtn(homeImage);
 	ActionListener FloorGuideBtnActionListener;
@@ -43,26 +51,26 @@ public class NonMemberCheckLayout extends JFrame {
 		Label.setIcon(mainImage);
 		
 		// 회원고객 버튼
+		b1.addActionListener(new MemberBtnActionListener(this));
 		b1.setBounds(25, 440, 700, 170);
 		Label.add(b1);
 		
 		// 비회원고객 버튼
+		b2.addActionListener(new NonMemberBtnActionListener(this));
 		b2.setBounds(25, 615, 700, 170);
 		Label.add(b2);
 		
 		// 뒤로가기 버튼
-		b3.setBorderPainted(false);
+		b3.addActionListener(new PrevBtnActionListener(this));
 		Label.add(b3);
 		
 		// 홈 버튼
 		b4.addActionListener(new HomeBtnActionListener(this));
-		b4.setBorderPainted(false);
 		Label.add(b4);
 		
 		// 안내 버튼
 		b5.addActionListener(new FloorGuideBtnActionListener(this));
 		b5.setBorderPainted(false);
-
 		Label.add(b5);
 		
 		add(Label);
