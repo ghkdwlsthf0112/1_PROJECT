@@ -1,13 +1,14 @@
 package gui.layout.login.non_member_check_in;
 
 import java.awt.Color;
-import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import actions.HomeBtnActionListener;
+import actions.PrevBtnActionListener;
 import gui.buttons.ChkInBtn;
 import gui.buttons.FloorGuideBtn;
 import gui.buttons.HomeBtn;
@@ -15,18 +16,18 @@ import gui.buttons.PrevBtn;
 import image.getImages;
 
 public class NonMemberCheckLayout extends JFrame {
-	ActionListener MemberBtnActionLister;
-	ImageIcon mainImage = new getImages().getImageIcon(768, 1024, "src/image/background_image/background4.png");
-	ImageIcon memberImage = new getImages().getImageIcon(700, 180, "src/image/icon_image/btn/MemberCustomers.png");
-	ImageIcon nonmemberImage = new getImages().getImageIcon(700, 180, "src/image/icon_image/btn/NonMemberCustomers.png");
-	ImageIcon backImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/back_white.png");
-	ImageIcon homeImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/home_white.png");
-	ImageIcon guideImage = new getImages().getImageIcon(80, 40, "src/image/icon_image/btn/RoomInfomationMap_white.png");
+	
+	static ImageIcon mainImage = new getImages().getImageIcon(768, 1024, "src/image/background_image/background4.png");
+	static ImageIcon memberImage = new getImages().getImageIcon(700, 180, "src/image/icon_image/btn/MemberCustomers.png");
+	static ImageIcon nonmemberImage = new getImages().getImageIcon(700, 180, "src/image/icon_image/btn/NonMemberCustomers.png");
+	static ImageIcon backImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/back_white.png");
+	static ImageIcon homeImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/home_white.png");
+	static ImageIcon guideImage = new getImages().getImageIcon(80, 40, "src/image/icon_image/btn/RoomInfomationMap_white.png");
 	
 	JButton b1 = new ChkInBtn (memberImage);
 	JButton b2 = new ChkInBtn (nonmemberImage);
-	JButton b3 = new PrevBtn(backImage);
-	JButton b4 = new HomeBtn(homeImage);
+	public JButton b3 = new PrevBtn(backImage);
+	public JButton b4 = new HomeBtn(homeImage);
 	JButton b5 = new FloorGuideBtn(guideImage);
 	
 	//JButton 
@@ -34,6 +35,7 @@ public class NonMemberCheckLayout extends JFrame {
 	public NonMemberCheckLayout() {
 		super("델루나호텔");
 		setLayout(null);
+		
 		JLabel Label = new JLabel();
 		Label.setBounds(0, 0, 768, 1024);
 		Label.setIcon(mainImage);
@@ -59,6 +61,7 @@ public class NonMemberCheckLayout extends JFrame {
 		Label.add(b3);
 		
 		// 홈 버튼
+		b4.addActionListener(new HomeBtnActionListener(this));
 		b4.setBounds(80, 920, 40, 40);
 		b4.setBackground(new Color(0,0,0,0));
 		b4.setBorderPainted(false);
@@ -76,7 +79,7 @@ public class NonMemberCheckLayout extends JFrame {
 		setLocation(550, 10);
 		setSize(768, 1024);
 		setVisible(true);
-		setResizable(true);
+		setResizable(false);
 	}
 	public static void main(String[] args) {
 		new NonMemberCheckLayout();

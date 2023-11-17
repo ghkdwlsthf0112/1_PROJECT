@@ -23,7 +23,7 @@ public class PrevBtnActionListener implements ActionListener {
 		} else if(e.getSource() == ReservationInquiryLayoutPrevBtn) {
 			new HotelMainLayout();
 			mainFrame.dispose();
-		}
+		} 
 	}
 	
 	public PrevBtnActionListener(HotelMainLayout mainFrame) {
