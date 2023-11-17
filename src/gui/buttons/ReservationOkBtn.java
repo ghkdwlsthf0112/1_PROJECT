@@ -37,5 +37,6 @@ public class ReservationOkBtn extends JButton{
 		setBorderPainted(false);
 		setOpaque(false);
 		setBackground(new Color(0, 0, 0));
+//		setEnabled(false);
 	}
 }

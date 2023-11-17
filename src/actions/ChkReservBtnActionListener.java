@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import gui.layout.main.hotel_main.HotelMainLayout;
 import gui.layout.main.reservation_inquiry.ReservationInquiryLayout;
 
-public class ChkReservationBtnActionListener implements ActionListener{
+public class ChkReservBtnActionListener implements ActionListener{
 	JFrame mainFrame;
 	JButton ChkReservationBtn;
 	
@@ -21,7 +21,7 @@ public class ChkReservationBtnActionListener implements ActionListener{
 		}
 	}
 	
-	public ChkReservationBtnActionListener(HotelMainLayout mainFrame) {
+	public ChkReservBtnActionListener(HotelMainLayout mainFrame) {
 		this.mainFrame = mainFrame;
 		this.ChkReservationBtn = mainFrame.b3;
 	}

@@ -23,6 +23,8 @@ public class NumberBtnActionListener implements ActionListener{
 	JButton btn0;
 	JButton btnClear;
 	
+	JButton ReservationOkBtn;
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
@@ -65,6 +67,12 @@ public class NumberBtnActionListener implements ActionListener{
 				displayField.setText(currentText + source.toString());
 			}
 		}		
+		
+		if(displayField.getText().length()==6) {
+			ReservationOkBtn.setEnabled(true);
+		} else {
+			ReservationOkBtn.setEnabled(false);
+		}
 	}
 
 	public NumberBtnActionListener(ReservationInquiryLayout mainFrame) {
@@ -81,6 +89,7 @@ public class NumberBtnActionListener implements ActionListener{
 		this.btnBack = mainFrame.btnBack;
 		this.btn0 = mainFrame.btn0;
 		this.btnClear = mainFrame.btnClear;
+		this.ReservationOkBtn = mainFrame.b3;
 
 	}
 	

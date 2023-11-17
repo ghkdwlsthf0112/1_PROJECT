@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import actions.ChkInBtnActionListener;
-import actions.ChkReservationBtnActionListener;
+import actions.ChkReservBtnActionListener;
 import actions.FloorGuideBtnActionListener;
 import actions.PrevBtnActionListener;
 import gui.buttons.AdminBtn;
@@ -62,7 +62,7 @@ public class HotelMainLayout extends JFrame {
 		imageLabel.add(b2);
 
 		// 예약확인 버튼
-		b3.addActionListener(new ChkReservationBtnActionListener(this));
+		b3.addActionListener(new ChkReservBtnActionListener(this));
 		imageLabel.add(b3);
 
 		// 관리자 버튼 안보이는 버튼
