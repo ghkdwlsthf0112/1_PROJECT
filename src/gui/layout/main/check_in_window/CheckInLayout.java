@@ -27,11 +27,11 @@ public class CheckInLayout extends JFrame {
 	static ImageIcon guideBtnImage = new getImages().getImageIcon(80, 40, "src/image/icon_image/btn/RoomInfomationMap.png");
 	
 	
-	JButton b1 = new ChkInBtn(CheckInReservation);
-	JButton b2 = new ChkInBtn(FieldCheckIn);
+	public JButton b1 = new ChkInBtn(CheckInReservation);
+	public JButton b2 = new ChkInBtn(FieldCheckIn);
 	public JButton b3 = new PrevBtn(backImage);
 	public JButton b4 = new HomeBtn(homeBtnImage);
-	JButton b5 = new FloorGuideBtn(guideBtnImage);
+	public JButton b5 = new FloorGuideBtn(guideBtnImage);
 	
 	public CheckInLayout(){
 		setLayout(null);

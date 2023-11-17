@@ -73,6 +73,7 @@ public class CoverLayout extends JFrame {
 		setVisible(true);
 		setResizable(false);
 	}
+}
 
 
 

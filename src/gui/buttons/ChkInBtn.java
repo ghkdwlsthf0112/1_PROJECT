@@ -11,8 +11,9 @@ import javax.swing.JButton;
 import image.getImages;
 
 public class ChkInBtn extends JButton{
+	
 	public ChkInBtn() {
-
+		decorate();
 	}
     
     public ChkInBtn(String text) {
