@@ -11,8 +11,9 @@ import javax.swing.JButton;
 import image.getImages;
 
 public class ChkInBtn extends JButton{
+	
 	public ChkInBtn() {
-
+		decorate();
 	}
     
     public ChkInBtn(String text) {
@@ -31,6 +32,8 @@ public class ChkInBtn extends JButton{
         setRolloverSelectedIcon(icon);
         decorate();
     }
+    
+    
 
     public ChkInBtn(String text, Icon icon) {
         super(text, icon);

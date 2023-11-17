@@ -2,21 +2,21 @@ package gui.layout.main.reservation_inquiry;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import actions.ChkReservIsExistActionListener;
 import actions.HomeBtnActionListener;
 import actions.NumberBtnActionListener;
 import actions.PrevBtnActionListener;
 import gui.buttons.HomeBtn;
 import gui.buttons.PrevBtn;
+import gui.buttons.ReservationOkBtn;
 import gui.buttons.numeric_keypad.NumericBtn;
 import image.getImages;
 
@@ -37,6 +37,7 @@ public class ReservationInquiryLayout extends JFrame {
 	static ImageIcon btnBackImage = new getImages().getImageIcon(90, 90, "src/image/icon_image/btn/btnBack.png");
 	static ImageIcon btn0Image = new getImages().getImageIcon(90, 90, "src/image/icon_image/btn/btn_0.png");
 	static ImageIcon btnClearImage = new getImages().getImageIcon(90, 90, "src/image/icon_image/btn/btnAllDel.png");
+	static ImageIcon checkImage = new getImages().getImageIcon(200, 80, "src/image/icon_image/btn/check.png");
 
 	
 	
@@ -47,7 +48,9 @@ public class ReservationInquiryLayout extends JFrame {
 	ActionListener HomeBtnActionListener;
 	public JButton b2 = new PrevBtn(backImage);
 	ActionListener PrevBtnActionListener;
-	
+	public JButton b3 = new ReservationOkBtn(checkImage);
+	ActionListener ChkReservationIsExistActionListener;
+
 	public JButton btn1 = new NumericBtn(btn1Image);
 	public JButton btn2 = new NumericBtn(btn2Image);
 	public JButton btn3 = new NumericBtn(btn3Image);
@@ -135,6 +138,11 @@ public class ReservationInquiryLayout extends JFrame {
 		
 		b2.addActionListener(new PrevBtnActionListener(this));
 		add(b2);
+		
+		b3.addActionListener(new ChkReservIsExistActionListener(this));
+		b3.setBounds(85, 600, 200, 80);
+		b3.setEnabled(false);
+		add(b3);
 		
 		add(imageLabel);
 		

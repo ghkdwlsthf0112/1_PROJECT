@@ -28,7 +28,6 @@ public class CalendarBtnActionListener implements ActionListener {
 	}
 	
 	
-	
 	public CalendarBtnActionListener(ReservationLayout mainFrame) {
 		this.mainFrame = mainFrame;
 		this.CalendarBtn = mainFrame.calendarBtn;
