@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import gui.layout.login.member_login_window.MemberLoginLayout;
 import gui.layout.login.non_member_check_in.NonMemberCheckLayout;
 import gui.layout.main.guide_map.GuideMapLayout;
 import gui.layout.main.hotel_main.HotelMainLayout;
@@ -30,6 +31,11 @@ public class FloorGuideBtnActionListener implements ActionListener{
 	public FloorGuideBtnActionListener(NonMemberCheckLayout mainFrame) {
 		this.mainFrame = mainFrame;
 		this.FloorGuideBtn = mainFrame.b5;	
+	}
+	
+	public FloorGuideBtnActionListener(MemberLoginLayout mainFrame) {
+		this.mainFrame = mainFrame;
+		this.FloorGuideBtn = mainFrame.b3;	
 	}
 
 }
