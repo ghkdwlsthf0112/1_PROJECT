@@ -26,28 +26,33 @@ public class NumberBtnActionListener implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		JButton source = (JButton) e.getSource();
+		// 스트링 빌더로 화면에 띄워줄 인스턴스 생성
+		StringBuilder source = new StringBuilder();
+		
+		// 버튼별 입력시 들어갈 char값 설정
 		if(e.getSource()== btn0) {
-			source.setText("0");
+			source.append('0');
 		} else if(e.getSource()== btn1) {
-			source.setText("1");
+			source.append("1");
 		} else if(e.getSource()== btn2) {
-			source.setText("2");
+			source.append("2");
 		} else if(e.getSource()== btn3) {
-			source.setText("3");
+			source.append("3");
 		} else if(e.getSource()== btn4) {
-			source.setText("4");
+			source.append("4");
 		} else if(e.getSource()== btn5) {
-			source.setText("5");
+			source.append("5");
 		} else if(e.getSource()== btn6) {
-			source.setText("6");
+			source.append("6");
 		} else if(e.getSource()== btn7) {
-			source.setText("7");
+			source.append("7");
 		} else if(e.getSource()== btn8) {
-			source.setText("8");
+			source.append("8");
 		} else if(e.getSource()== btn9) {
-			source.setText("9");
+			source.append("9");
 		}
+		
+		// 밑에서 글자수 제한이랑 디스플레이에서 삭제 밑 클리어 조건 추가
 		String currentText = displayField.getText();
 		if (e.getSource()== btnClear) {
 			displayField.setText("");
@@ -57,7 +62,7 @@ public class NumberBtnActionListener implements ActionListener{
 			}
 		} else {
 			if (currentText.length() < 6) {
-				displayField.setText(currentText + source.getText());
+				displayField.setText(currentText + source.toString());
 			}
 		}		
 	}
