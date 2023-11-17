@@ -11,16 +11,17 @@ public class AdminDao {
 	public int chkReservation(String reservation_number) {
 		int re = -1;
 		try (Connection conn = DBConnection.getConnection();) {
-			String sql = "SELECT * FROM reservation WHERE reservation_number LIKE '%?'";
+			String sql = "SELECT * FROM reservation WHERE reservation_number LIKE '?'";
 			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setString(1, "%"+reservation_number);
+				System.out.println(sql);
 				try(ResultSet rs = pstmt.executeQuery()){
-					pstmt.setString(1, reservation_number);
 					if(rs.next()) {
 						System.out.println("나 여기 있어");
 						re = 1;			
 					}
-					return re;
 				}
+				return re;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

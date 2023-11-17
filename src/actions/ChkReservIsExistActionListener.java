@@ -30,15 +30,14 @@ public class ChkReservIsExistActionListener implements ActionListener{
 //	
 	
 //	messageBox(this, "아이디를 입력한 뒤 중복확인을 해주세요.");
-	
+	AdminDao admindao = new AdminDao();
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == ReservationOkBtn) {
 			System.out.println(displayField.getText());
-			int Result = new AdminDao().chkReservation(displayField.getText());
-			if(Result == 1) {
+			if(admindao.chkReservation(displayField.getText()) == 1) {
 				System.out.println("확인");
-			} else if(Result == -1) {
+			} else {
 				System.out.println("예약정보가 없습니다");
 			}
 		}
