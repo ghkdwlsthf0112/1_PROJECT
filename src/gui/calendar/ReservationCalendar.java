@@ -13,16 +13,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-public class ReservationCalendar {
-	
-	public static void main(String[] args) {
-		new Calendarmain();
-//		Calendarmain c2 = new Calendarmain();
-	}
-}
-
-class Calendarmain extends JFrame implements ActionListener {
+public class ReservationCalendar extends JFrame implements ActionListener {
 	Container container = getContentPane();
 	
 	JPanel panel1 = new JPanel();
@@ -36,15 +29,25 @@ class Calendarmain extends JFrame implements ActionListener {
 	JButton[] buttons = new JButton[49];
 	String[] dayNames = {"일", "월", "화", "수", "목", "금", "토"};
 	
+	private JLabel selectDateLabel = new JLabel("선택한 날짜");
+	private JTextField selectDateTextField = new JTextField(10);
+	
 	CalendarFunction cf = new CalendarFunction();
 	
-	public Calendarmain() {
+	public ReservationCalendar() {
 		setTitle("체크인 체크아웃 날짜");
 		setSize(500, 400);
 		setLocation(400, 400);
 		init();
 		start();
 		setVisible(true);
+		
+		panel1.add(selectDateLabel);
+		panel1.add(selectDateTextField);
+		
+		for (int i = 7; i < buttons.length; i++) {
+			buttons[i].addActionListener(this);
+		}
 	}
 	
 	private void init() {
@@ -105,8 +108,17 @@ class Calendarmain extends JFrame implements ActionListener {
 		nextBtn.addActionListener(this);
 		prevBtn.addActionListener(this);
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		for (int i = 7; i < buttons.length; i++) {
+			if (e.getSource() == buttons[i]) {
+				String selectDate = buttons[i].getText();
+				selectDateTextField.setText(selectDate);
+			}
+		}
+		
 		int gap = 0;
 		if (e.getSource() == nextBtn) { // 다음 버튼 클릭
 			gap = 1;
@@ -116,6 +128,11 @@ class Calendarmain extends JFrame implements ActionListener {
 		
 		cf.init(gap); // CalendarFunction의 init메서드를 호출해서 달력 업데이트
 		label.setText(cf.getCalText());	 // 년월 표시 라벨 갱신
+		
 	}
 	
+	
+	public static void main(String[] args) {
+		new ReservationCalendar();
+	}
 }

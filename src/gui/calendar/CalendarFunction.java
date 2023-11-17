@@ -10,6 +10,7 @@ public class CalendarFunction {
 	int year;
 	int month;
 	
+	
 	public CalendarFunction() {
 		// 현재 년 가져오기
 		year = cal.get(Calendar.YEAR);
@@ -62,6 +63,7 @@ public class CalendarFunction {
 		// 초기화 하고 새로운 달력 설정
 		calSet();
 	}
+	
 	
 }
 
