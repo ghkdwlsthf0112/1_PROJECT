@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 
 import gui.layout.main.check_in_window.CheckInLayout;
 import gui.layout.main.hotel_main.HotelMainLayout;
+import gui.layout.main.reservation_inquiry.ReservationChkInNow;
 import gui.layout.main.reservation_inquiry.ReservationInquiryLayout;
 
 public class ChkReservationBtnActionListener implements ActionListener{
@@ -21,7 +22,7 @@ public class ChkReservationBtnActionListener implements ActionListener{
 			new ReservationInquiryLayout();
 			mainFrame.dispose();
 		} else if(e.getSource() == CheckInReservationBtn) {
-			new ReservationInquiryLayout();
+			new ReservationChkInNow();
 			mainFrame.dispose();
 		}
 	}
@@ -30,8 +31,10 @@ public class ChkReservationBtnActionListener implements ActionListener{
 		this.mainFrame = mainFrame;
 		this.ChkReservationBtn = mainFrame.b3;
 	}
+	
+	// 체크인 방법 선택창에서 같이 들어옴
 	public ChkReservationBtnActionListener(CheckInLayout mainFrame) {
 		this.mainFrame = mainFrame;
-		this.ChkReservationBtn = mainFrame.b1;
+		this.CheckInReservationBtn = mainFrame.b1;
 	}
 }

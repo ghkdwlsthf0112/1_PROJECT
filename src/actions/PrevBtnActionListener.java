@@ -5,11 +5,16 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+
 import gui.layout.login.member_login_window.MemberLoginLayout;
 import gui.layout.login.non_member_check_in.NonMemberCheckLayout;
 import gui.layout.main.check_in_window.CheckInLayout;
 import gui.layout.main.cover.CoverLayout;
+import gui.layout.main.guide_map.GuideMapLayout;
 import gui.layout.main.hotel_main.HotelMainLayout;
+import gui.layout.main.reservation_inquiry.ReservationChkIn;
+import gui.layout.main.reservation_inquiry.ReservationChkInNow;
+import gui.layout.main.reservation_inquiry.ReservationInfo;
 import gui.layout.main.reservation_inquiry.ReservationInquiryLayout;
 
 public class PrevBtnActionListener implements ActionListener {
@@ -19,6 +24,11 @@ public class PrevBtnActionListener implements ActionListener {
 	JButton CheckInLayoutPrevBtn;
 	JButton NonMemberCheckLayoutPrevBtn;
 	JButton MemberLoginLayoutPrevBtn;
+	JButton ReservationInfoPrevBtn;
+	JButton ReservationChkInNowPrevBtn;
+	JButton ReservationChkInPrevBtn;
+	JButton GuideMapLayoutPrevBtn;
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -36,6 +46,18 @@ public class PrevBtnActionListener implements ActionListener {
 			mainFrame.dispose();
 		} else if(e.getSource() == MemberLoginLayoutPrevBtn) {
 			new NonMemberCheckLayout();
+			mainFrame.dispose();
+		} else if(e.getSource() == ReservationInfoPrevBtn) {
+			new ReservationInquiryLayout();
+			mainFrame.dispose();
+		} else if(e.getSource() == ReservationChkInNowPrevBtn) {
+			new CheckInLayout();
+			mainFrame.dispose();
+		} else if(e.getSource() == ReservationChkInPrevBtn) {
+			new ReservationChkInNow();
+			mainFrame.dispose();
+		} else if(e.getSource() == GuideMapLayoutPrevBtn) {
+			new HotelMainLayout();
 			mainFrame.dispose();
 		}
 	}
@@ -66,4 +88,23 @@ public class PrevBtnActionListener implements ActionListener {
 		this.MemberLoginLayoutPrevBtn = mainFrame.b1;
 	}
 
+	public PrevBtnActionListener(ReservationInfo mainFrame) {
+		this.mainFrame = mainFrame;
+		this.ReservationInfoPrevBtn = mainFrame.b1;
+	}
+	
+	public PrevBtnActionListener(ReservationChkInNow mainFrame) {
+		this.mainFrame = mainFrame;
+		this.ReservationChkInNowPrevBtn = mainFrame.b2;
+	}
+	
+	public PrevBtnActionListener(ReservationChkIn mainFrame) {
+		this.mainFrame = mainFrame;
+		this.ReservationChkInPrevBtn = mainFrame.b1;
+	}
+	
+	public PrevBtnActionListener(GuideMapLayout mainFrame) {
+		this.mainFrame = mainFrame;
+		this.GuideMapLayoutPrevBtn = mainFrame.b1;
+	}
 }

@@ -1,5 +1,9 @@
 package database.reservation;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Reservation {
 	Integer reservation_id;
 	String reservation_number;
@@ -7,7 +11,10 @@ public class Reservation {
 	Integer room_number;
 	String reservation_start;
 	String reservation_end;
+	SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+
+	
 	public Reservation(
 			Integer reservation_id, 
 			String reservation_number, 
@@ -71,5 +78,17 @@ public class Reservation {
 		this.reservation_end = reservation_end;
 	}
 	
+	@Override
+	public String toString() {
+		Date start = null;
+		Date end = null;
+		try {
+			start = newDtFormat.parse(reservation_start);
+			end = newDtFormat.parse(reservation_end);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return String.format("[예약번호 : %s]\t[호실 : %d]\t[예약기간 : %s - %s]\n", reservation_number,room_number,newDtFormat.format(start),newDtFormat.format(end));
+	}
 	
 }

@@ -43,7 +43,7 @@ public class NonMemberCheckLayout extends JFrame {
 	//JButton 
  
 	public NonMemberCheckLayout() {
-		super("델루나호텔");
+		super();
 		setLayout(null);
 		
 		JLabel Label = new JLabel();
@@ -70,7 +70,6 @@ public class NonMemberCheckLayout extends JFrame {
 		
 		// 안내 버튼
 		b5.addActionListener(new FloorGuideBtnActionListener(this));
-		b5.setBorderPainted(false);
 		Label.add(b5);
 		
 		add(Label);

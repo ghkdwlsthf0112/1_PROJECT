@@ -20,7 +20,7 @@ import gui.buttons.ReservationOkBtn;
 import gui.buttons.numeric_keypad.NumericBtn;
 import image.getImages;
 
-public class ReservationInquiryLayout extends JFrame {
+public class ReservationChkInNow extends JFrame{
 	static ImageIcon mainImage = new getImages().getImageIcon(768, 1024, "src/image/background_image/ReservationInquiryLayout.png");
 	static ImageIcon homeBtnImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/home_white.png");
 	static ImageIcon backImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/back_white.png");
@@ -66,8 +66,8 @@ public class ReservationInquiryLayout extends JFrame {
 	
 	
 	ActionListener NumberBtnActionListener;
-	public ReservationInquiryLayout() {
-		setTitle("예약확인");
+	public ReservationChkInNow() {
+		setTitle("예약체크인");
 		setLayout(null);
 		
 		JLabel imageLabel = new JLabel();
@@ -154,8 +154,7 @@ public class ReservationInquiryLayout extends JFrame {
 		setVisible(true);
 		setResizable(false);
 	}
-
 	public static void main(String[] args) {
-		new ReservationInquiryLayout();
+		new ReservationChkInNow();
 	}
 }

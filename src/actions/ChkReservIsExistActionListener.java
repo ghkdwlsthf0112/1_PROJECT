@@ -5,15 +5,21 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import database.AdminDao;
+import gui.layout.main.reservation_inquiry.ReservationChkIn;
+import gui.layout.main.reservation_inquiry.ReservationChkInNow;
+import gui.layout.main.reservation_inquiry.ReservationInfo;
 import gui.layout.main.reservation_inquiry.ReservationInquiryLayout;
 
 public class ChkReservIsExistActionListener implements ActionListener{
 	JButton ReservationOkBtn;
 	JFrame mainFrame;
 	JTextField displayField;
+	JOptionPane info = new JOptionPane();
+	
 	
 //	if (e.getSource() == btn) {
 //        int re = JOptionPane.showConfirmDialog(this, "취소하시겠습니까?", " ", JOptionPane.YES_NO_OPTION,
@@ -35,10 +41,14 @@ public class ChkReservIsExistActionListener implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == ReservationOkBtn) {
 			System.out.println(displayField.getText());
-			if(admindao.chkReservation(displayField.getText()) == 1) {
-				System.out.println("확인");
+			if(admindao.chkReservation(displayField.getText()) == 1 && mainFrame.getTitle().equals("예약확인")) {
+				new ReservationInfo(admindao.getReservstion(displayField.getText()));
+				mainFrame.dispose();
+			} else if (admindao.chkReservation(displayField.getText()) == 1 && mainFrame.getTitle().equals("예약체크인")){
+				new ReservationChkIn(admindao.getReservstion(displayField.getText()));
+				mainFrame.dispose();
 			} else {
-				System.out.println("예약정보가 없습니다");
+				info.showMessageDialog(ReservationOkBtn, "확인되는 예약이 없습니다.", "Message",JOptionPane.INFORMATION_MESSAGE );
 			}
 		}
 	}
@@ -48,4 +58,12 @@ public class ChkReservIsExistActionListener implements ActionListener{
 		this.mainFrame = mainFrame;
 		this.displayField = mainFrame.displayField;
 	}
+	
+	public ChkReservIsExistActionListener(ReservationChkInNow mainFrame) {
+		this.ReservationOkBtn = mainFrame.b3;
+		this.mainFrame = mainFrame;
+		this.displayField = mainFrame.displayField;
+	}
+	
+	
 }

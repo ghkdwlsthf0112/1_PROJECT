@@ -15,6 +15,7 @@ import gui.buttons.ChkInBtn;
 import gui.buttons.FloorGuideBtn;
 import gui.buttons.HomeBtn;
 import gui.buttons.PrevBtn;
+import gui.layout.main.check_in_window.buttons.OnSiteCheckInBtn;
 import image.getImages;
 
 public class CheckInLayout extends JFrame {
@@ -30,7 +31,7 @@ public class CheckInLayout extends JFrame {
 	static ImageIcon guideBtnImage = new getImages().getImageIcon(80, 40, "src/image/icon_image/btn/RoomInfomationMap.png");
 	ActionListener FloorGuideBtnActionListener;
 	
-	public JButton b1 = new ChkInBtn(CheckInReservation);
+	public JButton b1 = new OnSiteCheckInBtn(CheckInReservation);
 	public JButton b2 = new ChkInBtn(FieldCheckIn);
 	public JButton b3 = new PrevBtn(backImage);
 	public JButton b4 = new HomeBtn(homeBtnImage);

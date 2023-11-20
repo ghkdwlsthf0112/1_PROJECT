@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
+import gui.layout.main.reservation_inquiry.ReservationChkInNow;
 import gui.layout.main.reservation_inquiry.ReservationInquiryLayout;
 
 public class NumberBtnActionListener implements ActionListener{
@@ -76,6 +77,24 @@ public class NumberBtnActionListener implements ActionListener{
 	}
 
 	public NumberBtnActionListener(ReservationInquiryLayout mainFrame) {
+		this.displayField = mainFrame.displayField;
+		this.btn1 = mainFrame.btn1;
+		this.btn2 = mainFrame.btn2;
+		this.btn3 = mainFrame.btn3;
+		this.btn4 = mainFrame.btn4;
+		this.btn5 = mainFrame.btn5;
+		this.btn6 = mainFrame.btn6;
+		this.btn7 = mainFrame.btn7;
+		this.btn8 = mainFrame.btn8;
+		this.btn9 = mainFrame.btn9;
+		this.btnBack = mainFrame.btnBack;
+		this.btn0 = mainFrame.btn0;
+		this.btnClear = mainFrame.btnClear;
+		this.ReservationOkBtn = mainFrame.b3;
+
+	}
+	
+	public NumberBtnActionListener(ReservationChkInNow mainFrame) {
 		this.displayField = mainFrame.displayField;
 		this.btn1 = mainFrame.btn1;
 		this.btn2 = mainFrame.btn2;
