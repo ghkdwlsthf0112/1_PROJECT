@@ -3,9 +3,16 @@ package database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.table.DefaultTableModel;
 
 import database.reservation.Reservation;
 
@@ -80,5 +87,44 @@ public class AdminDao {
 			return null;
 		}
 	}
-	//
+	// 예약내용에서 테이블명을 가져오는 메서드
+	public List<Object[]> getColumnNames() {
+		String sql = "SELECT * FROM reservation";
+	    String todayfm = new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis()));
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		try(
+			Connection conn = DBConnection.getConnection();		
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+		) {
+			List<Object[]> list = new ArrayList<>();
+			while(rs.next())  {
+				String n = rs.getString(2);
+				String e = rs.getString(3); 
+				int r = rs.getInt(4);
+				String s = rs.getString(5); 
+				String end =rs.getString(6);
+				
+				Date date = new Date(dateFormat.parse(end).getTime()); 
+				Date today = new Date(dateFormat.parse(todayfm).getTime());
+				int compare = date.compareTo(today); 
+				String isPass;
+				if(compare > 0) {
+					isPass = "N";
+				}else if(compare < 0) {
+					isPass = "Y";
+				}else {
+					isPass = "C";
+				}
+				Object[] o = new Object[]{n,e,r,s,end,isPass,new JButton()};
+				list.add(o);
+			}
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		return null;
+	}
 }

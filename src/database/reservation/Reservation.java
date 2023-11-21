@@ -13,7 +13,7 @@ public class Reservation {
 	String reservation_end;
 	SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-
+	
 	
 	public Reservation(
 			Integer reservation_id, 
@@ -88,7 +88,7 @@ public class Reservation {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		return String.format("[예약번호 : %s]\t[호실 : %d]\t[예약기간 : %s - %s]\n", reservation_number,room_number,newDtFormat.format(start),newDtFormat.format(end));
+		return String.format("[%s]\t\t[%d]\t\t[%s - %s]\n", reservation_number,room_number,newDtFormat.format(start),newDtFormat.format(end));
 	}
 	
 }
