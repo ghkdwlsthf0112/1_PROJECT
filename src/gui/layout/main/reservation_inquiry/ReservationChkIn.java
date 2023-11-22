@@ -12,7 +12,7 @@ import actions.FloorGuideBtnActionListener;
 import actions.HomeBtnActionListener;
 import actions.PrevBtnActionListener;
 import database.AdminDao;
-import database.reservation.Reservation;
+import database.dbObjects.Reservation;
 import gui.buttons.CancelReservationBtn;
 import gui.buttons.FloorGuideBtn;
 import gui.buttons.HomeBtn;

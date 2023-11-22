@@ -1,4 +1,4 @@
-package database.payment;
+package database.dbObjects;
 
 public class Payment {
 	Integer pay_id;

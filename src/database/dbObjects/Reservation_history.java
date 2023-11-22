@@ -1,4 +1,4 @@
-package database.reservation_history;
+package database.dbObjects;
 
 public class Reservation_history {
 	Integer reservation_history_id;

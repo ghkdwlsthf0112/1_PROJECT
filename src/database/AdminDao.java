@@ -14,7 +14,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
-import database.reservation.Reservation;
+import database.dbObjects.Reservation;
 
 //DAO (Database Access Object) - DB에 쿼리문 보내고 결과 반영하는 객체
 public class AdminDao {
@@ -58,7 +58,18 @@ public class AdminDao {
 		}
 	}
 	// 예약정보를 가져와 확인후 그 방의 체크인 상태를 바꿔주는 메서드
-
+	public int setReservationChkOut(String reservation_number) {
+		try (Connection conn = DBConnection.getConnection();) {
+			String sql = "DELETE FROM reservation WHERE reservation_number LIKE ?";
+			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setString(1, "%" + reservation_number);
+				return pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
 	// 예약정보를 가져와 확인후 그 방을 체크아웃 시켜주는 메서드
 	// 아이디 중복검사를 해주는 메서드
 	// 아이디 확인 후 비밀번호가 맞는지 확인해주는 메서드
@@ -89,7 +100,7 @@ public class AdminDao {
 	}
 	// 예약내용에서 테이블명을 가져오는 메서드
 	public List<Object[]> getColumnNames() {
-		String sql = "SELECT * FROM reservation";
+		String sql = "SELECT * FROM reservation ORDER BY reservation_end";
 	    String todayfm = new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis()));
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		try(
@@ -116,7 +127,7 @@ public class AdminDao {
 				}else {
 					isPass = "C";
 				}
-				Object[] o = new Object[]{n,e,r,s,end,isPass,new JButton()};
+				Object[] o = new Object[]{n,e,r,s,end,isPass};
 				list.add(o);
 			}
 			return list;

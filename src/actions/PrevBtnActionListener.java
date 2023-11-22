@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 
 import gui.layout.login.member_login_window.MemberLoginLayout;
 import gui.layout.login.non_member_check_in.NonMemberCheckLayout;
+import gui.layout.main.CheckOut;
 import gui.layout.main.admin_window.AdminLayout;
 import gui.layout.main.check_in_window.CheckInLayout;
 import gui.layout.main.cover.CoverLayout;
@@ -30,6 +31,7 @@ public class PrevBtnActionListener implements ActionListener {
 	JButton ReservationChkInPrevBtn;
 	JButton GuideMapLayoutPrevBtn;
 	JButton AdminLayoutPrevBtn;
+	JButton CheckOutPrevBtn;
 
 
 	@Override
@@ -62,6 +64,9 @@ public class PrevBtnActionListener implements ActionListener {
 			new HotelMainLayout();
 			mainFrame.dispose();
 		} else if(e.getSource() == AdminLayoutPrevBtn) {
+			new HotelMainLayout();
+			mainFrame.dispose();
+		} else if(e.getSource() == CheckOutPrevBtn) {
 			new HotelMainLayout();
 			mainFrame.dispose();
 		}
@@ -116,5 +121,10 @@ public class PrevBtnActionListener implements ActionListener {
 	public PrevBtnActionListener(AdminLayout mainFrame) {
 		this.mainFrame = mainFrame;
 		this.AdminLayoutPrevBtn = mainFrame.b1;
+	}
+	
+	public PrevBtnActionListener(CheckOut mainFrame) {
+		this.mainFrame = mainFrame;
+		this.CheckOutPrevBtn = mainFrame.b2;
 	}
 }

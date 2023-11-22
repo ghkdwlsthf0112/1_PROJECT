@@ -12,7 +12,7 @@ import actions.FloorGuideBtnActionListener;
 import actions.HomeBtnActionListener;
 import actions.PrevBtnActionListener;
 import database.AdminDao;
-import database.reservation.Reservation;
+import database.dbObjects.Reservation;
 import gui.buttons.CancelReservationBtn;
 import gui.buttons.FloorGuideBtn;
 import gui.buttons.HomeBtn;
@@ -43,7 +43,6 @@ public class ReservationInfo extends JFrame{
 		JLabel Label = new JLabel();
 		Label.setBounds(0, 0, 768, 1024);
 		Label.setIcon(mainImage);
-		System.out.println(reservstion.toString());
 		
 		JLabel resNum = new JLabel(reservstion.get(0).getReservation_number());
 		resNum.setBounds(340, 225, 300, 100);

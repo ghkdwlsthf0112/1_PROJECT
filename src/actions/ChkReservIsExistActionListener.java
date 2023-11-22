@@ -48,7 +48,7 @@ public class ChkReservIsExistActionListener implements ActionListener{
 				new ReservationChkIn(admindao.getReservstion(displayField.getText()));
 				mainFrame.dispose();
 			} else {
-				info.showMessageDialog(ReservationOkBtn, "확인되는 예약이 없습니다.", "Message",JOptionPane.INFORMATION_MESSAGE );
+				info.showMessageDialog(mainFrame, "확인되는 예약이 없습니다.", "Message",JOptionPane.INFORMATION_MESSAGE );
 			}
 		}
 	}

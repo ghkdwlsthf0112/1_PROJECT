@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 
 import actions.AdminBtnActionListener;
 import actions.ChkInBtnActionListener;
+import actions.ChkOutBtnActionListener;
 import actions.ChkReservBtnActionListener;
 import actions.FloorGuideBtnActionListener;
 import actions.PrevBtnActionListener;
@@ -56,6 +57,7 @@ public class HotelMainLayout extends JFrame {
 		imageLabel.add(b1);
 
 		// 체크아웃 버튼
+		b2.addActionListener(new ChkOutBtnActionListener(this));
 		imageLabel.add(b2);
 
 		// 예약확인 버튼

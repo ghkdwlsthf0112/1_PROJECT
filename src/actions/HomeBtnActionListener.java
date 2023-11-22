@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 
 import gui.layout.login.member_login_window.MemberLoginLayout;
 import gui.layout.login.non_member_check_in.NonMemberCheckLayout;
+import gui.layout.main.CheckOut;
 import gui.layout.main.admin_window.AdminLayout;
 import gui.layout.main.check_in_window.CheckInLayout;
 import gui.layout.main.guide_map.GuideMapLayout;
@@ -87,6 +88,11 @@ public class HomeBtnActionListener implements ActionListener{
 	public HomeBtnActionListener(AdminLayout mainFrame) {
 		this.mainFrame = mainFrame;
 		this.homeBtn = mainFrame.b2;
+	}
+	
+	public HomeBtnActionListener(CheckOut mainFrame) {
+		this.mainFrame = mainFrame;
+		this.homeBtn = mainFrame.b1;
 	}
 
 }

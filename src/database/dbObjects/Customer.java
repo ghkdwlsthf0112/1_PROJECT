@@ -1,4 +1,4 @@
-package database.customer;
+package database.dbObjects;
 
 public class Customer {
 	Integer customer_id;

@@ -1,27 +1,31 @@
 package gui.layout.main.admin_window;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
+import java.awt.Font;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 import actions.HomeBtnActionListener;
 import actions.PrevBtnActionListener;
 import database.AdminDao;
-import database.reservation.Reservation;
+import database.dbObjects.Reservation;
 import gui.buttons.HomeBtn;
 import gui.buttons.PrevBtn;
 import image.getImages;
@@ -31,7 +35,8 @@ public class AdminLayout extends JFrame{
 	static ImageIcon backImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/back_white.png");
 	static ImageIcon homeImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/home_white.png");
 	List<Reservation> lists = new ArrayList<>();
-	String[] columnNames = {"예약번호","고객이메일","예약호실","예약시작일","예약종료일","사용기간경과","강제체크아웃"};
+	List<Object[]> obLists = new ArrayList<>();
+	String[] columnNames = {"예약번호","고객이메일","객실","체크인","체크아웃","경과"};
 	public JButton b1 = new PrevBtn(backImage);
 	public JButton b2 = new HomeBtn(homeImage);
 	
@@ -45,51 +50,56 @@ public class AdminLayout extends JFrame{
 		Label.setIcon(mainImage);
 		add(Label);
 		
+		// 예약 리스트 받아오기
 		lists = new AdminDao().getReservstion();
-		Reservation[] resList = new Reservation[lists.size()];
+		obLists = new AdminDao().getColumnNames();
 		
-//		DefaultTableModel model = new DefaultTableModel();
-//		List<Object[]> obLists = new ArrayList<>();
-//		obLists = new AdminDao().getColumnNames();
-//		for(String cl : columnNames) {
-//			model.addColumn(cl);
-//		}
-//		for(Object[] ob : obLists) {
-//			model.addRow(ob);
-//		}
-//		JTable reservationInfo = new JTable(model);
-//		JScrollPane jscp1 = new JScrollPane(reservationInfo);
-//
-//		reservationInfo.getColumn("예약번호").setPreferredWidth(50);
-//		reservationInfo.getColumn("고객이메일").setPreferredWidth(200);
-//		reservationInfo.getColumn("예약호실").setPreferredWidth(50);
-//		reservationInfo.getColumn("예약시작일").setPreferredWidth(70);
-//		reservationInfo.getColumn("예약종료일").setPreferredWidth(70);
-//		reservationInfo.getColumn("사용기간경과").setPreferredWidth(20);
-//		reservationInfo.getColumn("강제체크아웃").setPreferredWidth(20);
+//		Reservation[] resList = new Reservation[lists.size()];
+		DefaultTableModel model = new DefaultTableModel();
+		JPanel reservationInfo = new JPanel(new BorderLayout());
+		JTable table = new JTable(model);
+		table.getTableHeader().setReorderingAllowed(false); 
+		table.setDragEnabled(false);
+		table.setFont(new Font("나눔고딕", Font.BOLD, 11));
+		JScrollPane jscp1 = new JScrollPane(table);
+		jscp1.setBounds(0,0,650, 465);
+		table.setEnabled(false);
+		jscp1.setViewportView(table);
+		
+		
+		DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer(); // 디폴트테이블셀렌더러를 생성
+	    dtcr.setHorizontalAlignment(SwingConstants.CENTER);
 
-
-		JPanel reservationInfo = new JPanel(new GridLayout(15,0));
-		JScrollPane jscp1 = new JScrollPane(reservationInfo);
-		GridBagLayout gbl = new GridBagLayout();
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.fill = GridBagConstraints.BOTH;
-		for(int i = 0 ; i < lists.size() ; i++) {
-			JPanel infoLabel = new JPanel(gbl);
-//			infoLabel.setBorder(BorderFactory.createEmptyBorder(2 , 0 , 0 , 0));
-			infoLabel.setLayout(gbl);
-			try {
-				addInfoLable(infoLabel,lists,i);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			reservationInfo.add(infoLabel);
+	    
+		jscp1.setBorder(BorderFactory.createEmptyBorder());
+		jscp1.getViewport().setBackground(Color.WHITE);
+		reservationInfo.add(jscp1, BorderLayout.CENTER);
+		
+		
+		for(String cl : columnNames) {
+			model.addColumn(cl);
 		}
 		
+		for(Object[] ob : obLists) {
+			model.addRow(ob);
+		}
 		
+		table.getColumn("예약번호").setPreferredWidth(70);
 		
+		table.getColumn("고객이메일").setPreferredWidth(200);
 		
-		reservationInfo.setBounds(50, 300, 650, 470);
+		table.getColumn("객실").setPreferredWidth(40);
+		table.getColumn("객실").setCellRenderer(dtcr);
+
+		
+		table.getColumn("체크인").setPreferredWidth(80);
+		
+		table.getColumn("체크아웃").setPreferredWidth(80);
+		
+		table.getColumn("경과").setPreferredWidth(20);
+		table.getColumn("경과").setCellRenderer(dtcr);	
+
+		reservationInfo.setBounds(50, 305, 650, 465);
 		reservationInfo.setBackground(new Color(0,0,0,0));
 		Label.add(reservationInfo);
 		

@@ -1,4 +1,4 @@
-package database.room;
+package database.dbObjects;
 
 public class Room {
 	Integer room_id;
