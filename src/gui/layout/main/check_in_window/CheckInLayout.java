@@ -7,16 +7,16 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import actions.ChkReservationBtnActionListener;
 import actions.FloorGuideBtnActionListener;
 import actions.HomeBtnActionListener;
-import actions.OnSitecCheckInActionListener;
 import actions.PrevBtnActionListener;
-import gui.buttons.ChkInBtn;
 import gui.buttons.FloorGuideBtn;
 import gui.buttons.HomeBtn;
 import gui.buttons.PrevBtn;
+import gui.layout.main.check_in_window.actions.ChkReservationBtnActionListener;
+import gui.layout.main.check_in_window.actions.OnSitecCheckInActionListener;
 import gui.layout.main.check_in_window.buttons.OnSiteCheckInBtn;
+import gui.layout.main.hotel_main.buttons.ChkInBtn;
 import image.getImages;
 
 public class CheckInLayout extends JFrame {

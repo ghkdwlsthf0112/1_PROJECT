@@ -6,12 +6,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import database.dbObjects.Customer;
 import gui.layout.login.chk_ismember.LoginChkLayout;
 import gui.layout.login.member_login_window.MemberLoginLayout;
 import gui.layout.login.non_member_check_in.NonMemberCheckLayout;
-import gui.layout.main.CheckOut;
 import gui.layout.main.admin_window.AdminLayout;
 import gui.layout.main.check_in_window.CheckInLayout;
+import gui.layout.main.check_out_window.CheckOut;
 import gui.layout.main.cover.CoverLayout;
 import gui.layout.main.guide_map.GuideMapLayout;
 import gui.layout.main.hotel_main.HotelMainLayout;
@@ -19,6 +20,8 @@ import gui.layout.main.reservation_inquiry.ReservationChkIn;
 import gui.layout.main.reservation_inquiry.ReservationChkInNow;
 import gui.layout.main.reservation_inquiry.ReservationInfo;
 import gui.layout.main.reservation_inquiry.ReservationInquiryLayout;
+import gui.layout.main.reservation_window.ReservationLayout;
+import gui.layout.paymentWindow.check_totalpay_window.CheckTotalpayLayout;
 
 public class PrevBtnActionListener implements ActionListener {
 	JFrame mainFrame;
@@ -34,6 +37,9 @@ public class PrevBtnActionListener implements ActionListener {
 	JButton AdminLayoutPrevBtn;
 	JButton CheckOutPrevBtn;
 	JButton LoginChkLayoutPrevBtn;
+	JButton CheckTotalpayLayoutPrevBtn;
+
+	Customer customer;
 
 
 	@Override
@@ -74,7 +80,10 @@ public class PrevBtnActionListener implements ActionListener {
 		} else if(e.getSource() == LoginChkLayoutPrevBtn) {
 			new CheckInLayout();
 			mainFrame.dispose();
-		}
+		} else if(e.getSource() == CheckTotalpayLayoutPrevBtn) {
+			new ReservationLayout(customer);
+			mainFrame.dispose();
+		} 
 	}
 	
 	public PrevBtnActionListener(HotelMainLayout mainFrame) {
@@ -136,5 +145,11 @@ public class PrevBtnActionListener implements ActionListener {
 	public PrevBtnActionListener(LoginChkLayout mainFrame) {
 		this.mainFrame = mainFrame;
 		this.CheckOutPrevBtn = mainFrame.b3;
+	}
+	
+	public PrevBtnActionListener(CheckTotalpayLayout mainFrame) {
+		this.mainFrame = mainFrame;
+		this.CheckTotalpayLayoutPrevBtn = mainFrame.b2;
+		this.customer = mainFrame.customer;
 	}
 }

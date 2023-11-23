@@ -9,19 +9,19 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import actions.AdminBtnActionListener;
-import actions.ChkInBtnActionListener;
-import actions.ChkOutBtnActionListener;
-import actions.ChkReservBtnActionListener;
 import actions.FloorGuideBtnActionListener;
 import actions.PrevBtnActionListener;
-import gui.buttons.AdminBtn;
-import gui.buttons.ChkInBtn;
-import gui.buttons.ChkOutBtn;
-import gui.buttons.ChkReservationBtn;
 import gui.buttons.FloorGuideBtn;
 import gui.buttons.HomeBtn;
 import gui.buttons.PrevBtn;
+import gui.layout.main.hotel_main.actions.AdminBtnActionListener;
+import gui.layout.main.hotel_main.actions.ChkInBtnActionListener;
+import gui.layout.main.hotel_main.actions.ChkOutBtnActionListener;
+import gui.layout.main.hotel_main.actions.ChkReservBtnActionListener;
+import gui.layout.main.hotel_main.buttons.AdminBtn;
+import gui.layout.main.hotel_main.buttons.ChkInBtn;
+import gui.layout.main.hotel_main.buttons.ChkOutBtn;
+import gui.layout.main.hotel_main.buttons.ChkReservationBtn;
 import image.getImages;
 
 public class HotelMainLayout extends JFrame {
