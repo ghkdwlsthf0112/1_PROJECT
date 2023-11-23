@@ -13,11 +13,11 @@ import actions.HomeBtnActionListener;
 import actions.PrevBtnActionListener;
 import database.AdminDao;
 import database.dbObjects.Reservation;
-import gui.buttons.CancelReservationBtn;
 import gui.buttons.FloorGuideBtn;
 import gui.buttons.HomeBtn;
 import gui.buttons.OkBtn;
 import gui.buttons.PrevBtn;
+import gui.layout.main.reservation_inquiry.buttons.CancelReservationBtn;
 import image.getImages;
 
 public class ReservationChkIn extends JFrame{

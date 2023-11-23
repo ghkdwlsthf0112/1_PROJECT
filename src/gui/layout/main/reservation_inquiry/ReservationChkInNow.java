@@ -10,14 +10,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import actions.ChkReservIsExistActionListener;
 import actions.HomeBtnActionListener;
-import actions.NumberBtnActionListener;
 import actions.PrevBtnActionListener;
 import gui.buttons.HomeBtn;
 import gui.buttons.PrevBtn;
-import gui.buttons.ReservationOkBtn;
-import gui.buttons.numeric_keypad.NumericBtn;
+import gui.layout.main.reservation_inquiry.actions.ChkReservIsExistActionListener;
+import gui.layout.main.reservation_inquiry.actions.NumberBtnActionListener;
+import gui.layout.main.reservation_inquiry.buttons.NumericBtn;
+import gui.layout.main.reservation_inquiry.buttons.ReservationOkBtn;
 import image.getImages;
 
 public class ReservationChkInNow extends JFrame{

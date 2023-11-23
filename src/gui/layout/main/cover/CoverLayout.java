@@ -19,8 +19,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
-import actions.CoverBtnActionListener;
-import gui.buttons.CoverBtn;
+import gui.layout.main.cover.actions.CoverBtnActionListener;
+import gui.layout.main.cover.buttons.CoverBtn;
 import image.getImages;
 
 public class CoverLayout extends JFrame {

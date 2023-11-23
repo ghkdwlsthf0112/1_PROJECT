@@ -7,14 +7,14 @@ import javax.swing.JLabel;
 
 import actions.FloorGuideBtnActionListener;
 import actions.HomeBtnActionListener;
-import actions.MemberBtnActionListener;
-import actions.NonMemberBtnActionListener;
 import actions.PrevBtnActionListener;
 import gui.buttons.FloorGuideBtn;
 import gui.buttons.HomeBtn;
-import gui.buttons.MemberBtn;
-import gui.buttons.NonmemberBtn;
 import gui.buttons.PrevBtn;
+import gui.layout.login.chk_ismember.actions.MemberBtnActionListener;
+import gui.layout.login.chk_ismember.actions.NonMemberBtnActionListener;
+import gui.layout.login.chk_ismember.buttons.MemberBtn;
+import gui.layout.login.chk_ismember.buttons.NonmemberBtn;
 import image.getImages;
 
 public class LoginChkLayout extends JFrame{
