@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import gui.layout.login.chk_ismember.LoginChkLayout;
 //github.com/PigKidney/Hotel_teamProject.git
 import gui.layout.login.member_login_window.MemberLoginLayout;
 import gui.layout.login.non_member_check_in.NonMemberCheckLayout;
@@ -34,7 +35,7 @@ public class FloorGuideBtnActionListener implements ActionListener{
 	
 	public FloorGuideBtnActionListener(NonMemberCheckLayout mainFrame) {
 		this.mainFrame = mainFrame;
-		this.FloorGuideBtn = mainFrame.b5;	
+		this.FloorGuideBtn = mainFrame.b3;	
 	}
 	
 	public FloorGuideBtnActionListener(MemberLoginLayout mainFrame) {
@@ -55,5 +56,10 @@ public class FloorGuideBtnActionListener implements ActionListener{
 	public FloorGuideBtnActionListener(ReservationChkIn mainFrame) {
 		this.mainFrame = mainFrame;
 		this.FloorGuideBtn = mainFrame.b3;	
+	}
+	
+	public FloorGuideBtnActionListener(LoginChkLayout mainFrame) {
+		this.mainFrame = mainFrame;
+		this.FloorGuideBtn = mainFrame.b5;	
 	}
 }

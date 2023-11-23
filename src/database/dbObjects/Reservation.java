@@ -13,7 +13,8 @@ public class Reservation {
 	String reservation_end;
 	SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-	
+	public Reservation() {
+	}
 	
 	public Reservation(
 			Integer reservation_id, 

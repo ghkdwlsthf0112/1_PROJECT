@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import gui.layout.login.chk_ismember.LoginChkLayout;
 import gui.layout.login.member_login_window.MemberLoginLayout;
-import gui.layout.login.non_member_check_in.NonMemberCheckLayout;
 
 public class MemberBtnActionListener implements ActionListener{
 	JFrame mainFrame;
@@ -21,7 +21,7 @@ public class MemberBtnActionListener implements ActionListener{
 		
 	}
 	
-	public MemberBtnActionListener(NonMemberCheckLayout mainFrame) {
+	public MemberBtnActionListener(LoginChkLayout mainFrame) {
 		this.mainFrame = mainFrame;
 		this.MemberBtn = mainFrame.b1;
 	}

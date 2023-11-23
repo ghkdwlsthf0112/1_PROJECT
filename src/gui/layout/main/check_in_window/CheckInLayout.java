@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import actions.ChkReservationBtnActionListener;
 import actions.FloorGuideBtnActionListener;
 import actions.HomeBtnActionListener;
+import actions.OnSitecCheckInActionListener;
 import actions.PrevBtnActionListener;
 import gui.buttons.ChkInBtn;
 import gui.buttons.FloorGuideBtn;
@@ -48,6 +49,7 @@ public class CheckInLayout extends JFrame {
 		imageLabel.add(b1);
 		
 		b2.setBounds(25, 615, 700, 170);
+		b2.addActionListener(new OnSitecCheckInActionListener(this));
 		imageLabel.add(b2);
 		
 		b3.setBounds(30, 920, 40, 40);

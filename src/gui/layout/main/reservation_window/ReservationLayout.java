@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import actions.CalendarBtnActionListener;
+import database.dbObjects.Customer;
+import database.dbObjects.Reservation;
 import gui.buttons.CalendarBtn;
 import image.getImages;
 
@@ -19,12 +21,19 @@ public class ReservationLayout extends JFrame  {
 	static JTextField dateTextField;
 	ActionListener CalendarBtnActionListener;
 	public JButton calendarBtn = new CalendarBtn(calendarImage);
-	
-	public ReservationLayout() {
+	Customer customer;
+	Reservation reservation;
+	public ReservationLayout(Customer customer) {
 		
 		setLayout(null);
+		this.customer = customer;
+		System.out.println(customer.toString());
 //		JLabel imageLabel = new JLabel();
 		JLabel chkInLabel = new JLabel("입실날짜");
+		
+		reservation.setCustomer_email(customer.getCustomer_email());
+//		reservation.setReservation_start(getName());
+//		reservation.setReservation_end(getName());
 		
 		dateTextField = new JTextField(20);
 		dateTextField.setHorizontalAlignment(chkInLabel.CENTER);
@@ -52,7 +61,8 @@ public class ReservationLayout extends JFrame  {
 	
 	
 	public static void main(String[] args) {
-		new ReservationLayout();
+		Customer customer = null; // -> 회원 비회원 전부 Customer 객체를 이용해서 전달
+		new ReservationLayout(customer);
 	}
 	
 	

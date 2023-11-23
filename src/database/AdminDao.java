@@ -3,7 +3,6 @@ package database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,9 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.table.DefaultTableModel;
-
+import database.dbObjects.Customer;
 import database.dbObjects.Reservation;
 
 //DAO (Database Access Object) - DB에 쿼리문 보내고 결과 반영하는 객체
@@ -73,6 +70,30 @@ public class AdminDao {
 	// 예약정보를 가져와 확인후 그 방을 체크아웃 시켜주는 메서드
 	// 아이디 중복검사를 해주는 메서드
 	// 아이디 확인 후 비밀번호가 맞는지 확인해주는 메서드
+	public Customer getCustomer(String email, String password) {
+		try (Connection conn = DBConnection.getConnection();) {
+			String sql = "SELECT * FROM customer WHERE customer_email LIKE ? AND customer_password LIKE ?";
+			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setString(1, email);
+				pstmt.setString(2, password);
+				Customer customer = new Customer();
+				try (ResultSet rs = pstmt.executeQuery()) {
+					while (rs.next() == true) {
+						customer.setCustomer_id(rs.getInt(1));
+						customer.setCustomer_email(rs.getString(2));
+						customer.setCustomer_password(rs.getString(3)); 
+						customer.setCustomer_phone_number(rs.getString(4)); 
+						customer.setCustomer_name(rs.getString(5));
+						customer.setCustomer_yn(rs.getString(6));
+					}
+					return customer;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	// 체크인이 되어 있는 방을 골라주는 메서드
 	public List<Reservation> getReservstion() {
 		// DB에서 커밋을 하지 않으면 나오지 않는다

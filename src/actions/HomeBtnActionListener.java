@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import gui.layout.login.chk_ismember.LoginChkLayout;
 import gui.layout.login.member_login_window.MemberLoginLayout;
 import gui.layout.login.non_member_check_in.NonMemberCheckLayout;
 import gui.layout.main.CheckOut;
@@ -45,7 +46,7 @@ public class HomeBtnActionListener implements ActionListener{
 	
 	public HomeBtnActionListener(NonMemberCheckLayout mainFrame) {
 		this.mainFrame = mainFrame;
-		this.homeBtn = mainFrame.b4;	
+		this.homeBtn = mainFrame.b2;	
 	}
 	
 	public HomeBtnActionListener(PayExitLayout mainFrame) {
@@ -95,4 +96,8 @@ public class HomeBtnActionListener implements ActionListener{
 		this.homeBtn = mainFrame.b1;
 	}
 
+	public HomeBtnActionListener(LoginChkLayout mainFrame) {
+		this.mainFrame = mainFrame;
+		this.homeBtn = mainFrame.b4;
+	}
 }

@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import gui.layout.login.chk_ismember.LoginChkLayout;
 import gui.layout.login.member_login_window.MemberLoginLayout;
 import gui.layout.login.non_member_check_in.NonMemberCheckLayout;
 import gui.layout.main.CheckOut;
@@ -32,6 +33,7 @@ public class PrevBtnActionListener implements ActionListener {
 	JButton GuideMapLayoutPrevBtn;
 	JButton AdminLayoutPrevBtn;
 	JButton CheckOutPrevBtn;
+	JButton LoginChkLayoutPrevBtn;
 
 
 	@Override
@@ -46,10 +48,10 @@ public class PrevBtnActionListener implements ActionListener {
 			new HotelMainLayout();
 			mainFrame.dispose();
 		} else if(e.getSource() == NonMemberCheckLayoutPrevBtn) {
-			new CheckInLayout();
+			new LoginChkLayout();
 			mainFrame.dispose();
 		} else if(e.getSource() == MemberLoginLayoutPrevBtn) {
-			new NonMemberCheckLayout();
+			new LoginChkLayout();
 			mainFrame.dispose();
 		} else if(e.getSource() == ReservationInfoPrevBtn) {
 			new ReservationInquiryLayout();
@@ -68,6 +70,9 @@ public class PrevBtnActionListener implements ActionListener {
 			mainFrame.dispose();
 		} else if(e.getSource() == CheckOutPrevBtn) {
 			new HotelMainLayout();
+			mainFrame.dispose();
+		} else if(e.getSource() == LoginChkLayoutPrevBtn) {
+			new CheckInLayout();
 			mainFrame.dispose();
 		}
 	}
@@ -90,7 +95,7 @@ public class PrevBtnActionListener implements ActionListener {
 
 	public PrevBtnActionListener(NonMemberCheckLayout mainFrame) {
 		this.mainFrame = mainFrame;
-		this.NonMemberCheckLayoutPrevBtn = mainFrame.b3;
+		this.NonMemberCheckLayoutPrevBtn = mainFrame.b1;
 	}
 	
 	public PrevBtnActionListener(MemberLoginLayout mainFrame) {
@@ -126,5 +131,10 @@ public class PrevBtnActionListener implements ActionListener {
 	public PrevBtnActionListener(CheckOut mainFrame) {
 		this.mainFrame = mainFrame;
 		this.CheckOutPrevBtn = mainFrame.b2;
+	}
+	
+	public PrevBtnActionListener(LoginChkLayout mainFrame) {
+		this.mainFrame = mainFrame;
+		this.CheckOutPrevBtn = mainFrame.b3;
 	}
 }
