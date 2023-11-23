@@ -159,4 +159,35 @@ public class AdminDao {
 		}
 		return null;
 	}
+	
+	// 체크인 가능한 방 조회하는 메서드?
+	public List<Reservation> getAvailableCheckInRoom(String currentDate){
+		String sql = "SELECT * FROM reservation WHERE reservation_end >= ?";
+		
+		try (
+			Connection conn = DBConnection.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+		){
+			pstmt.setString(1, currentDate);
+			
+			List<Reservation> availableRooms = new ArrayList<>();
+			
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs.next()) {
+					availableRooms.add(new Reservation(
+							rs.getInt(1),
+							rs.getString(2),
+							rs.getString(3),
+							rs.getInt(4),
+							rs.getString(5),
+							rs.getString(6)));
+				}
+				return availableRooms;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

@@ -12,15 +12,20 @@ import actions.CalendarBtnActionListener;
 import database.dbObjects.Customer;
 import database.dbObjects.Reservation;
 import gui.buttons.CalendarBtn;
+import gui.buttons.SearchBtn;
 import image.getImages;
 
 public class ReservationLayout extends JFrame  {
 	
 	static ImageIcon calendarImage = new getImages().getImageIcon(40, 40, "src/image/calendar/calendar1.png");
+	static ImageIcon searchImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/check.png");
 	
-	static JTextField dateTextField;
+	public static JTextField chkInDateTextField;
+	public static JTextField chkOutDateTextField;
+
 	ActionListener CalendarBtnActionListener;
 	public JButton calendarBtn = new CalendarBtn(calendarImage);
+	public JButton searchBtn = new SearchBtn(searchImage);
 	Customer customer;
 	Reservation reservation;
 	public ReservationLayout(Customer customer) {
@@ -30,21 +35,32 @@ public class ReservationLayout extends JFrame  {
 		System.out.println(customer.toString());
 //		JLabel imageLabel = new JLabel();
 		JLabel chkInLabel = new JLabel("입실날짜");
+		JLabel chkOutLabel = new JLabel("퇴실 날짜");
+		
+		
+
 		
 		reservation.setCustomer_email(customer.getCustomer_email());
 //		reservation.setReservation_start(getName());
 //		reservation.setReservation_end(getName());
 		
-		dateTextField = new JTextField(20);
-		dateTextField.setHorizontalAlignment(chkInLabel.CENTER);
-		dateTextField.setBounds(50, 100, 200, 80);
-		dateTextField.setEnabled(false);
+		chkInDateTextField = new JTextField(20);
+		chkInDateTextField.setHorizontalAlignment(chkInLabel.CENTER);
+		chkInDateTextField.setBounds(50, 100, 200, 80);
+		chkInDateTextField.setEnabled(false);
+		
+		chkOutDateTextField = new JTextField();
+		chkOutDateTextField.setHorizontalAlignment(chkOutLabel.CENTER);
+		chkOutDateTextField.setBounds(100, 140, 200, 80);
+		chkOutDateTextField.setEnabled(false);
+
 		
 		calendarBtn.setBounds(500, 100, 40, 40);
 		calendarBtn.addActionListener(new CalendarBtnActionListener(this));
 		
 		add(chkInLabel);
-		add(dateTextField);
+		add(chkInDateTextField);
+		add(chkOutDateTextField);
 		add(calendarBtn);
 		
 		

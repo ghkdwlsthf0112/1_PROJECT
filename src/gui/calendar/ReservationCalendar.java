@@ -8,42 +8,52 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+
+import gui.layout.main.reservation_window.ReservationLayout;
 
 public class ReservationCalendar extends JFrame implements ActionListener {
 	Container container = getContentPane();
 	
+	public static boolean isInit = false;
+	
+	// 선택한 날짜를 저장함
+	int clickCount = 0;
+	
+	JPanel bar = new JPanel();
+	JButton lastMonth = new JButton("◀");
+	
 	JPanel panel1 = new JPanel();
 	JPanel panel2 = new JPanel();
 	
-	JButton prevBtn = new JButton("<");
-	JButton nextBtn = new JButton(">");
+	JButton prevBtn = new JButton("◀");
+	JButton nextBtn = new JButton("▶");
 	
 	JLabel label = new JLabel("0월 00년");
 	
 	JButton[] buttons = new JButton[49];
 	String[] dayNames = {"일", "월", "화", "수", "목", "금", "토"};
 	
-	private JLabel selectDateLabel = new JLabel("선택한 날짜");
-	private JTextField selectDateTextField = new JTextField(10);
+	//	private JLabel selectDateLabel = new JLabel("선택한 날짜");
+	//	private JTextField selectDateTextField = new JTextField(10);
 	
 	CalendarFunction cf = new CalendarFunction();
 	
 	public ReservationCalendar() {
-		setTitle("체크인 체크아웃 날짜");
+		setTitle("달력");
 		setSize(500, 400);
 		setLocation(400, 400);
 		init();
 		start();
 		setVisible(true);
-		
-		panel1.add(selectDateLabel);
-		panel1.add(selectDateTextField);
 		
 		for (int i = 7; i < buttons.length; i++) {
 			buttons[i].addActionListener(this);
@@ -104,20 +114,80 @@ public class ReservationCalendar extends JFrame implements ActionListener {
 	
 	// 이벤트 시작 메서드
 	private void start() {
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		nextBtn.addActionListener(this);
 		prevBtn.addActionListener(this);
 	}
 	
+	// 체크인 날짜가 체크아웃 날짜보다 뒤면 안됨
+	public int dayMinusCheck() {
+		int result = 0;
+		int chkInDate = Integer.valueOf(ReservationLayout.chkInDateTextField.getText().replace("-", ""));
+		int chkOutDate = Integer.valueOf(ReservationLayout.chkOutDateTextField.getText().replace("-", ""));
+		int minusCheck = chkOutDate - chkInDate;
+		if (minusCheck < 0) {
+			result = 1;
+		}
+		return result;
+	}
+	
+	// 체크인 날짜 선택을 오늘보다 전으로 선택 하면 안됨
+	public int errorCheck(int index) {
+		Date date = new Date();
+		int result = 0;
+		
+		String selectDateStr = cf.year + "-" + cf.month + "-" + buttons[index].getText();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		
+		try {
+			Date selectDate = format.parse(selectDateStr);
+			if (selectDate != null) {
+				if (selectDate.before(date) || selectDate.equals(date)) {
+					result = 1;
+				}
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		for (int i = 7; i < buttons.length; i++) {
-			if (e.getSource() == buttons[i]) {
-				String selectDate = buttons[i].getText();
-				selectDateTextField.setText(selectDate);
+
+			if (e.getSource() == buttons[i] && !buttons[i].getText().isEmpty()) {
+				// 날짜 yyyy-mm-dd로 문자열
+				String selectDate = cf.year + "-" + cf.month + "-" + buttons[i].getText();
+				clickCount++;
+
+				if (clickCount % 2 == 1) {
+					// 홀수 클릭 - 출발 날짜
+					// 시작 날짜로 설정하고 텍스트필드에 업데이트
+					ReservationLayout.chkInDateTextField.setText(selectDate);
+					// 도착 날짜 초기화
+					ReservationLayout.chkOutDateTextField.setText("");
+					if (errorCheck(i) == 1) {
+						JOptionPane.showMessageDialog(this, "오늘보다 이전 선택 ㄴㄴ");
+						ReservationLayout.chkInDateTextField.setText("");
+						ReservationLayout.chkOutDateTextField.setText("");
+						clickCount = 0;
+					}
+				} else {
+					ReservationLayout.chkOutDateTextField.setText(selectDate);
+					if (dayMinusCheck() == 1) {
+						JOptionPane.showMessageDialog(this, "체크아웃 날짜보다 뒤로가면 ㄴㄴ");
+						ReservationLayout.chkOutDateTextField.setText("");
+						clickCount = 0;
+					}
+					dispose();
+				}
+				
+
 			}
 		}
+		
 		
 		int gap = 0;
 		if (e.getSource() == nextBtn) { // 다음 버튼 클릭
