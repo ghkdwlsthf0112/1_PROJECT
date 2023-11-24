@@ -38,8 +38,14 @@ public class ReservationLayout extends JFrame {
 
 	public ReservationLayout(Customer customer) {
 		
+
 //		this.customer = customer;
 //		System.out.println(customer.toString());
+		setLayout(null);
+		this.customer = customer;
+//		System.out.println(customer.toString());
+//		JLabel imageLabel = new JLabel();
+		JLabel chkInLabel = new JLabel("입실날짜");
 		
 //		reservation.setCustomer_email(customer.getCustomer_email());
 //		reservation.setReservation_start(getName());

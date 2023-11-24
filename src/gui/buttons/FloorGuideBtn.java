@@ -5,10 +5,13 @@ import java.awt.Font;
 
 import javax.swing.Action;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-public class FloorGuideBtn extends JButton{
+import image.getImages;
 
+public class FloorGuideBtn extends JButton{
+	final protected static ImageIcon guideBtnImage = new getImages().getImageIcon(80, 40, "src/image/icon_image/btn/RoomInfomationMap_white.png");
 	
 	public FloorGuideBtn() {
 		decorate();
@@ -37,6 +40,8 @@ public class FloorGuideBtn extends JButton{
 	}
 
 	protected void decorate() {
+		setIcon(guideBtnImage);
+		setPressedIcon(guideBtnImage);
 		setBorderPainted(false);
 		setOpaque(false);
 		setBackground(new Color(0, 0, 0, 0));

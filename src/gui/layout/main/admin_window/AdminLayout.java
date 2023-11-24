@@ -32,13 +32,12 @@ import image.getImages;
 
 public class AdminLayout extends JFrame{
 	static ImageIcon mainImage = new getImages().getImageIcon(768, 1024, "src/image/background_image/adminimage.png");
-	static ImageIcon backImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/back_white.png");
-	static ImageIcon homeImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/home_white.png");
+	
 	List<Reservation> lists = new ArrayList<>();
 	List<Object[]> obLists = new ArrayList<>();
 	String[] columnNames = {"예약번호","고객이메일","객실","체크인","체크아웃","경과"};
-	public JButton b1 = new PrevBtn(backImage);
-	public JButton b2 = new HomeBtn(homeImage);
+	public JButton b1 = new PrevBtn();
+	public JButton b2 = new HomeBtn();
 	
 
 	public AdminLayout() {
@@ -52,7 +51,7 @@ public class AdminLayout extends JFrame{
 		
 		// 예약 리스트 받아오기
 		lists = new AdminDao().getReservstion();
-		obLists = new AdminDao().getColumnNames();
+		obLists = new AdminDao().getReservationsObject();
 		
 //		Reservation[] resList = new Reservation[lists.size()];
 		DefaultTableModel model = new DefaultTableModel();

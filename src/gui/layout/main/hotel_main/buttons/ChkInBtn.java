@@ -11,7 +11,8 @@ import javax.swing.JButton;
 import image.getImages;
 
 public class ChkInBtn extends JButton{
-	
+	final protected static ImageIcon checkInImage = new getImages().getImageIcon(710, 170, "src/image/icon_image/btn/checkIn.png");
+
 	public ChkInBtn() {
 		decorate();
 	}
@@ -41,6 +42,8 @@ public class ChkInBtn extends JButton{
     }
 
     protected void decorate() {
+    	setIcon(checkInImage);
+    	setPressedIcon(checkInImage);
         setBorderPainted(false);
         setOpaque(false);
         setBackground(new Color(0,0,0,0));

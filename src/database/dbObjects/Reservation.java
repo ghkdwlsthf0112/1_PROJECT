@@ -2,6 +2,8 @@ package database.dbObjects;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.Date;
 
 public class Reservation {
@@ -66,6 +68,25 @@ public class Reservation {
 	public String getReservation_start() {
 		return reservation_start;
 	}
+	
+	public Period getDiffDate() {
+		Date start = null;
+		Date end = null;
+		try {
+			start = newDtFormat.parse(reservation_start);
+			end = newDtFormat.parse(reservation_end);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+//		LocalDate startlocalDate = new java.sql.Date(start.getTime()).toLocalDate();;  
+//		LocalDate endlocalDate = new java.sql.Date(end.getTime()).toLocalDate();;  
+
+		LocalDateTime startlocalDateTime = new java.sql.Timestamp(start.getTime()) .toLocalDateTime();
+		LocalDateTime endlocalDateTime = new java.sql.Timestamp(end.getTime()) .toLocalDateTime();
+
+		Period diff = Period.between(startlocalDateTime.toLocalDate(), endlocalDateTime.toLocalDate());
+		return diff;
+	}
 
 	public void setReservation_start(String reservation_start) {
 		this.reservation_start = reservation_start;
@@ -78,6 +99,9 @@ public class Reservation {
 	public void setReservation_end(String reservation_end) {
 		this.reservation_end = reservation_end;
 	}
+	
+	
+	
 	
 	@Override
 	public String toString() {
