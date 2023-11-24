@@ -30,36 +30,36 @@ public class ReservationInfo extends JFrame{
 	static ImageIcon cancelImage = new getImages().getImageIcon(200, 80, "src/image/icon_image/btn/CancelReservation.png");
 	static ImageIcon okImage = new getImages().getImageIcon(200, 80, "src/image/icon_image/btn/check.png");
 
-	List<Reservation> reservstion;
+	Reservation reservstion;
 	public JButton b1 = new PrevBtn(backImage);
 	public JButton b2 = new HomeBtn(homeImage);
 	public JButton b3 = new FloorGuideBtn(guideImage);
 	public JButton b4 = new CancelReservationBtn(cancelImage);
 	public JButton b5 = new OkBtn(okImage);
 
-	public ReservationInfo(List<Reservation> reservstion) {
+	public ReservationInfo(Reservation reservstion) {
 		setLayout(null);
 		this.reservstion = reservstion;
 		JLabel Label = new JLabel();
 		Label.setBounds(0, 0, 768, 1024);
 		Label.setIcon(mainImage);
 		
-		JLabel resNum = new JLabel(reservstion.get(0).getReservation_number());
+		JLabel resNum = new JLabel(reservstion.getReservation_number());
 		resNum.setBounds(340, 225, 300, 100);
 		resNum.setFont(new Font("굴림", Font.BOLD, 40));
 		add(resNum);
 		
-		JLabel resRoomNum = new JLabel(reservstion.get(0).getRoom_number().toString()+"호");
+		JLabel resRoomNum = new JLabel(reservstion.getRoom_number().toString()+"호");
 		resRoomNum.setBounds(340, 345, 300, 100);
 		resRoomNum.setFont(new Font("굴림", Font.BOLD, 40));
 		add(resRoomNum);
 		
-		JLabel resStartDate = new JLabel(reservstion.get(0).getReservation_start());
+		JLabel resStartDate = new JLabel(reservstion.getReservation_start());
 		resStartDate.setBounds(340, 465, 300, 100);
 		resStartDate.setFont(new Font("굴림", Font.BOLD, 40));
 		add(resStartDate);
 		
-		JLabel resEndDate = new JLabel(reservstion.get(0).getReservation_end());
+		JLabel resEndDate = new JLabel(reservstion.getReservation_end());
 		resEndDate.setBounds(340, 585, 300, 100);
 		resEndDate.setFont(new Font("굴림", Font.BOLD, 40));
 		add(resEndDate);
@@ -97,7 +97,7 @@ public class ReservationInfo extends JFrame{
 	public static void main(String[] args) {
 		AdminDao admindao = new AdminDao();
 
-		List<Reservation> reservstion = admindao.getReservstion("111111");
+		Reservation reservstion = admindao.getReservstion("111111");
 		new ReservationInfo(reservstion);
 	}
 	

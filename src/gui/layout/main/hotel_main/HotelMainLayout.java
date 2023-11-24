@@ -26,22 +26,15 @@ import image.getImages;
 
 public class HotelMainLayout extends JFrame {
 
-	static ImageIcon mainImage = new getImages().getImageIcon(768, 1024, "src/image/background_image/background4.png");
-	static ImageIcon checkInImage = new getImages().getImageIcon(710, 170, "src/image/icon_image/btn/checkIn.png");
-	static ImageIcon checkOutImage = new getImages().getImageIcon(340, 170, "src/image/icon_image/btn/checkOut.png");
-	static ImageIcon chkResvImage = new getImages().getImageIcon(340, 170,
-			"src/image/icon_image/btn/ConfirmationOfReservation.png");
-	static ImageIcon backImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/back_white.png");
-	static ImageIcon homeBtnImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/home_white.png");
-	static ImageIcon guideBtnImage = new getImages().getImageIcon(80, 40, "src/image/icon_image/btn/RoomInfomationMap_white.png");
-
-	public JButton b1 = new ChkInBtn(checkInImage);
-	public JButton b2 = new ChkOutBtn(checkOutImage);
-	public JButton b3 = new ChkReservationBtn(chkResvImage);
+	final protected static ImageIcon mainImage = new getImages().getImageIcon(768, 1024, "src/image/background_image/background4.png");
+	
+	public JButton b1 = new ChkInBtn();
+	public JButton b2 = new ChkOutBtn();
+	public JButton b3 = new ChkReservationBtn();
 	public JButton b4 = new AdminBtn();
-	public JButton b5 = new PrevBtn(backImage);
-	public JButton b6 = new HomeBtn(homeBtnImage);
-	public JButton b7 = new FloorGuideBtn(guideBtnImage);
+	public JButton b5 = new PrevBtn();
+	public JButton b6 = new HomeBtn();
+	public JButton b7 = new FloorGuideBtn();
 	
 	public HotelMainLayout() {
 		super("델루나호텔");
@@ -85,6 +78,10 @@ public class HotelMainLayout extends JFrame {
 		setSize(768, 1024);
 		setVisible(true);
 		setResizable(false);
+	}
+	
+	public static void main(String[] args) {
+		new HotelMainLayout();
 	}
 	
 }

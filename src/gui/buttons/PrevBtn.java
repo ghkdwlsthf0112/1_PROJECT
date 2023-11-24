@@ -5,11 +5,15 @@ import java.awt.Color;
 
 import javax.swing.Action;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
+import image.getImages;
 
 
 public class PrevBtn extends JButton{
-	
+	final protected static ImageIcon backImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/back_white.png");
+
 	public PrevBtn() {
 		decorate();
 	}
@@ -37,6 +41,8 @@ public class PrevBtn extends JButton{
 	}
 
 	protected void decorate() {
+		setIcon(backImage);
+		setPressedIcon(backImage);
 		setBorderPainted(false);
 		setOpaque(false);
 		setBackground(new Color(0, 0, 0, 0));

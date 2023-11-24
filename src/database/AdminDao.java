@@ -12,6 +12,8 @@ import java.util.List;
 
 import database.dbObjects.Customer;
 import database.dbObjects.Reservation;
+import database.dbObjects.Room;
+import oracle.jdbc.logging.annotations.DisableTrace;
 
 //DAO (Database Access Object) - DB에 쿼리문 보내고 결과 반영하는 객체
 public class AdminDao {
@@ -34,8 +36,40 @@ public class AdminDao {
 		}
 		return re;
 	}
+	
+	/**
+	 * DB에서 해당 예약번호에 대한 정보를 하나만 받고 싶을때
+	 * 
+	 * 
+	 * @param reservation_number = 예약번호 뒤 6자리
+	 * @return DB에서 검색후 예약번호에 맞는 Reservation 객체를 return
+	 */
+	public Reservation getReservstion(String reservation_number) {
+		try (Connection conn = DBConnection.getConnection();) {
+			String sql = "SELECT * FROM reservation WHERE reservation_number LIKE ?";
+			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setString(1, "%" + reservation_number);
+				Reservation reservation = new Reservation();
+				try (ResultSet rs = pstmt.executeQuery()) {
+					while (rs.next() == true) {
+						reservation.setReservation_id(rs.getInt(1)); 
+						reservation.setReservation_number(rs.getString(2));
+						reservation.setCustomer_email(rs.getString(3));
+						reservation.setRoom_number(rs.getInt(4));
+						reservation.setReservation_start(rs.getString(5));
+						reservation.setReservation_end(rs.getString(6));
+					}
+					return reservation;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
-	public List<Reservation> getReservstion(String reservation_number) {
+	@DisableTrace
+	public List<Reservation> getReservstions(String reservation_number) {
 		try (Connection conn = DBConnection.getConnection();) {
 			String sql = "SELECT * FROM reservation WHERE reservation_number LIKE ?";
 			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -54,7 +88,12 @@ public class AdminDao {
 			return null;
 		}
 	}
-	// 예약정보를 가져와 확인후 그 방의 체크인 상태를 바꿔주는 메서드
+	
+	/**
+	 * DB에서 해당 예약번호의 예약을 찾아 삭제(체크아웃) 시켜주는 메서드
+	 * @param reservation_number == 예약번호
+	 * @return DB reservation delete
+	 */
 	public int setReservationChkOut(String reservation_number) {
 		try (Connection conn = DBConnection.getConnection();) {
 			String sql = "DELETE FROM reservation WHERE reservation_number LIKE ?";
@@ -67,9 +106,18 @@ public class AdminDao {
 			return -1;
 		}
 	}
+	
 	// 예약정보를 가져와 확인후 그 방을 체크아웃 시켜주는 메서드
+	
 	// 아이디 중복검사를 해주는 메서드
-	// 아이디 확인 후 비밀번호가 맞는지 확인해주는 메서드
+	
+	/**
+	 * DB에 있는 고객정보를 확인해서 Customer객체로 리턴해주는 메서드
+	 * 
+	 * @param email = 고객 로그인 아이디(이메일)
+	 * @param password = 고객 비밀번호
+	 * @return Customer
+	 */
 	public Customer getCustomer(String email, String password) {
 		try (Connection conn = DBConnection.getConnection();) {
 			String sql = "SELECT * FROM customer WHERE customer_email LIKE ? AND customer_password LIKE ?";
@@ -94,6 +142,8 @@ public class AdminDao {
 			return null;
 		}
 	}
+	
+	
 	// 체크인이 되어 있는 방을 골라주는 메서드
 	public List<Reservation> getReservstion() {
 		// DB에서 커밋을 하지 않으면 나오지 않는다
@@ -119,8 +169,13 @@ public class AdminDao {
 			return null;
 		}
 	}
-	// 예약내용에서 테이블명을 가져오는 메서드
-	public List<Object[]> getColumnNames() {
+	
+	/**
+	 * DB에 있는 예약정보들을 관리자창에 보여주기위해서 Object화 해서 리스트에 담아 리턴
+	 * 
+	 * @return new Object[]{n,e,r,s,end,isPass} => List로
+	 */
+	public List<Object[]> getReservationsObject() {
 		String sql = "SELECT * FROM reservation ORDER BY reservation_end";
 	    String todayfm = new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis()));
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -158,5 +213,34 @@ public class AdminDao {
 			e1.printStackTrace();
 		}
 		return null;
+	}
+
+	/**
+	 * DB에 해당 방번호를 입력하면 그 방에대한 정보를 Room 객체에 담아 리턴해주는 매서드
+	 * @param room_number = 방번호
+	 * @return Room
+	 */
+	public Room getRoom(String room_number) {
+		try (Connection conn = DBConnection.getConnection();) {
+			String sql = "SELECT * FROM room WHERE room_number LIKE ?";
+			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setString(1, room_number+"%");
+				Room room = new Room();
+				try (ResultSet rs = pstmt.executeQuery()) {
+					while (rs.next() == true) {
+						room.setRoom_id(rs.getInt(1)); 
+						room.setRoom_number(rs.getInt(2));
+						room.setRoom_type(rs.getString(3));
+						room.setRoom_fare(rs.getInt(4));
+						room.setRoom_is_using_yn(rs.getString(5));
+						room.setRoom_floor(rs.getInt(6));
+					}
+					return room;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
