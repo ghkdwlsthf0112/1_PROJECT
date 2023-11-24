@@ -12,6 +12,7 @@ import java.util.List;
 
 import database.dbObjects.Customer;
 import database.dbObjects.Reservation;
+import database.dbObjects.Room;
 
 //DAO (Database Access Object) - DB에 쿼리문 보내고 결과 반영하는 객체
 public class AdminDao {
@@ -160,27 +161,41 @@ public class AdminDao {
 		return null;
 	}
 	
+	
 	// 체크인 가능한 방 조회하는 메서드?
-	public List<Reservation> getAvailableCheckInRoom(String currentDate){
-		String sql = "SELECT * FROM reservation WHERE reservation_end >= ?";
+	public List<Room> getAvailableCheckInRoom(String checkInDate, String checkOutDate){
+		// 사용중이지 않은 방 쿼리문
+		
+		// 사용중이 아닌 방을 선택하고 Reservation 테이블에 있는 예약된 방을 제외함
+		// 
+		String sql = "SELECT * FROM Room WHERE room_is_using_yn = 'N' AND room_id NOT IN "  
+				+ "(SELECT room_id FROM Reservation "
+				+ "WHERE (reservation_start <= ? AND reservation_end >= ?) OR " 
+				+ "(reservation_start <= ? AND reservation_end >= ?) OR " 
+				+ "(reservation_start >= ? AND reservation_end <= ?))"; 
 		
 		try (
 			Connection conn = DBConnection.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 		){
-			pstmt.setString(1, currentDate);
+			pstmt.setString(1, checkInDate);
+			pstmt.setString(2, checkInDate);
+			pstmt.setString(3, checkOutDate);
+			pstmt.setString(4, checkOutDate);
+			pstmt.setString(5, checkInDate);
+			pstmt.setString(6, checkOutDate);
 			
-			List<Reservation> availableRooms = new ArrayList<>();
+			List<Room> availableRooms = new ArrayList<>();
 			
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
-					availableRooms.add(new Reservation(
-							rs.getInt(1),
-							rs.getString(2),
-							rs.getString(3),
-							rs.getInt(4),
-							rs.getString(5),
-							rs.getString(6)));
+					availableRooms.add(new Room(
+							rs.getInt("room_id"),
+							rs.getInt("room_number"),
+							rs.getString("room_type"),
+							rs.getInt("room_fare"),
+							rs.getString("room_is_using_yn"),
+							rs.getInt("room_floor")));
 				}
 				return availableRooms;
 			}

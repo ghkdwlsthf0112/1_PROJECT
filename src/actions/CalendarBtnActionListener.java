@@ -22,7 +22,7 @@ public class CalendarBtnActionListener implements ActionListener {
 		if(e.getSource() == CalendarBtn) {
 			if (calendarWindowTest == 0) {
 				new ReservationCalendar();
-				calendarWindowTest = 1;
+//				calendarWindowTest = 1;
 			}
 		}
 	}
@@ -30,7 +30,7 @@ public class CalendarBtnActionListener implements ActionListener {
 	
 	public CalendarBtnActionListener(ReservationLayout mainFrame) {
 		this.mainFrame = mainFrame;
-		this.CalendarBtn = mainFrame.calendarBtn;
+		this.CalendarBtn = mainFrame.calendarBtn1;
 	}
 	
 }

@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,12 +19,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import database.AdminDao;
+import database.dbObjects.Room;
 import gui.layout.main.reservation_window.ReservationLayout;
 
 public class ReservationCalendar extends JFrame implements ActionListener {
 	Container container = getContentPane();
-	
-	public static boolean isInit = false;
+	AdminDao adminDao = new AdminDao();
 	
 	// 선택한 날짜를 저장함
 	int clickCount = 0;
@@ -142,7 +144,7 @@ public class ReservationCalendar extends JFrame implements ActionListener {
 		try {
 			Date selectDate = format.parse(selectDateStr);
 			if (selectDate != null) {
-				if (selectDate.before(date) || selectDate.equals(date)) {
+				if (selectDate.before(date)) {
 					result = 1;
 				}
 			}
@@ -173,6 +175,8 @@ public class ReservationCalendar extends JFrame implements ActionListener {
 						ReservationLayout.chkInDateTextField.setText("");
 						ReservationLayout.chkOutDateTextField.setText("");
 						clickCount = 0;
+					} else {
+						showAvailableRooms(selectDate, null);
 					}
 				} else {
 					ReservationLayout.chkOutDateTextField.setText(selectDate);
@@ -180,6 +184,8 @@ public class ReservationCalendar extends JFrame implements ActionListener {
 						JOptionPane.showMessageDialog(this, "체크아웃 날짜보다 뒤로가면 ㄴㄴ");
 						ReservationLayout.chkOutDateTextField.setText("");
 						clickCount = 0;
+					} else {
+						showAvailableRooms(ReservationLayout.chkInDateTextField.getText(), selectDate);
 					}
 					dispose();
 				}
@@ -199,6 +205,10 @@ public class ReservationCalendar extends JFrame implements ActionListener {
 		cf.init(gap); // CalendarFunction의 init메서드를 호출해서 달력 업데이트
 		label.setText(cf.getCalText());	 // 년월 표시 라벨 갱신
 		
+	}
+	
+	private void showAvailableRooms(String checkInDate, String checkOutDate) {
+		List<Room> availableRooms = adminDao.getAvailableCheckInRoom(checkInDate, checkOutDate);
 	}
 	
 	
