@@ -24,7 +24,6 @@ import gui.layout.main.cover.buttons.CoverBtn;
 import image.getImages;
 
 public class CoverLayout extends JFrame {
-	ActionListener CoverBtnActionListener;
 	public static ImageIcon mainImage1 = new getImages().getImageIcon(768, 1024,
 			"src/image/background_image/background1.png");
 	public static ImageIcon mainImage2 = new getImages().getImageIcon(768, 1024,
@@ -70,6 +69,7 @@ public class CoverLayout extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocation(550, 10);
 		setSize(768, 1024);
+		setUndecorated(true);
 		setVisible(true);
 		setResizable(false);
 	}

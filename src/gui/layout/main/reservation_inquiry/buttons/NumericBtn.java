@@ -24,9 +24,9 @@ public class NumericBtn extends JButton{
         decorate();
     }
     
-    public NumericBtn(Icon icon) {
+    public NumericBtn(Icon icon,Icon iconP) {
         super(icon);
-        setPressedIcon(icon);
+        setPressedIcon(iconP);
         setRolloverSelectedIcon(icon);
         decorate();
     }
@@ -41,6 +41,7 @@ public class NumericBtn extends JButton{
     protected void decorate() {
         setBorderPainted(false);
         setOpaque(false);
+        setFocusPainted(false);
         setBackground(new Color(0,0,0,0));
     }
 }

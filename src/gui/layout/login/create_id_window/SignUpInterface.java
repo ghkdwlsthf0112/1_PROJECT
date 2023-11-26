@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.regex.Pattern;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -16,6 +17,11 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
+import gui.layout.login.create_id_window.buttons.CreateIdTermbtns;
+import gui.layout.login.create_id_window.buttons.CreatedIdInitBtn;
+import gui.layout.login.create_id_window.buttons.ExitBtn;
+import image.getImages;
 
 public class SignUpInterface extends JFrame {
 
@@ -45,32 +51,49 @@ public class SignUpInterface extends JFrame {
 	private JTextField phoneNumField;
 	private JComboBox<String> domainComboBox;
 	private JButton dupliBtn;
-	private JButton termsBtn;
-	private JButton entBtn;
+	private JButton CreateIdTermbtns;
+	private JButton CreatedIdInitBtn;
 	private Guide guide;
+	private JButton exitBtn;
 	private boolean agreedToTerms = false;
 	String[] domainList = { "", "naver.com", "daum.net", "gmail.com", "yahoo.com", "kakao.com" };
-
+	final int reLocationX = -50;
+	final int reLocationY = -100;
+	final static int sizeX = 680;
+	final static int sizeY = 800;
+	final protected static boolean chkfieldView = false;
+	
+	static ImageIcon mainImage = new getImages().getImageIcon(680, 800, "src/image/background_image/CreateID.png");
+ 
+	
 	public SignUpInterface() {
 		super("회원가입 화면입니다.");
-
+		JLabel image = new JLabel();
+		image.setBounds(0, 0, sizeX, sizeY);
+		image.setIcon(mainImage);
+		add(image);
 		// guide 객체 생성 및 초기화
-		guide = new Guide();
+		guide = new Guide(this);
+		guide.setVisible(chkfieldView);
 
 		init();
 		componentLayout();
-		addComponent();
+		addComponent(image);
 		addActionListeners();
 
 		domainComboBox = new JComboBox<String>();
-		domainComboBox.setBounds(300, 296, 250, 30);
+		domainComboBox.setBounds(300+reLocationX, 296+reLocationY, 250, 30);
 
-		getContentPane().setBackground(Color.WHITE);
+//		getContentPane().setBackground(Color.WHITE);
 		setLayout(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setBounds(550, 10, 768, 1024);
+//		setBounds(550, 10, 768, 1024);
+		setUndecorated(true);
+		setLocation(595, 100);
+		setSize(sizeX, sizeY);
+		
 		setVisible(true);
-
+		
 	}
 
 	private void init() {
@@ -103,44 +126,59 @@ public class SignUpInterface extends JFrame {
 		domainComboBox.setEditable(true);
 		// 버튼
 		dupliBtn = new JButton("중복확인");
-		termsBtn = new JButton("화면클릭 후 약관동의하기");
-		entBtn = new JButton("입력완료버튼");
+		CreateIdTermbtns = new CreateIdTermbtns();
+		CreatedIdInitBtn = new CreatedIdInitBtn();
+		exitBtn = new ExitBtn();
 	}
 
 	private void componentLayout() {
+		
+
 		// 컴포넌트 위치(x, y), 입력상자(가로, 세로)
 		// 라벨 높이 간격 65
-		title.setBounds(60, 30, 1000, 50);
-		title2.setBounds(120, 200, 900, 50);
-		emailLabel.setBounds(120, 245, 300, 50);
-		domainLabel.setBounds(450, 245, 300, 50);
-		pwdLabel.setBounds(120, 310, 300, 50);
-		pwdChkLabel.setBounds(120, 375, 300, 50);
-		nameLabel.setBounds(120, 440, 300, 50);
-		phoneNumLabel.setBounds(120, 505, 300, 50);
+		title.setBounds(60+reLocationX, 30+reLocationY, 1000, 50);
+		title2.setBounds(120+reLocationX, 200+reLocationY, 900, 50);
+		emailLabel.setBounds(120+reLocationX, 245+reLocationY, 320, 50);
+		domainLabel.setBounds(465+reLocationX, 245+reLocationY, 320, 50);
+		pwdLabel.setBounds(120+reLocationX, 310+reLocationY, 320, 50);
+		pwdChkLabel.setBounds(120+reLocationX, 375+reLocationY, 320, 50);
+		nameLabel.setBounds(120+reLocationX, 440+reLocationY, 320, 50);
+		phoneNumLabel.setBounds(120+reLocationX, 505+reLocationY, 320, 50);
 		// 텍스트필드 높이 간격 65
-		emailField.setBounds(240, 252, 210, 36);
-		domainComboBox.setBounds(475, 252, 100, 36);
-		pwdField.setBounds(240, 317, 335, 36);
-		pwdChkField.setBounds(240, 382, 335, 36);
-		nameField.setBounds(240, 447, 335, 36);
-		phoneNumField.setBounds(240, 512, 335, 36);
-		dupliBtn.setBounds(580, 252, 90, 36);
-		termsBtn.setBounds(134, 650, 500, 80);
-		entBtn.setBounds(134, 750, 500, 80);
+		
+		emailField.setBounds(240+reLocationX, 252+reLocationY, 220, 36);
+		emailField.setBorder(null);
+		domainComboBox.setBounds(495+reLocationX, 252+reLocationY, 100, 36);
+		domainComboBox.setBorder(null);
+		pwdField.setBounds(240+reLocationX, 325+reLocationY, 355, 36);
+		pwdField.setBorder(null);
+		pwdChkField.setBounds(240+reLocationX, 399+reLocationY, 355, 36);
+		pwdChkField.setBorder(null);
+		nameField.setBounds(240+reLocationX, 472+reLocationY, 355, 36);
+		nameField.setBorder(null);
+		phoneNumField.setBounds(240+reLocationX, 545+reLocationY, 355, 36);
+		phoneNumField.setBorder(null);
+		
+		dupliBtn.setBounds(650+reLocationX, 252+reLocationY, 40, 36);
+		exitBtn.setBounds(620, 30, 30, 30);
+		
+		CreateIdTermbtns.setBounds(134+reLocationX, 620+reLocationY, 500, 80);
+		CreatedIdInitBtn.setBounds(134+reLocationX, 720+reLocationY, 500, 80);
+		
+		
 		// Rule 컴포넌트 위치(높이 간격 65)
-		emailRule.setBounds(250, 258, 190, 25);
-		domainRule.setBounds(485, 258, 70, 25);
-		pwdRule.setBounds(250, 323, 300, 25);
-		pwdChkRule.setBounds(250, 388, 300, 25);
-		nameRule.setBounds(250, 453, 300, 25);
-		phoneNumRule.setBounds(250, 518, 300, 25);
+		emailRule.setBounds(250+reLocationX, 258+reLocationY, 190, 25);
+		domainRule.setBounds(500+reLocationX, 258+reLocationY, 70, 25);
+		pwdRule.setBounds(250+reLocationX, 330+reLocationY, 300, 25);
+		pwdChkRule.setBounds(250+reLocationX, 404+reLocationY, 300, 25);
+		nameRule.setBounds(250+reLocationX, 477+reLocationY, 300, 25);
+		phoneNumRule.setBounds(250+reLocationX, 550+reLocationY, 300, 25);
 
 		// 폰트, 굵기, 글자크기
 		title.setFont(new Font("굴림", Font.BOLD, 38));
 		title2.setFont(new Font("굴림", Font.BOLD, 20));
 		emailLabel.setFont(new Font("굴림", Font.BOLD, 24));
-		domainLabel.setFont(new Font("굴림", Font.BOLD, 24));
+		domainLabel.setFont(new Font("굴림", Font.BOLD, 20));
 		pwdLabel.setFont(new Font("굴림", Font.BOLD, 24));
 		pwdChkLabel.setFont(new Font("굴림", Font.BOLD, 24));
 		nameLabel.setFont(new Font("굴림", Font.BOLD, 24));
@@ -149,10 +187,10 @@ public class SignUpInterface extends JFrame {
 		// 버튼 색상 및 크기
 		dupliBtn.setFont(new Font("굴림", Font.PLAIN, 14));
 		dupliBtn.setForeground(Color.BLACK);
-		termsBtn.setFont(new Font("굴림", Font.BOLD, 30));
-		termsBtn.setForeground(Color.BLUE);
-		entBtn.setFont(new Font("굴림", Font.BOLD, 30));
-		entBtn.setForeground(Color.BLUE);
+		CreateIdTermbtns.setFont(new Font("굴림", Font.BOLD, 30));
+		CreateIdTermbtns.setForeground(Color.BLUE);
+		CreatedIdInitBtn.setFont(new Font("굴림", Font.BOLD, 30));
+		CreatedIdInitBtn.setForeground(Color.BLUE);
 		// Rule 폰트
 		emailRule.setFont(new Font("굴림", Font.PLAIN, 14));
 		domainRule.setFont(new Font("굴림", Font.PLAIN, 14));
@@ -169,41 +207,43 @@ public class SignUpInterface extends JFrame {
 		phoneNumRule.setForeground(Color.GRAY);
 	}
 
-	private void addComponent() {
+	private void addComponent(JLabel j) {
 		// 기능추가
-		add(emailRule);
-		add(domainRule);
-		add(nameRule);
-		add(pwdRule);
-		add(pwdChkRule);
-		add(phoneNumRule);
-		add(title);
-		add(title2);
-		add(emailLabel);
-		add(domainLabel);
-		add(pwdLabel);
-		add(pwdChkLabel);
-		add(nameLabel);
-		add(emailField);
-		add(domainComboBox);
-		add(pwdField);
-		add(pwdChkField);
-		add(nameField);
-		add(phoneNumLabel);
-		add(phoneNumField);
-		add(dupliBtn);
-		add(termsBtn);
-		add(entBtn);
-		guide.setBounds(550, 10, 768, 1024);
-		add(guide);
-		addComponentsWithGuide(); // 다른 구성 요소들과 함께 패널을 추가
+		j.add(emailRule);
+		j.add(domainRule);
+		j.add(nameRule);
+		j.add(pwdRule);
+		j.add(pwdChkRule);
+		j.add(phoneNumRule);
+		// 라벨
+		j.add(domainLabel);
+//		add(title);
+//		j.add(title2);
+//		j.add(emailLabel);
+//		j.add(pwdLabel);
+//		j.add(pwdChkLabel);
+//		j.add(nameLabel);
+//		j.add(phoneNumLabel);
+		j.add(emailField);
+		j.add(domainComboBox);
+		j.add(pwdField);
+		j.add(pwdChkField);
+		j.add(nameField);
+		j.add(phoneNumField);
+//		j.add(dupliBtn);
+		j.add(CreateIdTermbtns);
+		j.add(CreatedIdInitBtn);
+		j.add(exitBtn);
+		j.add(guide);
+		addComponentsWithGuide(j); // 다른 구성 요소들과 함께 패널을 추가
 	}
 
-	private void addComponentsWithGuide() {
+	private void addComponentsWithGuide(JLabel j) {
 		// 기능 추가 및 패널 추가
 		// (기존 코드와 패널 추가)
-		guide.setBounds(245, 0, 768, 1024); // 패널 위치 설정
-		add(guide); // 패널 추가
+		guide.setBounds(200, -100, sizeX, sizeY); // 패널 위치 설정
+		guide.setBackground(new Color(0,0,0,0));
+		j.add(guide); // 패널 추가
 	}
 
 	private String formatEmailDomain(String email, String domain) {
@@ -214,15 +254,26 @@ public class SignUpInterface extends JFrame {
 	}
 
 	private void addActionListeners() {
-		guide.emailGuide0.setVisible(true);
-		guide.pwdGuide0.setVisible(true);
-		guide.nameGuide0.setVisible(true);
-		guide.phoneNumGuide0.setVisible(true);
+		guide.emailGuide0.setVisible(chkfieldView);
+		guide.pwdGuide0.setVisible(chkfieldView);
+		guide.nameGuide0.setVisible(chkfieldView);
+		guide.phoneNumGuide0.setVisible(chkfieldView);
 
 		domainComboBox.addActionListener(e -> dupliBtn.requestFocusInWindow());
 		pwdField.addActionListener(e -> pwdChkField.requestFocusInWindow());
 		pwdChkField.addActionListener(e -> nameField.requestFocusInWindow());
 		nameField.addActionListener(e -> phoneNumField.requestFocusInWindow());
+		
+		exitBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(e.getSource()== exitBtn) {
+					dispose();
+				}
+				
+			}
+		});
 
 		emailField.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
@@ -517,7 +568,7 @@ public class SignUpInterface extends JFrame {
 			}
 		});
 
-		termsBtn.addActionListener(new ActionListener() {
+		CreateIdTermbtns.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new MemberTerms();
@@ -525,7 +576,7 @@ public class SignUpInterface extends JFrame {
 			}
 		});
 
-		entBtn.addActionListener(new ActionListener() {
+		CreatedIdInitBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String emailDomain = formatEmailDomain(email, domain);
@@ -533,17 +584,17 @@ public class SignUpInterface extends JFrame {
 					MemberDao.addMember(emailDomain, pwd, name, phoneNum);
 					System.out.println("정보를 보내는데 성공했습니다.");
 				} else if (emailDomain == null) {
-					JOptionPane.showMessageDialog(null, "이메일을 확인해주세요.");
+					JOptionPane.showMessageDialog(SignUpInterface.this, "이메일을 확인해주세요.");
 				} else if (pwd == null) {
-					JOptionPane.showMessageDialog(null, "비밀번호를 확인해주세요.");
+					JOptionPane.showMessageDialog(SignUpInterface.this, "비밀번호를 확인해주세요.");
 				} else if (name == null) {
-					JOptionPane.showMessageDialog(null, "이름을 확인해주세요.");
+					JOptionPane.showMessageDialog(SignUpInterface.this, "이름을 확인해주세요.");
 				} else if (phoneNum.length() < 10) {
-					JOptionPane.showMessageDialog(null, "핸드폰 번호를 확인해주세요.");
+					JOptionPane.showMessageDialog(SignUpInterface.this, "핸드폰 번호를 확인해주세요.");
 				} else if (!agreedToTerms) {
-					JOptionPane.showMessageDialog(null, "약관을 읽고 동의해주세요.");
+					JOptionPane.showMessageDialog(SignUpInterface.this, "약관을 읽고 동의해주세요.");
 				} else {
-					JOptionPane.showMessageDialog(null, "버그입니다. 신고해주세요!");
+					JOptionPane.showMessageDialog(SignUpInterface.this, "버그입니다. 신고해주세요!");
 				}
 			}
 		});

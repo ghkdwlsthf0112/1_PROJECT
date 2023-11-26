@@ -13,21 +13,27 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import actions.CalendarBtnActionListener;
+import actions.HomeBtnActionListener;
+import actions.PrevBtnActionListener;
 import database.dbObjects.Customer;
 import database.dbObjects.Reservation;
 import database.dbObjects.Room;
 import gui.buttons.CalendarBtn;
+import gui.buttons.HomeBtn;
+import gui.buttons.PrevBtn;
 import gui.layout.main.reservation_window.actions.SearchBtnActionListener;
 import gui.layout.main.reservation_window.buttons.SearchBtn;
 import image.getImages;
 
 public class ReservationLayout extends JFrame {
+	final static ImageIcon main = new getImages().getImageIcon(768, 1024, "src/image/background_image/roomselectbackground.png");
 	static ImageIcon calendarImage = new getImages().getImageIcon(40, 40, "src/image/calendar/calendar1.png");
-	static ImageIcon searchImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/check.png");
+	static ImageIcon searchImage = new getImages().getImageIcon(154, 50, "src/image/icon_image/btn/check.png");
+	
 	public static JTextField chkInDateTextField;
 	public static JTextField chkOutDateTextField;
-	ActionListener CalendarBtnActionListener;
-	ActionListener SearchBtnActionListener;
+	
+	
 	public static JButton calendarBtn1 = new CalendarBtn(calendarImage);
 	public static JButton searchBtn = new SearchBtn(searchImage);
 	public static JPanel centerPanel;
@@ -35,13 +41,19 @@ public class ReservationLayout extends JFrame {
 	Customer customer;
 	Reservation reservation;
 
+	
+	public JButton b1 = new HomeBtn();
+	public JButton b2 = new PrevBtn();
 
 	public ReservationLayout(Customer customer) {
 		
-//		this.customer = customer;
-//		System.out.println(customer.toString());
 		setLayout(null);
 		this.customer = customer;
+		
+		JLabel imageLabel = new JLabel();
+		imageLabel.setBounds(0, 0, 768, 1024);
+		imageLabel.setIcon(main);
+		add(imageLabel);
 //		System.out.println(customer.toString());
 //		JLabel imageLabel = new JLabel();
 		
@@ -55,44 +67,46 @@ public class ReservationLayout extends JFrame {
 		
 		scrollPane = new JScrollPane(centerPanel);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(10, 280, 740, 600);
+		scrollPane.setBounds(80, 270, 620, 525);
 		
 		setLayout(null);
 		
-		JLabel chkInLabel = new JLabel("입실 날짜");
-		JLabel chkOutLabel = new JLabel("퇴실 날짜");
 		
-		chkInLabel.setBounds(10, 50, 60, 60);
-		chkOutLabel.setBounds(10, 120, 60, 60);
+		
+		
 		
 		chkInDateTextField = new JTextField();
-		chkInDateTextField.setHorizontalAlignment(chkInLabel.CENTER);
-		chkInDateTextField.setBounds(100, 50, 200, 80);
+		chkInDateTextField.setBounds(200, 87, 300, 40);
 		chkInDateTextField.setEnabled(false);
 		
 		chkOutDateTextField = new JTextField();
-		chkOutDateTextField.setHorizontalAlignment(chkOutLabel.CENTER);
-		chkOutDateTextField.setBounds(100, 140, 200, 80);
+		chkOutDateTextField.setBounds(200, 160, 300, 40);
 		chkOutDateTextField.setEnabled(false);
-		calendarBtn1.setBounds(500, 100, 40, 40);
+		
+		calendarBtn1.setBounds(608, 95, 40, 40);
 		calendarBtn1.addActionListener(new CalendarBtnActionListener(this));
 		
-		searchBtn.setBounds(500, 165, 100, 100);
+		searchBtn.setBounds(549, 150, 154, 50);
 		searchBtn.addActionListener(new SearchBtnActionListener(this));
 		
-		add(scrollPane);
-		add(chkInLabel);
-		add(chkOutLabel);
-		add(chkInDateTextField);
-		add(chkOutDateTextField);
-		add(calendarBtn1);
+		imageLabel.add(scrollPane);
+		imageLabel.add(chkInDateTextField);
+		imageLabel.add(chkOutDateTextField);
+		imageLabel.add(calendarBtn1);
 		
-		add(searchBtn);
+		imageLabel.add(searchBtn);
+		
+		b1.addActionListener(new HomeBtnActionListener(this));
+		imageLabel.add(b1);
+
+		b2.addActionListener(new PrevBtnActionListener(this));
+		imageLabel.add(b2);
 		
 		
 		setTitle("객실 선택창");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBounds(550, 10, 768, 1024);
+		setUndecorated(true);
 		setVisible(true);
 	}
 	

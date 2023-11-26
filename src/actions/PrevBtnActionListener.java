@@ -38,7 +38,8 @@ public class PrevBtnActionListener implements ActionListener {
 	JButton CheckOutPrevBtn;
 	JButton LoginChkLayoutPrevBtn;
 	JButton CheckTotalpayLayoutPrevBtn;
-
+	JButton ReservationLayoutPrevBtn;
+	
 	Customer customer;
 
 
@@ -82,6 +83,9 @@ public class PrevBtnActionListener implements ActionListener {
 			mainFrame.dispose();
 		} else if(e.getSource() == CheckTotalpayLayoutPrevBtn) {
 			new ReservationLayout(customer);
+			mainFrame.dispose();
+		} else if(e.getSource() == ReservationLayoutPrevBtn) {
+			new LoginChkLayout();
 			mainFrame.dispose();
 		} 
 	}
@@ -151,5 +155,10 @@ public class PrevBtnActionListener implements ActionListener {
 		this.mainFrame = mainFrame;
 		this.CheckTotalpayLayoutPrevBtn = mainFrame.b2;
 		this.customer = mainFrame.customer;
+	}
+	
+	public PrevBtnActionListener(ReservationLayout mainFrame) {
+		this.mainFrame = mainFrame;
+		this.ReservationLayoutPrevBtn = mainFrame.b2;
 	}
 }

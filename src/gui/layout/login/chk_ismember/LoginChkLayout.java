@@ -18,19 +18,14 @@ import gui.layout.login.chk_ismember.buttons.NonmemberBtn;
 import image.getImages;
 
 public class LoginChkLayout extends JFrame{
-	static ImageIcon mainImage = new getImages().getImageIcon(768, 1024, "src/image/background_image/background4.png");
-	static ImageIcon memberImage = new getImages().getImageIcon(710, 170, "src/image/icon_image/btn/MemberCustomers.png");
-	static ImageIcon nonmemberImage = new getImages().getImageIcon(710, 170, "src/image/icon_image/btn/NonMemberCustomers.png");
-	static ImageIcon backImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/back_white.png");
-	static ImageIcon homeImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/home_white.png");
-	static ImageIcon guideImage = new getImages().getImageIcon(80, 40, "src/image/icon_image/btn/RoomInfomationMap_white.png");
+	final protected static ImageIcon mainImage = new getImages().getImageIcon(768, 1024, "src/image/background_image/회원비회원선택화면.png");
 	
 
-	public JButton b1 = new MemberBtn (memberImage);
-	public JButton b2 = new NonmemberBtn (nonmemberImage);
-	public JButton b3 = new PrevBtn(backImage);
-	public JButton b4 = new HomeBtn(homeImage);
-	public JButton b5 = new FloorGuideBtn(guideImage);
+	public JButton b1 = new MemberBtn();
+	public JButton b2 = new NonmemberBtn();
+	public JButton b3 = new PrevBtn();
+	public JButton b4 = new HomeBtn();
+	public JButton b5 = new FloorGuideBtn();
 
 	 
 	public LoginChkLayout() {
@@ -43,12 +38,10 @@ public class LoginChkLayout extends JFrame{
 		
 		// 회원고객 버튼
 		b1.addActionListener(new MemberBtnActionListener(this));
-		b1.setBounds(25, 440, 700, 170);
 		Label.add(b1);
 		
 		// 비회원고객 버튼
 		b2.addActionListener(new NonMemberBtnActionListener(this));
-		b2.setBounds(25, 615, 700, 170);
 		Label.add(b2);
 		
 		// 뒤로가기 버튼
@@ -68,6 +61,7 @@ public class LoginChkLayout extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocation(550, 10);
 		setSize(768, 1024);
+		setUndecorated(true);
 		setVisible(true);
 		setResizable(false);
 	}

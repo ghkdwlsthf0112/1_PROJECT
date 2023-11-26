@@ -4,9 +4,15 @@ import java.awt.Color;
 
 import javax.swing.Action;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import image.getImages;
+
 public class OnSiteCheckInBtn extends JButton{
+	final protected static ImageIcon CheckInReservation = new getImages().getImageIcon(710, 170, "src/image/icon_image/btn/CheckInReservation.png");
+
+	
 	public OnSiteCheckInBtn() {
 		decorate();
 	}
@@ -36,8 +42,12 @@ public class OnSiteCheckInBtn extends JButton{
     }
 
     protected void decorate() {
+    	setIcon(CheckInReservation);
+    	setPressedIcon(CheckInReservation);
         setBorderPainted(false);
+        setFocusPainted(false);
         setOpaque(false);
+        setBounds(25, 440, 700, 170);
         setBackground(new Color(0,0,0,0));
     }
 }

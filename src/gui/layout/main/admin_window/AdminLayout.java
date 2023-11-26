@@ -28,6 +28,7 @@ import database.AdminDao;
 import database.dbObjects.Reservation;
 import gui.buttons.HomeBtn;
 import gui.buttons.PrevBtn;
+import gui.layout.main.admin_window.actions.ExitProgramActionListiner;
 import image.getImages;
 
 public class AdminLayout extends JFrame{
@@ -38,16 +39,17 @@ public class AdminLayout extends JFrame{
 	String[] columnNames = {"예약번호","고객이메일","객실","체크인","체크아웃","경과"};
 	public JButton b1 = new PrevBtn();
 	public JButton b2 = new HomeBtn();
+	public JButton b3 = new JButton();
 	
 
 	public AdminLayout() {
 		setTitle("관리자페이지");
 		setLayout(null);
 		
-		JLabel Label = new JLabel();
-		Label.setBounds(0, 0, 768, 1024);
-		Label.setIcon(mainImage);
-		add(Label);
+		JLabel label = new JLabel();
+		label.setBounds(0, 0, 768, 1024);
+		label.setIcon(mainImage);
+		add(label);
 		
 		// 예약 리스트 받아오기
 		lists = new AdminDao().getReservstion();
@@ -100,22 +102,26 @@ public class AdminLayout extends JFrame{
 
 		reservationInfo.setBounds(50, 305, 650, 465);
 		reservationInfo.setBackground(new Color(0,0,0,0));
-		Label.add(reservationInfo);
+		label.add(reservationInfo);
 		
 		
 		// 뒤로가기 버튼
 		b1.addActionListener(new PrevBtnActionListener(this));
-		Label.add(b1);
+		label.add(b1);
 				
 		// 홈 버튼
 		b2.addActionListener(new HomeBtnActionListener(this));
-		Label.add(b2);
+		label.add(b2);
 				
-			
+		b3.addActionListener(null);
+		b3.setBounds(500, 850, 300, 100);
+		b3.addActionListener(new ExitProgramActionListiner(this));
+		label.add(b3);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocation(550, 10);
 		setSize(768, 1024);
+		setUndecorated(true);
 		setVisible(true);
 		setResizable(false);
 	}

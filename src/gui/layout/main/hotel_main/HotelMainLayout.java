@@ -26,7 +26,7 @@ import image.getImages;
 
 public class HotelMainLayout extends JFrame {
 
-	final protected static ImageIcon mainImage = new getImages().getImageIcon(768, 1024, "src/image/background_image/background4.png");
+	final static ImageIcon mainImage = new getImages().getImageIcon(768, 1024, "src/image/background_image/background4.png");
 	
 	public JButton b1 = new ChkInBtn();
 	public JButton b2 = new ChkOutBtn();
@@ -45,7 +45,6 @@ public class HotelMainLayout extends JFrame {
 		imageLabel.setIcon(mainImage);
 
 		// 예약하기 버튼
-		b1.setBounds(25, 440, 700, 170);
 		b1.addActionListener(new ChkInBtnActionListener(this));
 		imageLabel.add(b1);
 
@@ -76,6 +75,7 @@ public class HotelMainLayout extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocation(550, 10);
 		setSize(768, 1024);
+		setUndecorated(true);
 		setVisible(true);
 		setResizable(false);
 	}

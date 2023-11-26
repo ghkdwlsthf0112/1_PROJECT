@@ -45,6 +45,7 @@ public class ChkReservationBtn extends JButton {
 		setIcon(chkResvImage);
 		setPressedIcon(chkResvImage);
 		setBorderPainted(false);
+        setFocusPainted(false);      
 		setOpaque(false);
 		setBackground(new Color(0, 0, 0));
 		setBounds(380, 615, 340, 170);

@@ -16,25 +16,21 @@ import gui.buttons.PrevBtn;
 import gui.layout.login.member_login_window.actions.LoginBtnActionListener;
 import gui.layout.login.member_login_window.buttons.FindIDBtn;
 import gui.layout.login.member_login_window.buttons.LoginBtn;
-import gui.layout.login.non_member_check_in.NonMemberTextField;
+import gui.layout.login.non_member_check_in.actions.CreatIdBtnActionListener;
 import gui.layout.login.non_member_check_in.buttons.CreateIDBtn;
 import image.getImages;
 
 public class MemberLoginLayout extends JFrame {
 	static ImageIcon mainImage = new getImages().getImageIcon(768, 1024, "src/image/background_image/background7.png");
-	static ImageIcon backImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/back_white.png");
-	static ImageIcon homeImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/home_white.png");
-	static ImageIcon guideImage = new getImages().getImageIcon(80, 40, "src/image/icon_image/btn/RoomInfomationMap_white.png");
-	static ImageIcon loginBtnImage = new getImages().getImageIcon(220, 100, "src/image/icon_image/btn/check.png");
 
-	public JButton b1 = new PrevBtn(backImage);
-	public JButton b2 = new HomeBtn(homeImage);
-	public JButton b3 = new FloorGuideBtn(guideImage);
-	public JButton b4 = new LoginBtn(loginBtnImage);
-	public JButton b5 = new FindIDBtn("아이디 찾기");
-	public JButton b6 = new CreateIDBtn("아이디 만들기");
+	public JButton b1 = new PrevBtn();
+	public JButton b2 = new HomeBtn();
+	public JButton b3 = new FloorGuideBtn();
+	public JButton b4 = new LoginBtn();
+	public JButton b5 = new FindIDBtn();
+	public JButton b6 = new CreateIDBtn();
 
-	public JTextField eamil = new NonMemberTextField();
+	public JTextField eamil = new MemberTextField();
 	public JPasswordField password = new MemberPasswordField();
 
 	public MemberLoginLayout() {
@@ -45,11 +41,11 @@ public class MemberLoginLayout extends JFrame {
 		Label.setIcon(mainImage);
 		
 		// 이메일 입력
-		eamil.setLocation(370,360);
+		eamil.setLocation(270,383);
 		Label.add(eamil); 
 		
 		// 비밀번호 입력
-		password.setLocation(370,440);
+		password.setLocation(270,483);
 		Label.add(password);
 		
 		
@@ -66,20 +62,19 @@ public class MemberLoginLayout extends JFrame {
 		b3.setBorderPainted(false);
 		Label.add(b3);
 		
-		
-		b4.setBounds(260, 630, 220, 100);
+		// 로그인버튼
 		b4.addActionListener(new LoginBtnActionListener(this));
 		Label.add(b4);
 		
 		
-		b5.setBounds(260, 730, 110, 20);
+		b5.setBounds(380, 620, 250, 20);
 		// 아이디 비밀번호 찾기 ->
 		b5.addActionListener(null);
 		Label.add(b5);
 		
-		b6.setBounds(370, 730, 110, 20);
+		b6.setBounds(150, 620, 110, 20);
 		// 회원가입 창으로 ->
-		b6.addActionListener(null);
+		b6.addActionListener(new CreatIdBtnActionListener(this));
 		Label.add(b6);
 		
 		add(Label);
@@ -90,6 +85,7 @@ public class MemberLoginLayout extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocation(550, 10);
 		setSize(768, 1024);
+		setUndecorated(true);
 		setVisible(true);
 		setResizable(false);
 	}

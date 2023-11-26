@@ -43,8 +43,9 @@ public class FloorGuideBtn extends JButton{
 		setIcon(guideBtnImage);
 		setPressedIcon(guideBtnImage);
 		setBorderPainted(false);
+		setFocusPainted(false);
 		setOpaque(false);
 		setBackground(new Color(0, 0, 0, 0));
-		setBounds(130, 920, 80, 40);
+		setBounds(130, 965, 80, 40);
 	}
 }

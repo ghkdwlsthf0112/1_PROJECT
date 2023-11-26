@@ -26,15 +26,26 @@ public class Guide extends JPanel {
 	JLabel phoneNumGuide0;
 	JLabel phoneNumGuide1;
 	JLabel phoneNumGuide2;
+	int reLocationX=0;
+	int reLocationY=0;
+	int sizeX;
+	int sizeY;
 	
-	public Guide() {
+	
+	public Guide(SignUpInterface mainFrame) {
 		setLayout(null);
+//		this.reLocationX = mainFrame.reLocationX;
+//		this.reLocationY = mainFrame.reLocationY;
+		this.sizeX = mainFrame.sizeX;
+		this.sizeY = mainFrame.sizeY;
 		setBackground(Color.WHITE);
 		init();
 		componentLayout();
-		addComponent();
+		addComponent();		
+
 	}
 	 
+
 	private void init() {
 		emailGuide0 = new JLabel("이메일을 입력하세요.");
 		emailGuide1 = new JLabel("입력된 이메일은 잘못된 형식입니다.");
@@ -75,28 +86,30 @@ public class Guide extends JPanel {
 	
 	private void setLabelProperties(JLabel label) {
         label.setFont(new Font("굴림", Font.PLAIN, 15));
+        label.setBackground(new Color(0,0,0,0));
         label.setForeground(Color.RED);
+        label.setBorder(null);
         label.setVisible(false);
     }
 	
 	public void componentLayout() {
-		emailGuide0.setBounds(0, 290, 250, 20);
-		emailGuide1.setBounds(0, 290, 250, 20);
-		emailGuide2.setBounds(0, 290, 250, 20);
-		emailGuide3.setBounds(0, 290, 250, 20);
-		domainGuide1.setBounds(0, 290, 250, 20);
-		domainGuide2.setBounds(0, 290, 250, 20);
-		pwdGuide0.setBounds(0, 355, 250, 20);
-		pwdGuide1.setBounds(0, 355, 250, 20);
-		pwdGuide2.setBounds(0, 355, 250, 20);
-		pwdChkGuide1.setBounds(0, 420, 250, 20);
-		pwdChkGuide2.setBounds(0, 420, 250, 20);
-		nameGuide0.setBounds(0, 485, 250, 20);
-		nameGuide1.setBounds(0, 485, 250, 20);
-		nameGuide2.setBounds(0, 485, 250, 20);
-		phoneNumGuide0.setBounds(0, 550, 250, 20);
-		phoneNumGuide1.setBounds(0, 550, 250, 20);
-		phoneNumGuide2.setBounds(0, 550, 250, 20);
+		emailGuide0.setBounds(0+reLocationX, 290+reLocationY, 250, 20);
+		emailGuide1.setBounds(0+reLocationX, 290+reLocationY, 250, 20);
+		emailGuide2.setBounds(0+reLocationX, 290+reLocationY, 250, 20);
+		emailGuide3.setBounds(0+reLocationX, 290+reLocationY, 250, 20);
+		domainGuide1.setBounds(0+reLocationX, 290+reLocationY, 250, 20);
+		domainGuide2.setBounds(0+reLocationX, 290+reLocationY, 250, 20);
+		pwdGuide0.setBounds(0+reLocationX, 355+reLocationY, 250, 20);
+		pwdGuide1.setBounds(0+reLocationX, 355+reLocationY, 250, 20);
+		pwdGuide2.setBounds(0+reLocationX, 355+reLocationY, 250, 20);
+		pwdChkGuide1.setBounds(0+reLocationX, 420+reLocationY, 250, 20);
+		pwdChkGuide2.setBounds(0+reLocationX, 420+reLocationY, 250, 20);
+		nameGuide0.setBounds(0+reLocationX, 485+reLocationY, 250, 20);
+		nameGuide1.setBounds(0+reLocationX, 485+reLocationY, 250, 20);
+		nameGuide2.setBounds(0+reLocationX, 485+reLocationY, 250, 20);
+		phoneNumGuide0.setBounds(0+reLocationX, 550+reLocationY, 250, 20);
+		phoneNumGuide1.setBounds(0+reLocationX, 550+reLocationY, 250, 20);
+		phoneNumGuide2.setBounds(0+reLocationX, 550+reLocationY, 250, 20);
 	}
 	
 	private void addComponent() {

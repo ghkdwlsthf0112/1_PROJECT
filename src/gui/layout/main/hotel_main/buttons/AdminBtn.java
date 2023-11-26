@@ -36,9 +36,10 @@ public class AdminBtn extends JButton{
     }
 
     protected void decorate() {
-        setBorderPainted(false);
+    	setBorderPainted(false);
+        setFocusPainted(false);      
         setOpaque(false);
         setBackground(new Color(0,0,0,0));
-        setBounds(720, 10, 20, 20);
+        setBounds(738, 10, 20, 20);
     }
 }

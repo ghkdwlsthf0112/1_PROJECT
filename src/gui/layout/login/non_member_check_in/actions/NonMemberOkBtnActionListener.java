@@ -108,7 +108,7 @@ public class NonMemberOkBtnActionListener implements ActionListener {
 	private static boolean isValidEmail(String email) {
 //		Pattern domainPattern = Pattern.compile(".+@(.+)");
 //		Matcher matcher = domainPattern.matcher(email);
-		return Pattern.matches(".+@(.+)", email);
+		return Pattern.matches("[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$", email);
 	}
 
 	private static boolean isValidName(String name) {

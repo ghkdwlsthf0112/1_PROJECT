@@ -18,8 +18,6 @@ public class GuideMapLayout extends JFrame {
 	public JLabel floorLabel = new JLabel();
 	
 	static ImageIcon mainImage = new getImages().getImageIcon(768, 1024, "src/image/background_image/층별안내도.png");
-	static ImageIcon backImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/back_white.png");
-	static ImageIcon homeImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/home_white.png");
 	
 	ImageIcon floor1Image = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/floor_1.png");
 	ImageIcon floor2Image = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/floor_2.png");
@@ -34,8 +32,8 @@ public class GuideMapLayout extends JFrame {
 	// 이미지 개수
 	public final int numImages = 4;
 		
-	public JButton b1 = new PrevBtn(backImage);
-	public JButton b2 = new HomeBtn(homeImage);
+	public JButton b1 = new PrevBtn();
+	public JButton b2 = new HomeBtn();
 
 	public GuideMapLayout() {
 		setTitle("층별 안내도");
@@ -48,21 +46,21 @@ public class GuideMapLayout extends JFrame {
 	
 		
 		floorLabel.setIcon(new getImages().getImageIcon(650, 470, "src/image/guide_map/가이드맵예시1.jpg"));
-		floorLabel.setBounds(50, 300, 650, 470);
+		floorLabel.setBounds(50, 250, 650, 470);
 		Label.add(floorLabel);
 				
 		
 		// 층별 버튼 1층 로비 2층 3층 객실 4층 옥상
-		f1.setBounds(350, 100, 40, 40);
+		f1.setBounds(270, 820, 40, 40);
 		f1.addActionListener(new FloorBtnActionListener(this));
 		Label.add(f1);
-		f2.setBounds(400, 100, 40, 40);
+		f2.setBounds(340, 820, 40, 40);
 		f2.addActionListener(new FloorBtnActionListener(this));
 		Label.add(f2);
-		f3.setBounds(450, 100, 40, 40);
+		f3.setBounds(410, 820, 40, 40);
 		f3.addActionListener(new FloorBtnActionListener(this));
 		Label.add(f3);
-		f4.setBounds(500, 100, 40, 40);
+		f4.setBounds(480, 820, 40, 40);
 		f4.addActionListener(new FloorBtnActionListener(this));
 		Label.add(f4);
 
@@ -80,6 +78,7 @@ public class GuideMapLayout extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocation(550, 10);
 		setSize(768, 1024);
+		setUndecorated(true);
 		setVisible(true);
 		setResizable(false);
 	}

@@ -15,27 +15,20 @@ import database.AdminDao;
 import database.dbObjects.Reservation;
 import gui.buttons.FloorGuideBtn;
 import gui.buttons.HomeBtn;
-import gui.buttons.OkBtn;
 import gui.buttons.PrevBtn;
 import gui.layout.main.reservation_inquiry.buttons.CancelReservationBtn;
+import gui.layout.main.reservation_inquiry.buttons.OkBtn;
 import image.getImages;
 
 public class ReservationChkIn extends JFrame{
-	static ImageIcon mainImage = new getImages().getImageIcon(768, 1024, "src/image/background_image/ex1.png");
-	static ImageIcon memberImage = new getImages().getImageIcon(710, 170, "src/image/icon_image/btn/MemberCustomers.png");
-	static ImageIcon nonmemberImage = new getImages().getImageIcon(710, 170, "src/image/icon_image/btn/NonMemberCustomers.png");
-	static ImageIcon backImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/back_white.png");
-	static ImageIcon homeImage = new getImages().getImageIcon(40, 40, "src/image/icon_image/btn/home_white.png");
-	static ImageIcon guideImage = new getImages().getImageIcon(80, 40, "src/image/icon_image/btn/RoomInfomationMap_white.png");
-	static ImageIcon cancelImage = new getImages().getImageIcon(200, 80, "src/image/icon_image/btn/CancelReservation.png");
-	static ImageIcon okImage = new getImages().getImageIcon(200, 80, "src/image/icon_image/btn/예약조회check.png");
+	final protected static ImageIcon mainImage = new getImages().getImageIcon(768, 1024, "src/image/background_image/ex1.png");
 
 	Reservation reservstion;
-	public JButton b1 = new PrevBtn(backImage);
-	public JButton b2 = new HomeBtn(homeImage);
-	public JButton b3 = new FloorGuideBtn(guideImage);
-//	public JButton b4 = new CancelReservationBtn(cancelImage);
-	public JButton b5 = new OkBtn(okImage);
+	
+	public JButton b1 = new PrevBtn();
+	public JButton b2 = new HomeBtn();
+	public JButton b3 = new FloorGuideBtn();
+	public JButton b4 = new OkBtn();
 
 	public ReservationChkIn(Reservation reservstion) {
 		setLayout(null);
@@ -78,14 +71,9 @@ public class ReservationChkIn extends JFrame{
 		b3.addActionListener(new FloorGuideBtnActionListener(this));
 		Label.add(b3);
 		
-		// 예약 취소 버튼
-//		b4.setBounds(160, 720, 200, 80);
-//		Label.add(b4);
-		
-		// 확인 버튼
-		b5.setBounds(280, 720, 200, 80);
-//		b5.addActionListener(new HomeBtnActionListener(this));
-		Label.add(b5);
+		// 체크인 버튼 => 체크인 액션 달아야함
+		b4.addActionListener(null);
+		Label.add(b4);
 
 		
 		add(Label);
@@ -93,6 +81,7 @@ public class ReservationChkIn extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocation(550, 10);
 		setSize(768, 1024);
+		setUndecorated(true);
 		setVisible(true);
 		setResizable(false);
 	}

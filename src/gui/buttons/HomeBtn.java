@@ -45,8 +45,9 @@ public class HomeBtn extends JButton{
 		setIcon(homeBtnImage);
 		setPressedIcon(homeBtnImage);
 		setBorderPainted(false);
+		setFocusPainted(false);
 		setOpaque(false);
 		setBackground(new Color(0, 0, 0, 0));
-		setBounds(80, 920, 40, 40);
+		setBounds(80, 965, 40, 40);
 	}
 }

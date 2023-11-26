@@ -35,6 +35,7 @@ public class floorBtn extends JButton{
 
 	protected void decorate() {
 		setBorderPainted(false);
+		setFocusPainted(false);
 		setOpaque(false);
 		setBackground(new Color(0,0,0,0));		
 	}

@@ -14,7 +14,6 @@ import database.dbObjects.Customer;
 import database.dbObjects.Reservation;
 import database.dbObjects.Room;
 
-import oracle.jdbc.logging.annotations.DisableTrace;
 
 //DAO (Database Access Object) - DB에 쿼리문 보내고 결과 반영하는 객체
 public class AdminDao {
@@ -69,7 +68,6 @@ public class AdminDao {
 		}
 	}
 
-	@DisableTrace
 	public List<Reservation> getReservstions(String reservation_number) {
 		try (Connection conn = DBConnection.getConnection();) {
 			String sql = "SELECT * FROM reservation WHERE reservation_number LIKE ?";

@@ -14,16 +14,21 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import gui.layout.login.create_id_window.buttons.TermAgreeBtn;
+import gui.layout.login.create_id_window.buttons.TermCencelBtn;
+import gui.layout.paymentWindow.check_totalpay_window.actions.TermsCancelBtnActionListener;
+
 public class MemberTerms extends JFrame {
 
 	JLabel mainLbl, privacyLbl;
 	JTextArea mainArea, privacyArea;
 	JCheckBox chk1, chk2;
 	JButton btn1;
-
+	public JButton cencelBtn = new TermCencelBtn();
 	public MemberTerms() {
 		setTitle("약관 동의");
 		setLayout(null);
+		setUndecorated(true);
 		setVisible(true);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		
@@ -31,7 +36,7 @@ public class MemberTerms extends JFrame {
 		mainLbl = new JLabel("호텔델루나 약관 화면입니다.");
 		chk1 = new JCheckBox("홈페이지 이용 약관에 동의합니다.");
 		chk2 = new JCheckBox("개인정보 이용 약관에 동의합니다.");
-		btn1 = new JButton("모두 동의했습니다.");
+		btn1 = new TermAgreeBtn();
 
 		mainArea = new JTextArea(getMainText());
 		privacyArea = new JTextArea(getPrivacyText());
@@ -41,7 +46,7 @@ public class MemberTerms extends JFrame {
 
 		JScrollPane mainScroll = new JScrollPane(mainArea);
 		JScrollPane privacyScroll = new JScrollPane(privacyArea);
-
+		
 		// 폰트
 		mainLbl.setFont(new Font("굴림", Font.BOLD, 23));
 		chk1.setFont(new Font("굴림", Font.PLAIN, 17));
@@ -49,13 +54,13 @@ public class MemberTerms extends JFrame {
 		btn1.setFont(new Font("굴림", Font.BOLD, 24));
 
 		// 위치(가로, 세로), 크기(가로, 세로)
-		setBounds(650, 100, 568, 774);
-		mainLbl.setBounds(80, 100, 600, 50);
-		mainScroll.setBounds(80, 170, 394, 130);
-		privacyScroll.setBounds(80, 350, 394, 130);
-		chk1.setBounds(75, 300, 380, 30);
-		chk2.setBounds(75, 480, 380, 30);
-		btn1.setBounds(75, 530, 400, 50);
+		setBounds(670, 200, 538, 600);
+		mainLbl.setBounds(80, 50, 600, 50);
+		mainScroll.setBounds(80, 120, 394, 130);
+		privacyScroll.setBounds(80, 300, 394, 130);
+		chk1.setBounds(75, 250, 380, 30);
+		chk2.setBounds(75, 430, 380, 30);
+		btn1.setBounds(200, 480, 275, 50);
 
 		// 기능추가
 		add(mainLbl);
@@ -65,13 +70,17 @@ public class MemberTerms extends JFrame {
 		add(chk2);
 		add(btn1);
 		
+		cencelBtn.addActionListener(new TermsCancelBtnActionListener(this));
+		add(cencelBtn);
+		
+		
 		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (chk1.isSelected() && chk2.isSelected()) {
-					JOptionPane.showMessageDialog(null, "모든 약관에 동의하셨습니다.");
+					JOptionPane.showMessageDialog(MemberTerms.this, "모든 약관에 동의하셨습니다.");
 					setVisible(false);
 				} else {
-					JOptionPane.showMessageDialog(null, "약관에 동의해주세요.");
+					JOptionPane.showMessageDialog(MemberTerms.this, "약관에 동의해주세요.");
 				}
 			}
 		});
@@ -83,6 +92,7 @@ public class MemberTerms extends JFrame {
 			}
 		});
 	}
+
 	
 	private void closeQnA() {
 		

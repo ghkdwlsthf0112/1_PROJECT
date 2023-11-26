@@ -10,8 +10,8 @@ import javax.swing.JButton;
 import image.getImages;
 
 public class PaymentBtn extends JButton{
-	static ImageIcon iconImage = new getImages().getImageIcon(250, 50, "src/image/icon_image/btn/결제진행.png");
-	static ImageIcon pressedIconImage = new getImages().getImageIcon(250, 50, "src/image/icon_image/btn/결제P.png");
+	final static ImageIcon iconImage = new getImages().getImageIcon(250, 50, "src/image/icon_image/btn/결제진행.png");
+	final static ImageIcon pressedIconImage = new getImages().getImageIcon(250, 50, "src/image/icon_image/btn/결제P.png");
 
 	public PaymentBtn() {
 		decorate();
@@ -44,8 +44,9 @@ public class PaymentBtn extends JButton{
     protected void decorate() {
     	setIcon(iconImage);
     	setPressedIcon(pressedIconImage);
-        setBorderPainted(false);
-        setOpaque(false);
+    	setBorderPainted(false);
+		setFocusPainted(false);
+		setOpaque(false);
         setBounds(124,450,250,50);
         setBackground(new Color(0,0,0,0));
     }

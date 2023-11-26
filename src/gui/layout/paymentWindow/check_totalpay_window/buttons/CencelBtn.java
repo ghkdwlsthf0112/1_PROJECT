@@ -10,8 +10,8 @@ import javax.swing.JButton;
 import image.getImages;
 
 public class CencelBtn extends JButton{
-	static ImageIcon cencelImage = new getImages().getImageIcon(100, 50, "src/image/icon_image/btn/paycencel.png");
-	static ImageIcon cencelCImage = new getImages().getImageIcon(100, 50, "src/image/icon_image/btn/paycencel_c.png");
+	final static ImageIcon cencelImage = new getImages().getImageIcon(100, 50, "src/image/icon_image/btn/paycencel.png");
+	final static ImageIcon cencelCImage = new getImages().getImageIcon(100, 50, "src/image/icon_image/btn/paycencel_c.png");
 
 	public CencelBtn() {
 		decorate();
@@ -44,8 +44,9 @@ public class CencelBtn extends JButton{
     protected void decorate() {
     	setIcon(cencelImage);
     	setPressedIcon(cencelCImage);
-        setBorderPainted(false);
-        setOpaque(false);
+    	setBorderPainted(false);
+		setFocusPainted(false);
+		setOpaque(false);
         setBounds(10, 450, 100, 50);
         setBackground(new Color(0,0,0,0));
     }

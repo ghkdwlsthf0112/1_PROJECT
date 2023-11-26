@@ -7,6 +7,8 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import database.DBConnection;
+
 public class MemberDao {
 
 	public static boolean duplicateTF;
@@ -17,7 +19,7 @@ public class MemberDao {
 
 	public static void dupliTest(String emailDomain) {
 
-		try (Connection conn = DBConnector.getConnection()) {
+		try (Connection conn = DBConnection.getConnection()) {
 			conn.setAutoCommit(false);
 
 			String countSQL = "SELECT COUNT(m_email) AS email_count FROM member WHERE m_email = ?";
@@ -47,7 +49,7 @@ public class MemberDao {
 
 	public static void addMember(String emailDomain, String pwd, String name, String phoneNum) {
 
-		try (Connection conn = DBConnector.getConnection()) {
+		try (Connection conn = DBConnection.getConnection()) {
 			conn.setAutoCommit(false);
 
 			String countSQL = "SELECT COUNT(m_email) AS email_count FROM member WHERE m_email = ?";

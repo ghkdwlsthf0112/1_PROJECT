@@ -26,9 +26,9 @@ public class MemberPasswordField extends JPasswordField{
 	
 	private void decorate() {
 		
-		setSize(250,40);
+		setSize(320,50);
         setBorder(null);
 //		setOpaque(false);
-        setFont(new Font("나눔고딕", Font.BOLD, 15));
+        setFont(new Font("나눔고딕", Font.BOLD, 22));
 	}
 }

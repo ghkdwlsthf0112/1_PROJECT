@@ -44,9 +44,10 @@ public class PrevBtn extends JButton{
 		setIcon(backImage);
 		setPressedIcon(backImage);
 		setBorderPainted(false);
+		setFocusPainted(false);
 		setOpaque(false);
 		setBackground(new Color(0, 0, 0, 0));
-		setBounds(30, 920, 40, 40);
+		setBounds(30, 965, 40, 40);
 	}
 	
 }

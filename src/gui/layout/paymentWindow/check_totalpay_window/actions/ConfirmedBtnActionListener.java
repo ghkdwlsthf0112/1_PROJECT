@@ -10,8 +10,8 @@ import database.dbObjects.Customer;
 import database.dbObjects.Reservation;
 import database.dbObjects.Room;
 import gui.buttons.HomeBtn;
-import gui.buttons.OkBtn;
 import gui.buttons.PrevBtn;
+import gui.layout.main.reservation_inquiry.buttons.OkBtn;
 import gui.layout.paymentWindow.check_totalpay_window.AgreePopupLayout;
 import gui.layout.paymentWindow.check_totalpay_window.CheckTotalpayLayout;
 

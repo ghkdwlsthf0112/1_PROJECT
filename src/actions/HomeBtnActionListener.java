@@ -18,6 +18,7 @@ import gui.layout.main.reservation_inquiry.ReservationChkIn;
 import gui.layout.main.reservation_inquiry.ReservationChkInNow;
 import gui.layout.main.reservation_inquiry.ReservationInfo;
 import gui.layout.main.reservation_inquiry.ReservationInquiryLayout;
+import gui.layout.main.reservation_window.ReservationLayout;
 import gui.layout.paymentWindow.check_totalpay_window.CheckTotalpayLayout;
 import gui.layout.paymentWindow.pay_exit_window.PayExitLayout;
 
@@ -105,5 +106,10 @@ public class HomeBtnActionListener implements ActionListener{
 	public HomeBtnActionListener(CheckTotalpayLayout mainFrame) {
 		this.mainFrame = mainFrame;
 		this.homeBtn = mainFrame.b2;
+	}
+	
+	public HomeBtnActionListener(ReservationLayout mainFrame) {
+		this.mainFrame = mainFrame;
+		this.homeBtn = mainFrame.b1;
 	}
 }

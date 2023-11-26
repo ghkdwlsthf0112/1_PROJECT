@@ -39,6 +39,7 @@ public class CalendarBtn extends JButton{
 	protected void decorate() {
 		setBorderPainted(false);
 		setOpaque(false);
+		setFocusPainted(false);
 		setBackground(new Color(0, 0, 0, 0));
 		setBounds(30, 920, 40, 40);
 	}

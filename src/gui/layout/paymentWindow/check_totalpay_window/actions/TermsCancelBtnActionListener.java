@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import gui.layout.login.create_id_window.MemberTerms;
 import gui.layout.paymentWindow.check_totalpay_window.AgreePopupLayout;
 
 public class TermsCancelBtnActionListener implements ActionListener{
@@ -22,6 +23,11 @@ public class TermsCancelBtnActionListener implements ActionListener{
 	}
 	 
 	public TermsCancelBtnActionListener(AgreePopupLayout mainFrame) {
+		this.cencelBtn = mainFrame.cencelBtn;
+		this.mainFrame = mainFrame;
+	}
+	
+	public TermsCancelBtnActionListener(MemberTerms mainFrame) {
 		this.cencelBtn = mainFrame.cencelBtn;
 		this.mainFrame = mainFrame;
 	}

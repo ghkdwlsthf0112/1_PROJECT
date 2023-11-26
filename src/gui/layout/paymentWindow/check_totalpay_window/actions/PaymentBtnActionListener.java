@@ -11,7 +11,6 @@ import database.dbObjects.Reservation;
 import database.dbObjects.Room;
 import gui.layout.main.hotel_main.HotelMainLayout;
 import gui.layout.paymentWindow.check_totalpay_window.AgreePopupLayout;
-import oracle.net.aso.j;
 
 public class PaymentBtnActionListener implements ActionListener{
 	Reservation reservstion;
