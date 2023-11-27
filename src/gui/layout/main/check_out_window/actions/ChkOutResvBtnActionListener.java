@@ -25,8 +25,12 @@ public class ChkOutResvBtnActionListener implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == ChkOutBtn) {
 			System.out.println(displayField.getText());
+			
 			if(admindao.setReservationChkOut(displayField.getText()) == 1) {
-				info.showMessageDialog(mainFrame, "체크아웃되었습니다.", "Message",JOptionPane.INFORMATION_MESSAGE );
+				// 체크아웃되면 방 상태도 업데이트
+				if (admindao.updateChkOutRoom(displayField.getText()) == 1) {
+					info.showMessageDialog(mainFrame, "체크아웃되었습니다.", "Message",JOptionPane.INFORMATION_MESSAGE );
+				}
 			} else {
 				info.showMessageDialog(mainFrame, "확인되는 예약이 없습니다.", "Message",JOptionPane.ERROR_MESSAGE );
 			}
