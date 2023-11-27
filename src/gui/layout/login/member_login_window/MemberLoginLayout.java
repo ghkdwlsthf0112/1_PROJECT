@@ -13,6 +13,7 @@ import actions.PrevBtnActionListener;
 import gui.buttons.FloorGuideBtn;
 import gui.buttons.HomeBtn;
 import gui.buttons.PrevBtn;
+import gui.layout.login.member_login_window.actions.FindIdPwdBtnActionListener;
 import gui.layout.login.member_login_window.actions.LoginBtnActionListener;
 import gui.layout.login.member_login_window.buttons.FindIDBtn;
 import gui.layout.login.member_login_window.buttons.LoginBtn;
@@ -69,7 +70,7 @@ public class MemberLoginLayout extends JFrame {
 		
 		b5.setBounds(380, 620, 250, 20);
 		// 아이디 비밀번호 찾기 ->
-		b5.addActionListener(null);
+		b5.addActionListener(new FindIdPwdBtnActionListener(this));
 		Label.add(b5);
 		
 		b6.setBounds(150, 620, 110, 20);

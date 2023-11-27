@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import database.AdminDao;
+import database.dbObjects.Reservation;
 import gui.layout.main.check_out_window.CheckOut;
 import gui.layout.main.reservation_inquiry.ReservationChkIn;
 import gui.layout.main.reservation_inquiry.ReservationInfo;
@@ -20,15 +21,14 @@ public class ChkOutResvBtnActionListener implements ActionListener{
 	JTextField displayField;
 	JOptionPane info = new JOptionPane();
 	AdminDao admindao = new AdminDao();
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == ChkOutBtn) {
-			System.out.println(displayField.getText());
-			
-			if(admindao.setReservationChkOut(displayField.getText()) == 1) {
+			Reservation reservation = admindao.getReservstion(displayField.getText());
+			if(admindao.setReservationChkOut(reservation.getReservation_number()) == 1) {
 				// 체크아웃되면 방 상태도 업데이트
-				if (admindao.updateChkOutRoom(displayField.getText()) == 1) {
+				if (admindao.updateChkOutRoom(reservation.getRoom_number().toString()) == 1) {
 					info.showMessageDialog(mainFrame, "체크아웃되었습니다.", "Message",JOptionPane.INFORMATION_MESSAGE );
 				}
 			} else {

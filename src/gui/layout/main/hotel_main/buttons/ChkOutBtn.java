@@ -46,6 +46,6 @@ public class ChkOutBtn extends JButton{
         setFocusPainted(false);      
         setOpaque(false);
         setBackground(new Color(0,0,0,0));
-        setBounds(25, 615, 340, 170);
+        setBounds(25, 617, 340, 170);
     }
 }

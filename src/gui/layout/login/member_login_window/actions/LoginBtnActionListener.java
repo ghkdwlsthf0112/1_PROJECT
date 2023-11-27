@@ -12,6 +12,7 @@ import database.AdminDao;
 import database.dbObjects.Customer;
 import gui.layout.login.member_login_window.MemberLoginLayout;
 import gui.layout.main.reservation_window.ReservationLayout;
+import pwdconv.PwdChange;
 
 public class LoginBtnActionListener implements ActionListener {
 	
@@ -23,7 +24,7 @@ public class LoginBtnActionListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()== loginBtn) {
-			Customer member = adminDao.getCustomer(eamil.getText(), password.getText());
+			Customer member = adminDao.getCustomer(eamil.getText(), new PwdChange().getPassWordToXEMD5String(password.getText()));
 			if(member.getCustomer_id() != null) {
 				new ReservationLayout(member);
 				mainFrame.dispose();

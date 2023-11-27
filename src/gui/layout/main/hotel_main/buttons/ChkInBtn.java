@@ -48,7 +48,7 @@ public class ChkInBtn extends JButton{
         setBorderPainted(false);
         setFocusPainted(false);      
         setOpaque(false);
-        setBounds(25, 440, 700, 170);
+        setBounds(25, 438, 700, 170);
         setBackground(new Color(0,0,0,0));
     }
 }

@@ -1,11 +1,14 @@
 package gui.layout.main.reservation_window.actions;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 
 import database.AdminDao;
 import database.dbObjects.Room;
@@ -15,6 +18,8 @@ public class SearchBtnActionListener implements ActionListener {
 
 	JButton SearchBtn;
 	JFrame mainFrame;
+	JScrollPane scrollPane;
+	
 	AdminDao adminDao = new AdminDao();
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -23,6 +28,12 @@ public class SearchBtnActionListener implements ActionListener {
 					ReservationLayout.chkInDateTextField.getText(),
 					ReservationLayout.chkOutDateTextField.getText()
 			);
+			JLabel jl = new JLabel();
+			int orign = 3;
+			jl.setLayout(new GridLayout(orign,0));
+			if(availableRooms.size()>orign) {
+				jl.setLayout(new GridLayout(availableRooms.size(),0));
+			}
 			
 			if (availableRooms != null && !availableRooms.isEmpty()) {
 				System.out.println("체크인 가능한 방 목록");
@@ -38,5 +49,6 @@ public class SearchBtnActionListener implements ActionListener {
 	public SearchBtnActionListener(ReservationLayout mainFrame) {
 		this.mainFrame = mainFrame;
 		this.SearchBtn = mainFrame.searchBtn;
+		this.scrollPane = mainFrame.scrollPane;
 	}
 }

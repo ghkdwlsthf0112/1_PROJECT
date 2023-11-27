@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -18,6 +19,7 @@ public class Guide extends JPanel {
 	JLabel pwdGuide0;
 	JLabel pwdGuide1;
 	JLabel pwdGuide2;
+	JLabel pwdChkGuide0;
 	JLabel pwdChkGuide1;
 	JLabel pwdChkGuide2;
 	JLabel nameGuide0;
@@ -42,28 +44,29 @@ public class Guide extends JPanel {
 		init();
 		componentLayout();
 		addComponent();		
-
+        setOpaque(false);
 	}
 	 
-
 	private void init() {
 		emailGuide0 = new JLabel("이메일을 입력하세요.");
 		emailGuide1 = new JLabel("입력된 이메일은 잘못된 형식입니다.");
 		emailGuide2 = new JLabel("현재 사용중인 이메일입니다.");
 		emailGuide3 = new JLabel("사용가능한 이메일입니다.");
-		domainGuide1 = new JLabel("도메인을 입력하거나 선택하세요.");
+		domainGuide1 = new JLabel("도메인을 다시 선택하거나 입력해주세요.");
 		domainGuide2 = new JLabel("중복 버튼을 눌러주세요.");
 		pwdGuide0 = new JLabel("비밀번호를 입력하세요.");
 		pwdGuide1 = new JLabel("입력된 비밀번호는 잘못된 형식입니다.");
 		pwdGuide2 = new JLabel("사용가능한 비밀번호입니다.");
-		pwdChkGuide1 = new JLabel("비밀번호가 일치합니다.");
-		pwdChkGuide2 = new JLabel("비밀번호가 일치하지 않습니다.");
+		pwdChkGuide0 = new JLabel("비밀번호 일치여부를 파악합니다.");
+		pwdChkGuide1 = new JLabel("비밀번호가 일치하지 않습니다.");
+		pwdChkGuide2 = new JLabel("비밀번호가 일치합니다.");
 		nameGuide0 = new JLabel("이름을 입력하세요");
-		nameGuide1 = new JLabel("이름은 2~20자 이내여야 합니다");
+		nameGuide1 = new JLabel("영문 혹은 한글만 입력해주세요.");
 		nameGuide2 = new JLabel("사용가능한 이름입니다");
 		phoneNumGuide0 = new JLabel("휴대폰 번호를 입력하세요");
 		phoneNumGuide1 = new JLabel("입력된 번호는 잘못된 형식입니다");
 		phoneNumGuide2 = new JLabel("사용가능한 번호입니다");
+		
 		
 		setLabelProperties(emailGuide0);
 		setLabelProperties(emailGuide1);
@@ -74,6 +77,7 @@ public class Guide extends JPanel {
         setLabelProperties(pwdGuide0);
         setLabelProperties(pwdGuide1);
         setLabelProperties(pwdGuide2);
+        setLabelProperties(pwdChkGuide0);
         setLabelProperties(pwdChkGuide1);
         setLabelProperties(pwdChkGuide2);
         setLabelProperties(nameGuide0);
@@ -86,30 +90,48 @@ public class Guide extends JPanel {
 	
 	private void setLabelProperties(JLabel label) {
         label.setFont(new Font("굴림", Font.PLAIN, 15));
-        label.setBackground(new Color(0,0,0,0));
         label.setForeground(Color.RED);
+        label.setVisible(true);
         label.setBorder(null);
         label.setVisible(false);
     }
 	
+	public void setComponentBounds(JComponent component, int x, int y, int width, int height) {
+		component.setBounds(x, y, width, height);
+	}
+	
+	// 컴포넌트 위치 x, y 설정가능 
+	// 컴포넌트 크기 width, height 설정가능
+	// 간격도 설정가능 현재 65
 	public void componentLayout() {
-		emailGuide0.setBounds(0+reLocationX, 290+reLocationY, 250, 20);
-		emailGuide1.setBounds(0+reLocationX, 290+reLocationY, 250, 20);
-		emailGuide2.setBounds(0+reLocationX, 290+reLocationY, 250, 20);
-		emailGuide3.setBounds(0+reLocationX, 290+reLocationY, 250, 20);
-		domainGuide1.setBounds(0+reLocationX, 290+reLocationY, 250, 20);
-		domainGuide2.setBounds(0+reLocationX, 290+reLocationY, 250, 20);
-		pwdGuide0.setBounds(0+reLocationX, 355+reLocationY, 250, 20);
-		pwdGuide1.setBounds(0+reLocationX, 355+reLocationY, 250, 20);
-		pwdGuide2.setBounds(0+reLocationX, 355+reLocationY, 250, 20);
-		pwdChkGuide1.setBounds(0+reLocationX, 420+reLocationY, 250, 20);
-		pwdChkGuide2.setBounds(0+reLocationX, 420+reLocationY, 250, 20);
-		nameGuide0.setBounds(0+reLocationX, 485+reLocationY, 250, 20);
-		nameGuide1.setBounds(0+reLocationX, 485+reLocationY, 250, 20);
-		nameGuide2.setBounds(0+reLocationX, 485+reLocationY, 250, 20);
-		phoneNumGuide0.setBounds(0+reLocationX, 550+reLocationY, 250, 20);
-		phoneNumGuide1.setBounds(0+reLocationX, 550+reLocationY, 250, 20);
-		phoneNumGuide2.setBounds(0+reLocationX, 550+reLocationY, 250, 20);
+		int x = 20; // 컴포넌트 위치 가로
+		int y = 335; // 컴포넌트 위치 세로
+		int width = 270; // 가로 크기
+		int height = 20; // 세로 크기
+		int interval = 73; // 간격
+		// y는 가이드 카테고리마다 70씩 차이가 난다
+		setComponentBounds(emailGuide0, x, y, width, height);
+		setComponentBounds(emailGuide1, x, y, width, height);
+		setComponentBounds(emailGuide2, x, y, width, height);
+		setComponentBounds(emailGuide3, x, y, width, height);
+		setComponentBounds(domainGuide1, x, y, width, height);
+		setComponentBounds(domainGuide2, x, y, width, height);
+		y += interval;
+		setComponentBounds(pwdGuide0, x, y, width, height);
+		setComponentBounds(pwdGuide1, x, y, width, height);
+		setComponentBounds(pwdGuide2, x, y, width, height);
+		y += interval;
+		setComponentBounds(pwdChkGuide0, x, y, width, height);
+		setComponentBounds(pwdChkGuide1, x, y, width, height);
+		setComponentBounds(pwdChkGuide2, x, y, width, height);
+		y += interval;
+		setComponentBounds(	nameGuide0, x, y, width, height);
+		setComponentBounds(nameGuide1, x, y, width, height);
+		setComponentBounds(nameGuide2, x, y, width, height);
+		y += interval;
+		setComponentBounds(	phoneNumGuide0, x, y, width, height);
+		setComponentBounds(	phoneNumGuide1, x, y, width, height);
+		setComponentBounds(phoneNumGuide2, x, y, width, height);
 	}
 	
 	private void addComponent() {
@@ -122,6 +144,7 @@ public class Guide extends JPanel {
 		add(pwdGuide0);
 		add(pwdGuide1);
 		add(pwdGuide2);
+		add(pwdChkGuide0);
 		add(pwdChkGuide1);
 		add(pwdChkGuide2);
 		add(nameGuide0);
@@ -133,5 +156,3 @@ public class Guide extends JPanel {
 	}
 
 }
-
-

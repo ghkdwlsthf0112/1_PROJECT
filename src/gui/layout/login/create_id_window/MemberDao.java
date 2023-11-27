@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import database.DBConnection;
+import pwdconv.PwdChange;
 
 public class MemberDao {
 
@@ -22,7 +23,7 @@ public class MemberDao {
 		try (Connection conn = DBConnection.getConnection()) {
 			conn.setAutoCommit(false);
 
-			String countSQL = "SELECT COUNT(m_email) AS email_count FROM member WHERE m_email = ?";
+			String countSQL = "SELECT COUNT(customer_email) AS email_count FROM customer WHERE customer_email = ?";
 
 			try (PreparedStatement countStatement = conn.prepareStatement(countSQL)) {
 				countStatement.setString(1, emailDomain);
@@ -52,7 +53,7 @@ public class MemberDao {
 		try (Connection conn = DBConnection.getConnection()) {
 			conn.setAutoCommit(false);
 
-			String countSQL = "SELECT COUNT(m_email) AS email_count FROM member WHERE m_email = ?";
+			String countSQL = "SELECT COUNT(customer_email) AS email_count FROM customer WHERE customer_email = ?";
 
 			try (PreparedStatement countStatement = conn.prepareStatement(countSQL)) {
 				countStatement.setString(1, emailDomain);
@@ -68,14 +69,13 @@ public class MemberDao {
 						System.out.println("회원가입이 완료됐습니다.");
 						JOptionPane.showMessageDialog(null, "회원가입이 완료 됐습니다.");
 						
-						String insertSQL = "INSERT INTO member (" + "m_no, m_email, m_pwd, m_name, m_phonenum) "
-								+ "VALUES (m_no_seq.nextval, ?, ?, ?, ?)";
+						String insertSQL = "INSERT INTO customer VALUES (customer_id_seq.nextval, ?, ?, ?, ?,'Y')";
 
 						try (PreparedStatement insertStatement = conn.prepareStatement(insertSQL)) {
 							insertStatement.setString(1, emailDomain);
-							insertStatement.setString(2, pwd);
-							insertStatement.setString(3, name);
-							insertStatement.setString(4, phoneNum);
+							insertStatement.setString(2, new PwdChange().getPassWordToXEMD5String(pwd));
+							insertStatement.setString(3, phoneNum);
+							insertStatement.setString(4, name);
 
 							insertStatement.executeUpdate();
 						}

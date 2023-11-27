@@ -48,6 +48,6 @@ public class ChkReservationBtn extends JButton {
         setFocusPainted(false);      
 		setOpaque(false);
 		setBackground(new Color(0, 0, 0));
-		setBounds(380, 615, 340, 170);
+		setBounds(380, 617, 340, 170);
 	}
 }

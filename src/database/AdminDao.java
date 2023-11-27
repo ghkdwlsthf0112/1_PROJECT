@@ -276,12 +276,11 @@ public class AdminDao {
 	 * @param reservation_number
 	 * @return 업데이트하면 1 아니면 -1
 	 */
-	public int updateChkOutRoom(String reservation_number) {
+	public int updateChkOutRoom(String roomNum) {
 		try (Connection conn = DBConnection.getConnection()) {
-			String sql = "UPDATE Room SET room_is_using_yn = 'N' WHERE room_number = "
-					+ "(SELECT room_number FROM reservation WHERE reservation_number LIKE ?)";
+			String sql = "UPDATE Room SET room_is_using_yn = 'N' WHERE room_number = ?";
 			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-				pstmt.setString(1, "%" + reservation_number);
+				pstmt.setString(1, roomNum);
 				return pstmt.executeUpdate();
 			}
 		} catch (SQLException e) {
