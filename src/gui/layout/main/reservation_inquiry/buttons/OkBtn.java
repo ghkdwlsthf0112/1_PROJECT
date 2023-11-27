@@ -45,7 +45,7 @@ public class OkBtn extends JButton{
 		setBorderPainted(false);
 		setFocusPainted(false);
 		setOpaque(false);
-		setBounds(270, 720, 200, 80);
+		setBounds(270, 650, 200, 80);
 		setBackground(new Color(0, 0, 0, 0));
 	}
 }

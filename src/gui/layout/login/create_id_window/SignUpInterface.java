@@ -75,6 +75,7 @@ public class SignUpInterface extends JFrame {
 		// guide 객체 생성 및 초기화
 		guide = new Guide(this);
 		guide.setVisible(chkfieldView);
+		guide.setBackground(Color.black);
 
 		init();
 		componentLayout();

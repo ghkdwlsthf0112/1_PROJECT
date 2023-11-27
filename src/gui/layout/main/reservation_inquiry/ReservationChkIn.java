@@ -21,7 +21,7 @@ import gui.layout.main.reservation_inquiry.buttons.OkBtn;
 import image.getImages;
 
 public class ReservationChkIn extends JFrame{
-	final protected static ImageIcon mainImage = new getImages().getImageIcon(768, 1024, "src/image/background_image/ex1.png");
+	final protected static ImageIcon mainImage = new getImages().getImageIcon(768, 1024, "src/image/background_image/ex2.png");
 
 	Reservation reservstion;
 	
@@ -40,23 +40,23 @@ public class ReservationChkIn extends JFrame{
 		System.out.println(reservstion.toString());
 		
 		JLabel resNum = new JLabel(reservstion.getReservation_number());
-		resNum.setBounds(340, 225, 300, 100);
-		resNum.setFont(new Font("굴림", Font.BOLD, 40));
+		resNum.setBounds(300, 262, 300, 100);
+		resNum.setFont(new Font("굴림", Font.BOLD, 35));
 		add(resNum);
 		
 		JLabel resRoomNum = new JLabel(reservstion.getRoom_number().toString()+"호");
-		resRoomNum.setBounds(340, 345, 300, 100);
-		resRoomNum.setFont(new Font("굴림", Font.BOLD, 40));
+		resRoomNum.setBounds(300, 350, 300, 100);
+		resRoomNum.setFont(new Font("굴림", Font.BOLD, 35));
 		add(resRoomNum);
 		
 		JLabel resStartDate = new JLabel(reservstion.getReservation_start());
-		resStartDate.setBounds(340, 465, 300, 100);
-		resStartDate.setFont(new Font("굴림", Font.BOLD, 40));
+		resStartDate.setBounds(300, 438, 300, 100);
+		resStartDate.setFont(new Font("굴림", Font.BOLD, 35));
 		add(resStartDate);
 		
 		JLabel resEndDate = new JLabel(reservstion.getReservation_end());
-		resEndDate.setBounds(340, 585, 300, 100);
-		resEndDate.setFont(new Font("굴림", Font.BOLD, 40));
+		resEndDate.setBounds(300, 526, 300, 100);
+		resEndDate.setFont(new Font("굴림", Font.BOLD, 35));
 		add(resEndDate);
 		
 		// 뒤로가기 버튼
@@ -89,7 +89,7 @@ public class ReservationChkIn extends JFrame{
 	public static void main(String[] args) {
 		AdminDao admindao = new AdminDao();
 
-		Reservation reservstion = admindao.getReservstion("111111");
+		Reservation reservstion = admindao.getReservstion("222222");
 		new ReservationChkIn(reservstion);
 	}
 }

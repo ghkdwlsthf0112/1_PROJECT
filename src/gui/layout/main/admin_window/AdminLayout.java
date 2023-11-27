@@ -114,7 +114,7 @@ public class AdminLayout extends JFrame{
 		label.add(b2);
 				
 		b3.addActionListener(null);
-		b3.setBounds(500, 850, 300, 100);
+		b3.setBounds(500, 950, 250, 60);
 		b3.addActionListener(new ExitProgramActionListiner(this));
 		label.add(b3);
 		
@@ -126,7 +126,7 @@ public class AdminLayout extends JFrame{
 		setResizable(false);
 	}
 	
-	public void addInfoLable(JLabel l, List<Reservation> lists) throws ParseException {
+	private void addInfoLable(JLabel l, List<Reservation> lists) throws ParseException {
 		
 		
 			for(Reservation list : lists) {
@@ -180,7 +180,7 @@ public class AdminLayout extends JFrame{
 		}
 	}
 	
-	public void addInfoLable(JPanel l, List<Reservation> lists , int i ) throws ParseException {
+	private void addInfoLable(JPanel l, List<Reservation> lists , int i ) throws ParseException {
 		//오늘날짜 yyyy-MM-dd로 생성
 		String todayfm = new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis()));
 		 

@@ -94,7 +94,7 @@ public class CheckTotalpayLayout extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		Reservation reservstion = new AdminDao().getReservstion("111111");
+		Reservation reservstion = new AdminDao().getReservstion("222222");
 		Customer customer = new Customer(1,"ez123@naver.com","qweASD123!","01012341234","김신","Y");
 		Room room = new Room(1,201,"스위트",50000,"N",2);
 		new CheckTotalpayLayout(reservstion, customer, room);
