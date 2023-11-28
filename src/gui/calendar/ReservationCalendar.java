@@ -123,35 +123,42 @@ public class ReservationCalendar extends JFrame implements ActionListener {
 	
 	// 체크인 날짜가 체크아웃 날짜보다 뒤면 안됨
 	public int dayMinusCheck() {
-		int result = 0;
-		int chkInDate = Integer.valueOf(ReservationLayout.chkInDateTextField.getText().replace("-", ""));
-		int chkOutDate = Integer.valueOf(ReservationLayout.chkOutDateTextField.getText().replace("-", ""));
-		int minusCheck = chkOutDate - chkInDate;
-		if (minusCheck < 0) {
-			result = 1;
-		}
-		return result;
-	}
+	      int result = 0;
+	      
+	      try {
+	         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	         Date chkInDate = format.parse(ReservationLayout.chkInDateTextField.getText());
+	         Date chkOutDate = format.parse(ReservationLayout.chkOutDateTextField.getText());
+	         
+	         if (chkOutDate.before(chkInDate)) {
+	            result = 1;
+	         }
+	      } catch (ParseException e) {
+	         e.printStackTrace();
+	      }
+	      return result;
+	   }
 	
 	// 체크인 날짜 선택을 오늘보다 전으로 선택 하면 안됨
-	public int errorCheck(int index) {
-		Date date = new Date();
-		int result = 0;
-		
-		String selectDateStr = cf.year + "-" + cf.month + "-" + buttons[index].getText();
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		
-		try {
-			Date selectDate = format.parse(selectDateStr);
-			if (selectDate != null) {
-				if (selectDate.before(date)) {
-					result = 1;
-				}
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return result;
+	public int errorCheck() {
+	      Date date = new Date();
+	      int result = 0;
+	      
+	      String selectDateStr = ReservationLayout.chkInDateTextField.getText();
+	      SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	      
+	      try {
+	         Date selectDate = format.parse(selectDateStr);
+	         
+	         if (selectDate != null) {
+	            if (selectDate.before(date) && !selectDateStr.equals(cf.getToday())) {
+	               result = 1;
+	            }
+	         }
+	      } catch (ParseException e) {
+	         e.printStackTrace();
+	      }
+	      return result;
 	}
 	
 	@Override
@@ -170,7 +177,7 @@ public class ReservationCalendar extends JFrame implements ActionListener {
 					ReservationLayout.chkInDateTextField.setText(selectDate);
 					// 도착 날짜 초기화
 					ReservationLayout.chkOutDateTextField.setText("");
-					if (errorCheck(i) == 1) {
+					if (errorCheck() == 1) {
 						JOptionPane.showMessageDialog(this, "오늘보다 이전 선택 ㄴㄴ");
 						ReservationLayout.chkInDateTextField.setText("");
 						ReservationLayout.chkOutDateTextField.setText("");

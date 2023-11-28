@@ -30,16 +30,18 @@ public class CheckTotalpayLayout extends JFrame{
 	public JButton b2 = new HomeBtn();
 	public JButton b3 = new OkBtn();
 	
-	public CheckTotalpayLayout(Reservation reservstion, Customer customer, Room room) {
+	public CheckTotalpayLayout(Reservation thisReservstion, Customer useCustomer) {
 		super("결제확인창");
 		setLayout(null);
-		this.reservstion = reservstion;
-		this.customer = customer;
-		this.room = room;
+		this.reservstion = thisReservstion;
+		this.customer = useCustomer;
+		this.room = new AdminDao().getRoom(reservstion.getRoom_number().toString());
 		
 		// CheckTotalpayLayout이 생성되면서 고객정보에서 이메일을 예약쪽에 등록
 		reservstion.setCustomer_email(customer.getCustomer_email());
-		
+		System.out.println(room.toString());
+		System.out.println(reservstion.toString());
+		System.out.println(customer.toString());
 		
 		JLabel imageLabel = new JLabel();
 		imageLabel.setBounds(0, 0, 768, 1024);
@@ -63,7 +65,9 @@ public class CheckTotalpayLayout extends JFrame{
 		//이용기간 계산 후 총 요금 계산		
 		int totalFare = room.getRoom_fare()*reservstion.getDiffDate().getDays();
 		
+		
 		JLabel resTotalFare = new JLabel(Integer.toString(totalFare)+"원");
+//		JLabel resTotalFare = new JLabel();
 		resTotalFare.setBounds(340, 560, 300, 100);
 		resTotalFare.setFont(new Font("굴림", Font.BOLD, 40));
 		add(resTotalFare);
@@ -93,10 +97,4 @@ public class CheckTotalpayLayout extends JFrame{
 		setResizable(false);
 	}
 	
-	public static void main(String[] args) {
-		Reservation reservstion = new AdminDao().getReservstion("222222");
-		Customer customer = new Customer(1,"ez123@naver.com","qweASD123!","01012341234","김신","Y");
-		Room room = new Room(1,201,"스위트",50000,"N",2);
-		new CheckTotalpayLayout(reservstion, customer, room);
-	}
 }

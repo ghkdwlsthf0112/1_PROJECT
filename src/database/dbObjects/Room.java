@@ -75,7 +75,10 @@ public class Room {
 		this.room_floor = room_floor;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return String.format("방번호 : %d/ 방종류 : %s/ 방요금 : %d/", room_number,room_type,room_fare);
+	}
 }
 
 

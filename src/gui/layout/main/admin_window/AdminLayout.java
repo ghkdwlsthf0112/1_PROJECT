@@ -74,6 +74,7 @@ public class AdminLayout extends JFrame{
 	    
 		jscp1.setBorder(BorderFactory.createEmptyBorder());
 		jscp1.getViewport().setBackground(Color.WHITE);
+		jscp1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		reservationInfo.add(jscp1, BorderLayout.CENTER);
 		
 		

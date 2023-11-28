@@ -1,8 +1,7 @@
 package gui.layout.main.reservation_window;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.event.ActionListener;
+import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,13 +14,16 @@ import javax.swing.JTextField;
 import actions.CalendarBtnActionListener;
 import actions.HomeBtnActionListener;
 import actions.PrevBtnActionListener;
+import database.AdminDao;
 import database.dbObjects.Customer;
 import database.dbObjects.Reservation;
 import database.dbObjects.Room;
 import gui.buttons.CalendarBtn;
 import gui.buttons.HomeBtn;
 import gui.buttons.PrevBtn;
+import gui.layout.main.reservation_window.actions.NextBtnActionListener;
 import gui.layout.main.reservation_window.actions.SearchBtnActionListener;
+import gui.layout.main.reservation_window.buttons.NextBtn;
 import gui.layout.main.reservation_window.buttons.SearchBtn;
 import image.getImages;
 
@@ -36,15 +38,18 @@ public class ReservationLayout extends JFrame {
 	
 	public static JButton calendarBtn1 = new CalendarBtn(calendarImage);
 	public static JButton searchBtn = new SearchBtn(searchImage);
-	public static JPanel centerPanel;
-	public static JScrollPane scrollPane;
-	Customer customer;
-	Reservation reservation;
+	public static JPanel centerPanel = new JPanel();
+	public static JScrollPane scrollPane = new JScrollPane();	
+	
+	public Customer customer;
+	public Reservation reservation = new Reservation();
 
 	
 	public JButton b1 = new HomeBtn();
 	public JButton b2 = new PrevBtn();
+	public JButton b3 = new NextBtn();
 
+	AdminDao adminDao = new AdminDao();
 	public ReservationLayout(Customer customer) {
 		
 		setLayout(null);
@@ -54,23 +59,27 @@ public class ReservationLayout extends JFrame {
 		imageLabel.setBounds(0, 0, 768, 1024);
 		imageLabel.setIcon(main);
 		add(imageLabel);
+		
 //		System.out.println(customer.toString());
-//		JLabel imageLabel = new JLabel();
 		
-//		reservation.setCustomer_email(customer.getCustomer_email());
-//		reservation.setReservation_start(getName());
-//		reservation.setReservation_end(getName());
-		
-		centerPanel = new JPanel();
-		centerPanel.setLayout(new BorderLayout());
-		centerPanel.setBackground(Color.WHITE);
-		
-		scrollPane = new JScrollPane(centerPanel);
+		reservation.setCustomer_email(customer.getCustomer_email());
+	
+
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(80, 270, 620, 525);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+		scrollPane.add(new JButton());
+		
+		centerPanel.setBackground(new Color(243,243,243));
+		GridLayout layout = new GridLayout(0,1,3,10);
+		layout.minimumLayoutSize(imageLabel);
+		centerPanel.setLayout(layout);
+
+		
+		scrollPane.setViewportView(centerPanel);
 		
 		setLayout(null);
-		
+
 		
 		
 		
@@ -89,6 +98,9 @@ public class ReservationLayout extends JFrame {
 		searchBtn.setBounds(549, 150, 154, 50);
 		searchBtn.addActionListener(new SearchBtnActionListener(this));
 		
+		
+		
+		
 		imageLabel.add(scrollPane);
 		imageLabel.add(chkInDateTextField);
 		imageLabel.add(chkOutDateTextField);
@@ -102,6 +114,8 @@ public class ReservationLayout extends JFrame {
 		b2.addActionListener(new PrevBtnActionListener(this));
 		imageLabel.add(b2);
 		
+		b3.addActionListener(new NextBtnActionListener(this));
+		imageLabel.add(b3);
 		
 		setTitle("객실 선택창");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -110,10 +124,11 @@ public class ReservationLayout extends JFrame {
 		setVisible(true);
 	}
 	
-
-	public static void main(String[] args) {
-		Customer customer = null; // -> 회원 비회원 전부 Customer 객체를 이용해서 전달
-		new ReservationLayout(customer);
-
-	}
+	
+	
+//	public static void main(String[] args) {
+//		Customer customer = null; // -> 회원 비회원 전부 Customer 객체를 이용해서 전달
+//		new ReservationLayout(customer);
+//
+//	}
 }
