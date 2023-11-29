@@ -77,7 +77,7 @@ public class Room {
 	
 	@Override
 	public String toString() {
-		return String.format("방번호 : %d/ 방종류 : %s/ 방요금 : %d/", room_number,room_type,room_fare);
+		return String.format("방번호 : %d/ 방종류 : %s/ 방요금 : %d \n", room_number,room_type,room_fare);
 	}
 }
 

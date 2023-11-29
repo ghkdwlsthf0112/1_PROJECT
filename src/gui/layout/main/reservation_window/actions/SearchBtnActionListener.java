@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import database.AdminDao;
+import database.ReservationDao;
 import database.dbObjects.Reservation;
 import database.dbObjects.Room;
 import gui.layout.main.reservation_window.ReservationLayout;
@@ -30,15 +30,22 @@ public class SearchBtnActionListener implements ActionListener {
 	JScrollPane scrollPane;
 	Reservation reservation;
 	
-	AdminDao adminDao = new AdminDao();
+	ReservationDao adminDao = new ReservationDao();
 	JOptionPane info = new JOptionPane();
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == SearchBtn) {
-			List<Room> availableRooms = adminDao.getAvailableCheckInRoom(
+			centerPanel.removeAll();
+//			List<Room> availableRooms = adminDao.getAvailableCheckInRoom(
+//					ReservationLayout.chkInDateTextField.getText(),
+//					ReservationLayout.chkOutDateTextField.getText()
+//			);
+			
+			List<Room> availableRooms = adminDao.getReservationRoom(
 					ReservationLayout.chkInDateTextField.getText(),
 					ReservationLayout.chkOutDateTextField.getText()
 			);
+
 			reservation.setReservation_start(ReservationLayout.chkInDateTextField.getText());
 			reservation.setReservation_end(ReservationLayout.chkOutDateTextField.getText());
 			if (availableRooms != null && !availableRooms.isEmpty()) {
@@ -80,6 +87,7 @@ public class SearchBtnActionListener implements ActionListener {
 				System.out.println("체크인 가능한 방이 없습니다.");
 			}
 			scrollPane.setViewportView(centerPanel);
+//			availableRooms.removeAll(availableRooms);
 		}
 	}
 	

@@ -19,13 +19,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import database.AdminDao;
+import database.ReservationDao;
 import database.dbObjects.Room;
 import gui.layout.main.reservation_window.ReservationLayout;
 
 public class ReservationCalendar extends JFrame implements ActionListener {
 	Container container = getContentPane();
-	AdminDao adminDao = new AdminDao();
+	ReservationDao adminDao = new ReservationDao();
 	
 	// 선택한 날짜를 저장함
 	int clickCount = 0;

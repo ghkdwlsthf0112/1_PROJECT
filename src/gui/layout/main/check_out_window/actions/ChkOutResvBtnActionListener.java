@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import database.AdminDao;
+import database.ReservationDao;
 import database.dbObjects.Reservation;
 import gui.layout.main.check_out_window.CheckOut;
 import gui.layout.main.reservation_inquiry.ReservationChkIn;
@@ -20,7 +20,7 @@ public class ChkOutResvBtnActionListener implements ActionListener{
 	JFrame mainFrame;
 	JTextField displayField;
 	JOptionPane info = new JOptionPane();
-	AdminDao admindao = new AdminDao();
+	ReservationDao admindao = new ReservationDao();
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {

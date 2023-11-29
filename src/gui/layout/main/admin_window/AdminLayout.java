@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 
 import actions.HomeBtnActionListener;
 import actions.PrevBtnActionListener;
-import database.AdminDao;
+import database.ReservationDao;
 import database.dbObjects.Reservation;
 import gui.buttons.HomeBtn;
 import gui.buttons.PrevBtn;
@@ -52,8 +52,8 @@ public class AdminLayout extends JFrame{
 		add(label);
 		
 		// 예약 리스트 받아오기
-		lists = new AdminDao().getReservstion();
-		obLists = new AdminDao().getReservationsObject();
+		lists = new ReservationDao().getReservstion();
+		obLists = new ReservationDao().getReservationsObject();
 		
 //		Reservation[] resList = new Reservation[lists.size()];
 		DefaultTableModel model = new DefaultTableModel();

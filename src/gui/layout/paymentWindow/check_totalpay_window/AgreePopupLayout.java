@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import database.AdminDao;
+import database.ReservationDao;
 import database.dbObjects.Customer;
 import database.dbObjects.Reservation;
 import database.dbObjects.Room;

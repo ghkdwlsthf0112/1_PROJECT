@@ -127,7 +127,7 @@ public class EmailSend {
 		
 	}
 	
-	public void ReservationSend(String reservationNum, String name, String roomNO ,String checkIn, String checkOut, String useDay, String payMoney ) {
+	public void ReservationSend(String reservationNum, String name, String roomNO ,String checkIn, String checkOut, String useDay, String payMoney ,String phoneNum) {
 		Properties props = System.getProperties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.port", "587");
@@ -144,7 +144,15 @@ public class EmailSend {
 			}
 		});
 		
-		String receiver = "haru4637@naver.com"; // 메일 받을 주소
+		CustomerDao cdao = new CustomerDao();
+		List<String> getlist = cdao.getIdList(name, phoneNum);
+		String sc = "";
+		if (getlist.size() > 0) {
+			for (int i = 0; i < getlist.size(); i++) {
+				sc += (String) getlist.get(i) + " ";
+			}
+		}
+		String receiver = sc; // 메일 받을 주소
 		String title = name + "님의 델루나호텔 예약정보 입니다";
 		String content = 
 				"회원님이 예약하신 델루나호텔 예약정보 입니다</br>"+

@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import database.AdminDao;
+import database.ReservationDao;
 import database.dbObjects.Customer;
 import gui.layout.login.member_login_window.MemberLoginLayout;
 import gui.layout.main.reservation_window.ReservationLayout;
@@ -20,7 +20,7 @@ public class LoginBtnActionListener implements ActionListener {
 	JFrame mainFrame;
 	JTextField eamil;
 	JTextField password;
-	AdminDao adminDao = new AdminDao();
+	ReservationDao adminDao = new ReservationDao();
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()== loginBtn) {

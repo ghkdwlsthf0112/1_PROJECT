@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 import actions.CalendarBtnActionListener;
 import actions.HomeBtnActionListener;
 import actions.PrevBtnActionListener;
-import database.AdminDao;
+import database.ReservationDao;
 import database.dbObjects.Customer;
 import database.dbObjects.Reservation;
 import database.dbObjects.Room;
@@ -49,7 +49,7 @@ public class ReservationLayout extends JFrame {
 	public JButton b2 = new PrevBtn();
 	public JButton b3 = new NextBtn();
 
-	AdminDao adminDao = new AdminDao();
+	ReservationDao adminDao = new ReservationDao();
 	public ReservationLayout(Customer customer) {
 		
 		setLayout(null);

@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import actions.FloorGuideBtnActionListener;
 import actions.HomeBtnActionListener;
 import actions.PrevBtnActionListener;
-import database.AdminDao;
+import database.ReservationDao;
 import database.dbObjects.Reservation;
 import gui.buttons.FloorGuideBtn;
 import gui.buttons.HomeBtn;
@@ -87,7 +87,7 @@ public class ReservationChkIn extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		AdminDao admindao = new AdminDao();
+		ReservationDao admindao = new ReservationDao();
 
 		Reservation reservstion = admindao.getReservstion("222222");
 		new ReservationChkIn(reservstion);

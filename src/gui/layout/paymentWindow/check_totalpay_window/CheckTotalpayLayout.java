@@ -9,8 +9,9 @@ import javax.swing.JLabel;
 
 import actions.HomeBtnActionListener;
 import actions.PrevBtnActionListener;
-import database.AdminDao;
+import database.ReservationDao;
 import database.dbObjects.Customer;
+import database.dbObjects.Payment;
 import database.dbObjects.Reservation;
 import database.dbObjects.Room;
 import gui.buttons.HomeBtn;
@@ -35,7 +36,7 @@ public class CheckTotalpayLayout extends JFrame{
 		setLayout(null);
 		this.reservstion = thisReservstion;
 		this.customer = useCustomer;
-		this.room = new AdminDao().getRoom(reservstion.getRoom_number().toString());
+		this.room = new ReservationDao().getRoom(reservstion.getRoom_number().toString());
 		
 		// CheckTotalpayLayout이 생성되면서 고객정보에서 이메일을 예약쪽에 등록
 		reservstion.setCustomer_email(customer.getCustomer_email());
@@ -62,12 +63,21 @@ public class CheckTotalpayLayout extends JFrame{
 		resEndDate.setFont(new Font("굴림", Font.BOLD, 40));
 		add(resEndDate);
 		
+		
+		
 		//이용기간 계산 후 총 요금 계산		
-		int totalFare = room.getRoom_fare()*reservstion.getDiffDate().getDays();
+		double totalFare = room.getRoom_fare()*reservstion.getDiffDate().getDays();
+		//DB payment
+		Payment payment = new Payment();		
+		double payPct = 1 - payment.getDiscount_pct();
+		
+		if(customer.getCustomer_yn() == "Y") {
+ 			totalFare = totalFare*payPct;
+		}
 		
 		
-		JLabel resTotalFare = new JLabel(Integer.toString(totalFare)+"원");
-//		JLabel resTotalFare = new JLabel();
+		
+		JLabel resTotalFare = new JLabel(Integer.toString((int)totalFare)+"원");
 		resTotalFare.setBounds(340, 560, 300, 100);
 		resTotalFare.setFont(new Font("굴림", Font.BOLD, 40));
 		add(resTotalFare);
