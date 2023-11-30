@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,10 +30,12 @@ import database.dbObjects.Reservation;
 import gui.buttons.HomeBtn;
 import gui.buttons.PrevBtn;
 import gui.layout.main.admin_window.actions.CompulsionExitActionListiner;
+import gui.layout.main.admin_window.actions.SelectResMouseEvent;
 import gui.layout.main.reservation_inquiry.buttons.ResChkOkBtn;
 import image.getImages;
+import oracle.jdbc.logging.annotations.StringBlinder;
 
-public class AdminChkResv extends JFrame implements MouseListener {
+public class AdminChkResv extends JFrame {
 	
 	static ImageIcon mainImage = new getImages().getImageIcon(768, 1024,
 			"src/image/background_image/adminimageReList.png");
@@ -47,17 +47,17 @@ public class AdminChkResv extends JFrame implements MouseListener {
 	public JButton b1 = new PrevBtn();
 	public JButton b2 = new HomeBtn();
 
+	public StringBuilder selectRes = new StringBuilder();
+//	public static String selectRes;
 	public JTextPane selectRoomInfo = new JTextPane();
-	public static String selectRes = "";
 	DefaultTableModel model = new DefaultTableModel();
-	JPanel reservationInfo = new JPanel(new BorderLayout());
-	JTable table = new JTable(model);
+	public JPanel reservationInfo = new JPanel(new BorderLayout());
+	public JTable table = new JTable(model);
 	
 	public JButton compulsionBtn = new ResChkOkBtn();
 	public AdminChkResv() {
 		setTitle("관리자페이지");
 		setLayout(null);
-
 		JLabel label = new JLabel();
 		label.setBounds(0, 0, 768, 1024);
 		label.setIcon(mainImage);
@@ -107,6 +107,7 @@ public class AdminChkResv extends JFrame implements MouseListener {
 		table.getColumn("경과").setPreferredWidth(20);
 		table.getColumn("경과").setCellRenderer(dtcr);
 		table.setTableHeader(null);
+		table.addMouseListener(new SelectResMouseEvent(this));
 		reservationInfo.setBounds(60, 250, 648, 465);
 		reservationInfo.setBackground(new Color(0, 0, 0, 0));
 		label.add(reservationInfo);
@@ -115,10 +116,11 @@ public class AdminChkResv extends JFrame implements MouseListener {
 		
 		label.add(selectRoomInfo);
 		compulsionBtn.setBounds(470, 730, 200, 80);
-		compulsionBtn.addActionListener(new CompulsionExitActionListiner(this, selectRes));
+		compulsionBtn.addActionListener(new CompulsionExitActionListiner(this));
+
 		label.add(compulsionBtn);
 		
-		startEvent();
+		
 		
 
 		// 뒤로가기 버튼
@@ -137,46 +139,12 @@ public class AdminChkResv extends JFrame implements MouseListener {
 		setResizable(false);
 	}
 
-	public void startEvent() {
-		table.addMouseListener(this);
-	}
+//	public void startEvent() {
+//		table.addMouseListener(this);
+//		
+//	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		int row = table.getSelectedRow();
-		int col = table.getSelectedColumn();
-		for (int i = 0; i < table.getColumnCount(); i++) {
-			System.out.print(table.getModel().getValueAt(row, i) + "\t");
-		}
-		selectRes = table.getModel().getValueAt(row, 0).toString();
-//		System.out.println("확인"+selectRes);
-//		selectRoomInfo.setText("예약번호 : "+selectRes+"\t 객실번호 : "+table.getModel().getValueAt(row, 2).toString());
-		
 	
-	}
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	private void addInfoLable(JLabel l, List<Reservation> lists) throws ParseException {
 
