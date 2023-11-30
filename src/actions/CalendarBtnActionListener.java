@@ -12,7 +12,7 @@ import gui.layout.main.reservation_window.ReservationLayout;
 
 public class CalendarBtnActionListener implements ActionListener {
 
-	JFrame mainFrame;
+	ReservationLayout mainFrame;
 	JButton CalendarBtn;
 	// 달력 창 1개 이상 못 열게 제한
 	int calendarWindowTest = 0;
@@ -21,7 +21,7 @@ public class CalendarBtnActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == CalendarBtn) {
 			if (calendarWindowTest == 0) {
-				new ReservationCalendar();
+				new ReservationCalendar(mainFrame);
 //				calendarWindowTest = 1;
 			}
 		}

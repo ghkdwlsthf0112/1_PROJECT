@@ -13,8 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import database.ReservationDao;
 import database.dbObjects.Customer;
+import database.dbObjects.Payment;
 import database.dbObjects.Reservation;
 import database.dbObjects.Room;
 import gui.layout.paymentWindow.check_totalpay_window.actions.PaymentBtnActionListener;
@@ -36,13 +36,15 @@ public class AgreePopupLayout extends JFrame{
 	public Customer customer;
 	public Room room;
 	public JFrame prevMainFrame;
+	public Payment payment;
 	
-	public AgreePopupLayout(Reservation reservstion, Customer customer,Room room,JFrame mainFrame) {
+	public AgreePopupLayout(Reservation reservstion, Customer customer,Room room, Payment payment, JFrame mainFrame) {
 		setLayout(null);
 		
 		this.reservstion = reservstion;
 		this.customer = customer;
 		this.room = room;
+		this.payment = payment;
 		this.prevMainFrame = mainFrame;
 		JPanel reservationInfo = new JPanel(new BorderLayout());
 		try {

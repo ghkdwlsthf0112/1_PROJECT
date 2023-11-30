@@ -10,6 +10,7 @@ import database.dbObjects.Customer;
 import gui.layout.login.chk_ismember.LoginChkLayout;
 import gui.layout.login.member_login_window.MemberLoginLayout;
 import gui.layout.login.non_member_check_in.NonMemberCheckLayout;
+import gui.layout.main.admin_window.AdminChkResv;
 import gui.layout.main.admin_window.AdminLayout;
 import gui.layout.main.check_in_window.CheckInLayout;
 import gui.layout.main.check_out_window.CheckOut;
@@ -39,7 +40,8 @@ public class PrevBtnActionListener implements ActionListener {
 	JButton LoginChkLayoutPrevBtn;
 	JButton CheckTotalpayLayoutPrevBtn;
 	JButton ReservationLayoutPrevBtn;
-	
+	JButton AdminChkResvPrevBtn;
+
 	Customer customer;
 
 
@@ -86,6 +88,9 @@ public class PrevBtnActionListener implements ActionListener {
 			mainFrame.dispose();
 		} else if(e.getSource() == ReservationLayoutPrevBtn) {
 			new LoginChkLayout();
+			mainFrame.dispose();
+		}  else if(e.getSource() == AdminChkResvPrevBtn) {
+			new AdminLayout();
 			mainFrame.dispose();
 		} 
 	}
@@ -153,12 +158,17 @@ public class PrevBtnActionListener implements ActionListener {
 	
 	public PrevBtnActionListener(CheckTotalpayLayout mainFrame) {
 		this.mainFrame = mainFrame;
-		this.CheckTotalpayLayoutPrevBtn = mainFrame.b2;
+		this.CheckTotalpayLayoutPrevBtn = mainFrame.b1;
 		this.customer = mainFrame.customer;
 	}
 	
 	public PrevBtnActionListener(ReservationLayout mainFrame) {
 		this.mainFrame = mainFrame;
 		this.ReservationLayoutPrevBtn = mainFrame.b2;
+	}
+	
+	public PrevBtnActionListener(AdminChkResv mainFrame) {
+		this.mainFrame = mainFrame;
+		this.AdminChkResvPrevBtn = mainFrame.b1;
 	}
 }

@@ -6,7 +6,11 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import database.ReservationDao;
+import database.RoomDao;
 import database.dbObjects.Reservation;
 import database.dbObjects.Room;
 import gui.layout.main.reservation_window.ReservationLayout;
@@ -29,68 +34,83 @@ public class SearchBtnActionListener implements ActionListener {
 	JPanel centerPanel;
 	JScrollPane scrollPane;
 	Reservation reservation;
-	
+
 	ReservationDao adminDao = new ReservationDao();
 	JOptionPane info = new JOptionPane();
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == SearchBtn) {
 			centerPanel.removeAll();
-//			List<Room> availableRooms = adminDao.getAvailableCheckInRoom(
-//					ReservationLayout.chkInDateTextField.getText(),
-//					ReservationLayout.chkOutDateTextField.getText()
-//			);
-			
-			List<Room> availableRooms = adminDao.getReservationRoom(
-					ReservationLayout.chkInDateTextField.getText(),
-					ReservationLayout.chkOutDateTextField.getText()
-			);
 
-			reservation.setReservation_start(ReservationLayout.chkInDateTextField.getText());
-			reservation.setReservation_end(ReservationLayout.chkOutDateTextField.getText());
+			// 지정기간에 사용중인 방 검색
+			List<Room> resRooms = adminDao.getReservationRoom(mainFrame.chkInDateTextField.getText(),
+					mainFrame.chkOutDateTextField.getText());
+			System.out.println(resRooms.toString());
+			
+			// 방 전체 가져오기
+			Map<Integer, Room> rooms = new RoomDao().getRoomsMap();
+			System.out.println(rooms.toString());
+			// 예약 내용에 있는 방에서 지정기간 사용중인 방 삭제
+//			Map<Integer, Room> rooms = new RoomDao().getRooms();
+			for (Room room : resRooms) {
+				rooms.remove(room.getRoom_number());
+				System.out.println(rooms.toString());
+			}
+			
+				
+			List<Room> availableRooms = rooms.values().stream().collect(Collectors.toCollection(ArrayList::new));	
+			Collections.sort(availableRooms);	
+			
+
+
+			// 정렬
+		    System.out.println(availableRooms.toString());
+			reservation.setReservation_start(mainFrame.chkInDateTextField.getText());
+			reservation.setReservation_end(mainFrame.chkOutDateTextField.getText());
 			if (availableRooms != null && !availableRooms.isEmpty()) {
 				System.out.println("체크인 가능한 방 목록");
 				for (Room room : availableRooms) {
-					System.out.println(room.getRoom_number()+"호" + "-" + room.getRoom_type()+"타입");
-					JPanel addRoom= new JPanel(new GridLayout(1,0,2,2));
+					
+					JPanel addRoom = new JPanel(new GridLayout(1, 0, 2, 2));
 					addRoom.setBackground(Color.white);
 					JLabel roomImage = new JLabel();
-					addRoom.setPreferredSize(new Dimension(600,120));
-		
+					addRoom.setPreferredSize(new Dimension(600, 120));
+
 					ImageIcon Image = new getImages().getImageIcon(200, 130, "src/image/hotel_image/디럭스룸1.png");
 					roomImage.setIcon(Image);
 					addRoom.add(roomImage);
-					
+
 					StringBuilder info = new StringBuilder();
-					info.append("<html>"+room.getRoom_number().toString()+"호<br>");
-					info.append(room.getRoom_type().toString()+"<br>");
+					info.append("<html>" + room.getRoom_number().toString() + "호<br>");
+					info.append(room.getRoom_type().toString() + "<br>");
 					JLabel roomNum = new JLabel(info.toString());
 					roomNum.setFont(new Font("굴림", Font.BOLD, 25));
 					roomNum.setHorizontalAlignment(JLabel.CENTER);
 					addRoom.add(roomNum);
-					
-					JLabel roomfare = new JLabel(room.getRoom_fare().toString()+"원");
+
+					JLabel roomfare = new JLabel(room.getRoom_fare().toString() + "원");
 					roomfare.setFont(new Font("굴림", Font.BOLD, 25));
 					roomfare.setHorizontalAlignment(JLabel.RIGHT);
 
 					addRoom.add(roomfare);
-					
+
 					JButton selectBtn = new SelectBtn();
-					selectBtn.addActionListener(new AddRoomActionListener(mainFrame, room ,selectBtn));
+					selectBtn.addActionListener(new AddRoomActionListener(mainFrame, room, selectBtn, addRoom));
 					addRoom.add(selectBtn);
 					centerPanel.add(addRoom);
-					
+
 				}
 			} else {
 				centerPanel.removeAll();
-				info.showMessageDialog(mainFrame, "선택가능한 방이 없습니다", "Message",JOptionPane.INFORMATION_MESSAGE );
+				info.showMessageDialog(mainFrame, "선택가능한 방이 없습니다", "Message", JOptionPane.INFORMATION_MESSAGE);
 				System.out.println("체크인 가능한 방이 없습니다.");
 			}
 			scrollPane.setViewportView(centerPanel);
 //			availableRooms.removeAll(availableRooms);
 		}
 	}
-	
+
 	public SearchBtnActionListener(ReservationLayout mainFrame) {
 		this.mainFrame = mainFrame;
 		this.SearchBtn = mainFrame.searchBtn;

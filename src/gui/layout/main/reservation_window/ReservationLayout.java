@@ -1,6 +1,7 @@
 package gui.layout.main.reservation_window;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
@@ -29,17 +30,18 @@ import image.getImages;
 
 public class ReservationLayout extends JFrame {
 	final static ImageIcon main = new getImages().getImageIcon(768, 1024, "src/image/background_image/roomselectbackground.png");
-	static ImageIcon calendarImage = new getImages().getImageIcon(40, 40, "src/image/calendar/calendar1.png");
-	static ImageIcon searchImage = new getImages().getImageIcon(154, 50, "src/image/icon_image/btn/check.png");
+	final static ImageIcon calendarImage = new getImages().getImageIcon(40, 40, "src/image/calendar/calendar1.png");
+	final static ImageIcon searchImage = new getImages().getImageIcon(154, 50, "src/image/icon_image/btn/check.png");
 	
-	public static JTextField chkInDateTextField;
-	public static JTextField chkOutDateTextField;
+	public JTextField chkInDateTextField;
+	public JTextField chkOutDateTextField;
+	public JTextField choiceRoomInfo;
+
 	
-	
-	public static JButton calendarBtn1 = new CalendarBtn(calendarImage);
-	public static JButton searchBtn = new SearchBtn(searchImage);
-	public static JPanel centerPanel = new JPanel();
-	public static JScrollPane scrollPane = new JScrollPane();	
+	public JButton calendarBtn1 = new CalendarBtn(calendarImage);
+	public JButton searchBtn = new SearchBtn(searchImage);
+	public JPanel centerPanel = new JPanel();
+	public JScrollPane scrollPane = new JScrollPane();	
 	
 	public Customer customer;
 	public Reservation reservation = new Reservation();
@@ -86,10 +88,16 @@ public class ReservationLayout extends JFrame {
 		
 		chkInDateTextField = new JTextField();
 		chkInDateTextField.setBounds(200, 87, 300, 40);
+		chkInDateTextField.setFont(new Font("굴림", Font.BOLD, 25));
+		chkInDateTextField.setForeground(Color.black);
+		chkInDateTextField.setBorder(null);
 		chkInDateTextField.setEnabled(false);
 		
 		chkOutDateTextField = new JTextField();
 		chkOutDateTextField.setBounds(200, 160, 300, 40);
+		chkOutDateTextField.setFont(new Font("굴림", Font.BOLD, 25));
+		chkOutDateTextField.setForeground(Color.black);
+		chkOutDateTextField.setBorder(null);
 		chkOutDateTextField.setEnabled(false);
 		
 		calendarBtn1.setBounds(608, 95, 40, 40);
@@ -98,14 +106,19 @@ public class ReservationLayout extends JFrame {
 		searchBtn.setBounds(549, 150, 154, 50);
 		searchBtn.addActionListener(new SearchBtnActionListener(this));
 		
-		
+		choiceRoomInfo = new JTextField();
+		choiceRoomInfo.setBounds(100, 870, 350, 40);
+		choiceRoomInfo.setFont(new Font("굴림", Font.BOLD, 20));
+		choiceRoomInfo.setForeground(Color.black);
+		choiceRoomInfo.setBorder(null);
+		choiceRoomInfo.setEnabled(false);
 		
 		
 		imageLabel.add(scrollPane);
 		imageLabel.add(chkInDateTextField);
 		imageLabel.add(chkOutDateTextField);
 		imageLabel.add(calendarBtn1);
-		
+		imageLabel.add(choiceRoomInfo);
 		imageLabel.add(searchBtn);
 		
 		b1.addActionListener(new HomeBtnActionListener(this));

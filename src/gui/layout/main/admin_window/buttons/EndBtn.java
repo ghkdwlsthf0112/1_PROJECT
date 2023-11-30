@@ -1,4 +1,4 @@
-package gui.layout.main.reservation_window.buttons;
+package gui.layout.main.admin_window.buttons;
 
 import java.awt.Color;
 
@@ -9,32 +9,32 @@ import javax.swing.JButton;
 
 import image.getImages;
 
-public class NextBtn extends JButton{
-	final static ImageIcon okImage = new getImages().getImageIcon(200, 80, "src/image/icon_image/btn/check.png");
-	final static ImageIcon okPImage = new getImages().getImageIcon(200, 80, "src/image/icon_image/btn/checkP.png");
+public class EndBtn extends JButton{
+	final static ImageIcon okImage = new getImages().getImageIcon(60, 60, "src/image/icon_image/btn/X.png");
+	final static ImageIcon okPImage = new getImages().getImageIcon(60, 60, "src/image/icon_image/btn/XP.png");
 
-	public NextBtn() {
+	public EndBtn() {
 		decorate();
 	}
 
-	public NextBtn(String text) {
+	public EndBtn(String text) {
 		super(text);
 		decorate();
 	}
 
-	public NextBtn(Action action) {
+	public EndBtn(Action action) {
 		super(action);
 		decorate();
 	}
 
-	public NextBtn(Icon icon) {
+	public EndBtn(Icon icon) {
 		super(icon);
 		setPressedIcon(icon);
 		setRolloverSelectedIcon(icon);
 		decorate();
 	}
 
-	public NextBtn(String text, Icon icon) {
+	public EndBtn(String text, Icon icon) {
 		super(text, icon);
 		decorate();
 	}
@@ -45,7 +45,7 @@ public class NextBtn extends JButton{
 		setBorderPainted(false);
 		setFocusPainted(false);
 		setOpaque(false);
-		setBounds(480, 850, 200, 80);
+		setBounds(660, 850, 60, 60);
 		setBackground(new Color(0, 0, 0, 0));
 	}
 }

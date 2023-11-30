@@ -22,6 +22,7 @@ import image.getImages;
 
 public class ReservationInfo extends JFrame{
 	final static ImageIcon mainImage = new getImages().getImageIcon(768, 1024, "src/image/background_image/ex1.png");
+	final static Font fontUI = new Font("굴림", Font.BOLD, 35);
 	
 	public Reservation reservstion;
 	public JButton b1 = new PrevBtn();
@@ -39,22 +40,22 @@ public class ReservationInfo extends JFrame{
 		
 		JLabel resNum = new JLabel(reservstion.getReservation_number());
 		resNum.setBounds(300, 262, 300, 100);
-		resNum.setFont(new Font("굴림", Font.BOLD, 35));
+		resNum.setFont(fontUI);
 		add(resNum);
 		
 		JLabel resRoomNum = new JLabel(reservstion.getRoom_number().toString()+"호");
 		resRoomNum.setBounds(300, 350, 300, 100);
-		resRoomNum.setFont(new Font("굴림", Font.BOLD, 35));
+		resRoomNum.setFont(fontUI);
 		add(resRoomNum);
 		
 		JLabel resStartDate = new JLabel(reservstion.getReservation_start());
 		resStartDate.setBounds(300, 438, 300, 100);
-		resStartDate.setFont(new Font("굴림", Font.BOLD, 35));
+		resStartDate.setFont(fontUI);
 		add(resStartDate);
 		
 		JLabel resEndDate = new JLabel(reservstion.getReservation_end());
 		resEndDate.setBounds(300, 526, 300, 100);
-		resEndDate.setFont(new Font("굴림", Font.BOLD, 35));
+		resEndDate.setFont(fontUI);
 		add(resEndDate);
 		
 		// 뒤로가기 버튼

@@ -1,24 +1,18 @@
 package database.dbObjects;
 
-public class Room {
+public class Room implements Comparable<Room>{
 	Integer room_id;
 	Integer room_number;
 	String room_type;
 	Integer room_fare;
 	String room_is_using_yn;
 	Integer room_floor;
-	
+
 	public Room() {
 	}
-	
-	public Room(
-			Integer room_id,
-			Integer room_number,
-			String room_type,
-			Integer room_fare,
-			String room_is_using_yn,
-			Integer room_floor
-			) {
+
+	public Room(Integer room_id, Integer room_number, String room_type, Integer room_fare, String room_is_using_yn,
+			Integer room_floor) {
 		this.room_id = room_id;
 		this.room_number = room_number;
 		this.room_type = room_type;
@@ -74,11 +68,19 @@ public class Room {
 	public void setRoom_floor(Integer room_floor) {
 		this.room_floor = room_floor;
 	}
-	
+
 	@Override
 	public String toString() {
-		return String.format("방번호 : %d/ 방종류 : %s/ 방요금 : %d \n", room_number,room_type,room_fare);
+		return String.format("선택 호실 : %d 방종류 : %s", room_number, room_type);
+	}
+
+	@Override
+	public int compareTo(Room room) {
+		if (room.getRoom_number() < room_number) {
+			return 1;
+		} else if (room.getRoom_number() > room_number) {
+			return -1;
+		}
+		return 0;
 	}
 }
-
-

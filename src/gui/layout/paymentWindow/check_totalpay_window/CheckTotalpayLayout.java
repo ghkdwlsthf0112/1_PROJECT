@@ -21,11 +21,15 @@ import gui.layout.paymentWindow.check_totalpay_window.actions.ConfirmedBtnAction
 import image.getImages;
 
 public class CheckTotalpayLayout extends JFrame{
-	final protected static ImageIcon mainImage = new getImages().getImageIcon(768, 1024, "src/image/background_image/background4.png");
+	final protected static ImageIcon mainImage = new getImages().getImageIcon(768, 1024, "src/image/background_image/totalpay.png");
+	final private static double DISCOUNT_PCT = 0.1;
+	final static Font fontUI = new Font("굴림", Font.BOLD, 35);
 
+	
 	public Reservation reservstion;
 	public Customer customer;
 	public Room room;
+	public Payment payment = new Payment();
 	
 	public JButton b1 = new PrevBtn();
 	public JButton b2 = new HomeBtn();
@@ -49,37 +53,37 @@ public class CheckTotalpayLayout extends JFrame{
 		imageLabel.setIcon(mainImage);
 		
 		JLabel resRoomNum = new JLabel(reservstion.getRoom_number().toString()+"호");
-		resRoomNum.setBounds(340, 230, 300, 100);
-		resRoomNum.setFont(new Font("굴림", Font.BOLD, 40));
+		resRoomNum.setBounds(300, 262, 300, 100);
+		resRoomNum.setFont(fontUI);
 		add(resRoomNum);
 		
 		JLabel resStartDate = new JLabel(reservstion.getReservation_start());
-		resStartDate.setBounds(340, 340, 300, 100);
-		resStartDate.setFont(new Font("굴림", Font.BOLD, 40));
+		resStartDate.setBounds(300, 350, 300, 100);
+		resStartDate.setFont(fontUI);
 		add(resStartDate);
 		
 		JLabel resEndDate = new JLabel(reservstion.getReservation_end());
-		resEndDate.setBounds(340, 450, 300, 100);
-		resEndDate.setFont(new Font("굴림", Font.BOLD, 40));
+		resEndDate.setBounds(300, 438, 300, 100);
+		resEndDate.setFont(fontUI);
 		add(resEndDate);
 		
 		
 		
 		//이용기간 계산 후 총 요금 계산		
-		double totalFare = room.getRoom_fare()*reservstion.getDiffDate().getDays();
+		double totalFare;
 		//DB payment
-		Payment payment = new Payment();		
-		double payPct = 1 - payment.getDiscount_pct();
-		
-		if(customer.getCustomer_yn() == "Y") {
- 			totalFare = totalFare*payPct;
+		payment.setDiscount_pct(DISCOUNT_PCT);
+		double payPct = 1 - DISCOUNT_PCT;
+		if(customer.getCustomer_yn().toString().trim().equals("Y")) {
+ 			totalFare = (room.getRoom_fare()*reservstion.getDiffDate().getDays())*payPct;
+		} else {
+			totalFare= room.getRoom_fare()*reservstion.getDiffDate().getDays();
 		}
-		
-		
+		payment.setPay_total((int)totalFare);
 		
 		JLabel resTotalFare = new JLabel(Integer.toString((int)totalFare)+"원");
-		resTotalFare.setBounds(340, 560, 300, 100);
-		resTotalFare.setFont(new Font("굴림", Font.BOLD, 40));
+		resTotalFare.setBounds(300, 526, 300, 100);
+		resTotalFare.setFont(fontUI);
 		add(resTotalFare);
 		
 		// 뒤로가기 버튼

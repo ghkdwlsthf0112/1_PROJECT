@@ -2,7 +2,6 @@ package database.dbObjects;
 
 public class Payment {
 	Integer pay_id;
-	Integer pay_number;
 	String reservation_number;
 	Double discount_pct;
 	Integer pay_total;
@@ -12,13 +11,11 @@ public class Payment {
 	}
 	public Payment(
 			Integer pay_id,
-			Integer pay_number,
 			String reservation_number,
 			Double discount_pct,
 			Integer pay_total) {
 		
 		this.pay_id = pay_id;
-		this.pay_number = pay_number;
 		this.reservation_number = reservation_number;
 		this.discount_pct = discount_pct;
 		this.pay_total = pay_total;
@@ -30,14 +27,6 @@ public class Payment {
 
 	public void setPay_id(Integer pay_id) {
 		this.pay_id = pay_id;
-	}
-
-	public Integer getPay_number() {
-		return pay_number;
-	}
-
-	public void setPay_number(Integer pay_number) {
-		this.pay_number = pay_number;
 	}
 
 	public String getReservation_number() {

@@ -15,7 +15,6 @@ import database.dbObjects.Customer;
 import database.dbObjects.Reservation;
 import database.dbObjects.Room;
 
-
 //DAO (Database Access Object) - DB에 쿼리문 보내고 결과 반영하는 객체
 public class ReservationDao {
 	// 예약번호로 정보를 가져와 확인하는 메서드 예약이 있으면 1 없으면 -1
@@ -100,6 +99,25 @@ public class ReservationDao {
 			String sql = "DELETE FROM reservation WHERE reservation_number LIKE ?";
 			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 				pstmt.setString(1, "%" + reservation_number);
+				return pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	
+	/**
+	 * DB에서 해당 예약번호의 예약을 찾아 삭제(체크아웃) 시켜주는 메서드
+	 * 
+	 * @param reservation_number == 예약번호
+	 * @return DB reservation delete
+	 */
+	public int adminCompulsionChkOut(String reservation_number) {
+		try (Connection conn = DBConnection.getConnection();) {
+			String sql = "DELETE FROM reservation WHERE reservation_number = ?";
+			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setString(1, reservation_number);
 				return pstmt.executeUpdate();
 			}
 		} catch (SQLException e) {
@@ -271,7 +289,7 @@ public class ReservationDao {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param reservation_number
@@ -288,10 +306,10 @@ public class ReservationDao {
 			return -1;
 		}
 	}
-	
-	
+
 	/**
 	 * 예약시 DB에 저장하기 위한 메서드
+	 * 
 	 * @param reservation
 	 * @return
 	 */
@@ -309,94 +327,87 @@ public class ReservationDao {
 		} catch (SQLException e) {
 			return -1;
 		}
-	
+
 	}
-	
+
 	/**
-	    * 체크인 시작 날짜에만 체크인 가능하게 
-	    * 
-	    * @param reservation_number - 예약번호
-	    * @return String 체크인 시작 날짜
-	    */
-	   public String getChkInStartDate(String reservation_number) {
-	      try (Connection conn = DBConnection.getConnection()){
-	         String sql = "SELECT reservation_start FROM reservation WHERE reservation_number LIKE ?";
-	         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-	            pstmt.setString(1, "%" + reservation_number);
-	            try (ResultSet rs = pstmt.executeQuery()){
-	               if (rs.next()) {
-	                  return rs.getString("reservation_start");
-	               }
-	            }
-	         }
-	      } catch (SQLException e) {
-	         e.printStackTrace();
-	      }
-	      return null;
-	   }
-	   
-	   /**
-	    * date가 startDate와 EndDate 사이에 있는지 반환  
-	    * 
-	    * @param date yyyymmdd
-	    * @param startDate yyyymmdd
-	    * @param endDate yyyymmdd
-	    * @return
-	   */
-	   public static boolean isWithinRange(String date, String startDate, String endDate) throws ParseException {
-	       if(date.length() != 10 || startDate.length() != 10 || endDate.length() != 10){
-	           return false;
-	       }        
-	   	       
-	       LocalDate localdate = LocalDate.parse(date);
-	       LocalDate startLocalDate = LocalDate.parse(startDate);
-	       LocalDate endLocalDate = LocalDate.parse(endDate);
-	       endLocalDate = endLocalDate.plusDays(1); // endDate는 포함하지 않으므로 +1일을 해줘야함.
-	       
-	       return ( ! localdate.isBefore( startLocalDate ) ) && ( localdate.isBefore( endLocalDate ) );
-	   }
-	   
-	   /**
-	    * 예약내용에서 저장되어 있는 방 정보 불러오기
-	    * @return
-	    */
-	   public static List<Room> getReservationRoom(String start, String end) {
-			String sql = "SELECT * FROM reservation INNER JOIN room USING (room_number)";
-			try (
-				Connection conn = DBConnection.getConnection(); 
-				PreparedStatement pstmt = conn.prepareStatement(sql);
-			) {
-				List<Room> rooms = new ArrayList<>();
+	 * 체크인 시작 날짜에만 체크인 가능하게
+	 * 
+	 * @param reservation_number - 예약번호
+	 * @return String 체크인 시작 날짜
+	 */
+	public String getChkInStartDate(String reservation_number) {
+		try (Connection conn = DBConnection.getConnection()) {
+			String sql = "SELECT reservation_start FROM reservation WHERE reservation_number LIKE ?";
+			try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setString(1, "%" + reservation_number);
 				try (ResultSet rs = pstmt.executeQuery()) {
-					while (rs.next() == true) {
-						// 예약되어 있는 기간 받아오고
-						String resStart = rs.getString("reservation_start");
-						String resEnd = rs.getString("reservation_end");
-						// 그 예약내용 방 객체 만들고
-						Room room = new Room(
-								rs.getInt("Room_id"),
-								rs.getInt("Room_number"),
-								rs.getString("Room_type"),
-								rs.getInt("Room_fare"),
-								rs.getString("Room_is_using_yn"),
-								rs.getInt("Room_floor")
-						);
-						// 선택 날짜에 사용가능한지 확인 후 가능하면 rooms list에 저장
-						if(isWithinRange(start,resStart,resEnd) == false && isWithinRange(end,resStart,resEnd)== false) {
-							rooms.add(room);
-						}
-						
+					if (rs.next()) {
+						return rs.getString("reservation_start");
 					}
-									
-					return rooms;
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
-			} catch (SQLException e) {
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * date가 startDate와 EndDate 사이에 있는지 반환
+	 * 
+	 * @param date      yyyymmdd
+	 * @param startDate yyyymmdd
+	 * @param endDate   yyyymmdd
+	 * @return
+	 */
+	public static boolean isWithinRange(String date, String startDate, String endDate) throws ParseException {
+		if (date.length() != 10 || startDate.length() != 10 || endDate.length() != 10) {
+			return false;
+		}
+
+		LocalDate localdate = LocalDate.parse(date);
+		LocalDate startLocalDate = LocalDate.parse(startDate);
+		LocalDate endLocalDate = LocalDate.parse(endDate);
+		endLocalDate = endLocalDate.plusDays(1); // endDate는 포함하지 않으므로 +1일을 해줘야함.
+
+		return (!localdate.isBefore(startLocalDate)) && (localdate.isBefore(endLocalDate));
+	}
+
+	/**
+	 * 예약내용에서 저장되어 있는 방 정보 불러오기
+	 * 
+	 * @return
+	 */
+	public static List<Room> getReservationRoom(String start, String end) {
+		String sql = "SELECT * FROM reservation INNER JOIN room USING (room_number)";
+		try (Connection conn = DBConnection.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			List<Room> rooms = new ArrayList<>();
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs.next() == true) {
+					// 예약되어 있는 기간 받아오고
+					String resStart = rs.getString("reservation_start");
+					String resEnd = rs.getString("reservation_end");
+					// 그 예약내용 방 객체 만들고
+					Room room = new Room(rs.getInt("Room_id"), rs.getInt("Room_number"), rs.getString("Room_type"),
+							rs.getInt("Room_fare"), rs.getString("Room_is_using_yn"), rs.getInt("Room_floor"));
+					// 선택 날짜에 사용가능한지 확인 후 가능하면 rooms list에 저장
+					if (isWithinRange(start, resStart, resEnd) == true
+							|| isWithinRange(end, resStart, resEnd) == true) {
+						rooms.add(room);
+					}
+
+				}
+
+				return rooms;
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return null;
-	   }
-	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

@@ -11,9 +11,11 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import actions.EmailSend;
+import database.PaymentDao;
 import database.ReservationDao;
 import database.ReservationHistoryDao;
 import database.dbObjects.Customer;
+import database.dbObjects.Payment;
 import database.dbObjects.Reservation;
 import database.dbObjects.Room;
 import gui.layout.main.hotel_main.HotelMainLayout;
@@ -26,7 +28,8 @@ public class PaymentBtnActionListener implements ActionListener {
 	Reservation reservstion;
 	Customer customer;
 	Room room;
-
+	Payment payment;
+	
 	JButton paymentBtn;
 	JFrame prevMainFrame;
 	JFrame mainFrame;
@@ -35,13 +38,10 @@ public class PaymentBtnActionListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == paymentBtn) {
-			admindao.getReservstions("%").get(1);
+			
 			String newReservationNum = duplicateNum();
 			reservstion.setReservation_number(newReservationNum);
-			int totalFare = room.getRoom_fare()*reservstion.getDiffDate().getDays();
-			System.out.println(room.toString());
-			System.out.println(reservstion.toString());
-			System.out.println(customer.toString());
+			payment.setReservation_number(newReservationNum);
 			new EmailSend().ReservationSend(
 					reservstion.getReservation_number(), 
 					customer.getCustomer_name(),
@@ -49,11 +49,12 @@ public class PaymentBtnActionListener implements ActionListener {
 					reservstion.getReservation_start(), 
 					reservstion.getReservation_end(),
 					Integer.toString(reservstion.getDiffDate().getDays()), 
-					Integer.toString(totalFare),
+					Integer.toString(payment.getPay_total()),
 					customer.getCustomer_phone_number());
 			String popUpMess = customer.getCustomer_name()+"님\n예약번호 "+reservstion.getReservation_number()+"의 결제가 완료되었습니다!\n감사합니다\n[입력하신 메일로 예약내역이 발송되었습니다]";
 			admindao.updateReservation(reservstion);
 			new ReservationHistoryDao().updateReservationHistory(reservstion);
+			new PaymentDao().InsertPayment(payment);
 			new JOptionPane().showMessageDialog(mainFrame, popUpMess , "Message",JOptionPane.INFORMATION_MESSAGE );
 			new HotelMainLayout();
 			
@@ -66,6 +67,7 @@ public class PaymentBtnActionListener implements ActionListener {
 		this.reservstion = mainFrame.reservstion;
 		this.customer = mainFrame.customer;
 		this.room = mainFrame.room;
+		this.payment = mainFrame.payment;
 		this.prevMainFrame = mainFrame.prevMainFrame;
 		this.paymentBtn = mainFrame.paymentBtn;
 		this.mainFrame = mainFrame;
@@ -109,19 +111,24 @@ public class PaymentBtnActionListener implements ActionListener {
 	}
 
 	private static String duplicateNum() {
+		// 랜덤 예약번호 받기
 		String reservationCode = generateCode();
+		
+		// 중복 체크
 		List<String> reNum = getReservations();
-
-		int count = reNum.size();
-		while (count > 0) {
-			for (String num : reNum) {
-				if (num.equals(reservationCode)) {
-					reservationCode = generateCode();
-					count = reNum.size();
-				} else {
-					--count;
+		if(reNum!=null) {
+			int count = reNum.size();
+			while (count > 0) {
+				for (String num : reNum) {
+					if (num.equals(reservationCode)) {
+						reservationCode = generateCode();
+						count = reNum.size();
+					} else {
+						--count;
+					}
 				}
 			}
+			return reservationCode;
 		}
 		return reservationCode;
 	}
