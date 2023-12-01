@@ -21,6 +21,7 @@ import javax.swing.JScrollPane;
 
 import database.ReservationDao;
 import database.RoomDao;
+import database.RoomImageDao;
 import database.dbObjects.Reservation;
 import database.dbObjects.Room;
 import gui.layout.main.reservation_window.ReservationLayout;
@@ -46,16 +47,13 @@ public class SearchBtnActionListener implements ActionListener {
 			// 지정기간에 사용중인 방 검색
 			List<Room> resRooms = adminDao.getReservationRoom(mainFrame.chkInDateTextField.getText(),
 					mainFrame.chkOutDateTextField.getText());
-			System.out.println(resRooms.toString());
 			
 			// 방 전체 가져오기
 			Map<Integer, Room> rooms = new RoomDao().getRoomsMap();
-			System.out.println(rooms.toString());
 			// 예약 내용에 있는 방에서 지정기간 사용중인 방 삭제
 //			Map<Integer, Room> rooms = new RoomDao().getRooms();
 			for (Room room : resRooms) {
 				rooms.remove(room.getRoom_number());
-				System.out.println(rooms.toString());
 			}
 			
 				
@@ -77,7 +75,16 @@ public class SearchBtnActionListener implements ActionListener {
 					JLabel roomImage = new JLabel();
 					addRoom.setPreferredSize(new Dimension(600, 120));
 
-					ImageIcon Image = new getImages().getImageIcon(200, 130, "src/image/hotel_image/디럭스룸1.png");
+//					ImageIcon Image;
+//					if(room.getRoom_type().equals("럭셔리")) {
+//						Image = new getImages().getImageIcon(200, 130, "src/image/hotel_image/럭셔리.jpg");
+//					} else if(room.getRoom_type().equals("더블")) {
+//						Image = new getImages().getImageIcon(200, 130, "src/image/hotel_image/더블.jpg");
+//					} else {
+//						Image = new getImages().getImageIcon(200, 130, "src/image/hotel_image/싱글.jpg");
+//					}
+					
+					ImageIcon Image = new getImages().getImageIcon(200, 130, new RoomImageDao().getRoomImageRute(room.getRoom_number()).toString());
 					roomImage.setIcon(Image);
 					addRoom.add(roomImage);
 
@@ -104,7 +111,6 @@ public class SearchBtnActionListener implements ActionListener {
 			} else {
 				centerPanel.removeAll();
 				info.showMessageDialog(mainFrame, "선택가능한 방이 없습니다", "Message", JOptionPane.INFORMATION_MESSAGE);
-				System.out.println("체크인 가능한 방이 없습니다.");
 			}
 			scrollPane.setViewportView(centerPanel);
 //			availableRooms.removeAll(availableRooms);

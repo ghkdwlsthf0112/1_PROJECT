@@ -155,12 +155,12 @@ public class EmailSend {
 		String receiver = sc; // 메일 받을 주소
 		String title = name + "님의 델루나호텔 예약정보 입니다";
 		String content = 
-				"회원님이 예약하신 델루나호텔 예약정보 입니다</br>"+
-				name+"고객님의 예약번호는"+reservationNum+"입니다</br>"+
-				"방번호 : " +roomNO+"호</br>"+
-				"체크인 날짜: " +checkIn+"일</br>"+
-				"체크아웃 날짜는 "+checkOut+"일 </br>"+
-				"사용기간: " +useDay+ "일</br>"+
+				"회원님이 예약하신 델루나호텔 예약정보 입니다<br/>"+
+				name+"고객님의 예약번호는"+reservationNum+"입니다<br/>"+
+				"방번호 : " +roomNO+"호<br/>"+
+				"체크인 날짜: " +checkIn+"일<br/>"+
+				"체크아웃 날짜는 "+checkOut+"일 <br/>"+
+				"사용기간: " +useDay+ "일<br/>"+
 				"결제하신금액: " +payMoney+ "원 입니다";
 				
 		Message message = new MimeMessage(session);

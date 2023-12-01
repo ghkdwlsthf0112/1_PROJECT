@@ -142,71 +142,81 @@ public class ReservationCalendar extends JFrame implements ActionListener {
 
 	// 체크인 날짜 선택을 오늘보다 전으로 선택 하면 안됨
 	public int errorCheck() {
-	      Calendar currentDate = Calendar.getInstance();
+		Calendar currentDate = Calendar.getInstance();
 //	      Date date = new Date();
-	      int result = 0;
+		int result = 0;
 
-	      String selectDateStr = mainFrame.chkInDateTextField.getText();
-	      SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String selectDateStr = mainFrame.chkInDateTextField.getText();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
-	      try {
-	         Date selectDate = format.parse(selectDateStr);
+		try {
+			Date selectDate = format.parse(selectDateStr);
 
-	         if (selectDate != null) {
-	            currentDate.set(Calendar.HOUR_OF_DAY, 0);
-	            currentDate.set(Calendar.MINUTE, 0);
-	            currentDate.set(Calendar.SECOND, 0);
-	            currentDate.set(Calendar.MILLISECOND, 0);
-	            
+			if (selectDate != null) {
+				currentDate.set(Calendar.HOUR_OF_DAY, 0);
+				currentDate.set(Calendar.MINUTE, 0);
+				currentDate.set(Calendar.SECOND, 0);
+				currentDate.set(Calendar.MILLISECOND, 0);
+
 //	            System.out.println("현재 날짜 : " + date);
 //	            System.out.println("선택 날짜 : " + selectDate);
 //	            System.out.println("-------------------------------");
 //	            System.out.println("현재 날짜 : " + currentDate.getTime());
 //	            System.out.println("선택 날짜 : " + selectDate);
-	            if (selectDate.before(currentDate.getTime()) && !selectDateStr.equals(cf.getToday())) {
-	               result = 1;
-	            }
-	         }
-	      } catch (ParseException e) {
-	         e.printStackTrace();
-	      }
-	      return result;
-	   }
+				if (selectDate.before(currentDate.getTime()) && !selectDateStr.equals(cf.getToday())) {
+					result = 1;
+				}
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 		for (int i = 7; i < buttons.length; i++) {
 
 			if (e.getSource() == buttons[i] && !buttons[i].getText().isEmpty()) {
 				// 날짜 yyyy-mm-dd로 문자열
-				String selectDate = cf.year + "-" + cf.month + "-" + buttons[i].getText();
+				String selectDateStr = cf.year + "-" + cf.month + "-" + buttons[i].getText();
+				Date selectDate = null;
 				clickCount++;
 
-				if (clickCount % 2 == 1) {
-					// 홀수 클릭 - 출발 날짜
-					// 시작 날짜로 설정하고 텍스트필드에 업데이트
-					mainFrame.chkInDateTextField.setText(selectDate);
-					// 도착 날짜 초기화
-					mainFrame.chkOutDateTextField.setText("");
-					if (errorCheck() == 1) {
-						JOptionPane.showMessageDialog(this, "당일보다 이전날짜는 선택 불가능합니다");
-						mainFrame.chkInDateTextField.setText("");
+				try {
+					selectDate = dateFormat.parse(selectDateStr);
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
+
+				if (selectDate != null) {
+					if (clickCount % 2 == 1) {
+						// 홀수 클릭 - 출발 날짜
+						// 시작 날짜로 설정하고 텍스트필드에 업데이트
+						mainFrame.chkInDateTextField.setText(dateFormat.format(selectDate));
+						// 도착 날짜 초기화
 						mainFrame.chkOutDateTextField.setText("");
-						clickCount = 0;
+						if (errorCheck() == 1) {
+							JOptionPane.showMessageDialog(this, "당일보다 이전날짜는 선택 불가능합니다");
+							mainFrame.chkInDateTextField.setText("");
+							mainFrame.chkOutDateTextField.setText("");
+							clickCount = 0;
+						} else {
+							showAvailableRooms(selectDateStr, null);
+						}
 					} else {
-						showAvailableRooms(selectDate, null);
+						mainFrame.chkOutDateTextField.setText(dateFormat.format(selectDate));
+						if (dayMinusCheck() == 1) {
+							JOptionPane.showMessageDialog(this, "불가능한 선택입니다");
+							mainFrame.chkOutDateTextField.setText("");
+							clickCount = 0;
+						} else {
+							showAvailableRooms(mainFrame.chkInDateTextField.getText(), selectDateStr);
+						}
+						dispose();
 					}
-				} else {
-					mainFrame.chkOutDateTextField.setText(selectDate);
-					if (dayMinusCheck() == 1) {
-						JOptionPane.showMessageDialog(this, "불가능한 선택입니다");
-						mainFrame.chkOutDateTextField.setText("");
-						clickCount = 0;
-					} else {
-						showAvailableRooms(mainFrame.chkInDateTextField.getText(), selectDate);
-					}
-					dispose();
 				}
 
 			}

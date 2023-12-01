@@ -12,6 +12,7 @@ import gui.layout.login.member_login_window.MemberLoginLayout;
 import gui.layout.login.non_member_check_in.NonMemberCheckLayout;
 import gui.layout.main.admin_window.AdminChkResv;
 import gui.layout.main.admin_window.AdminLayout;
+import gui.layout.main.admin_window.AdminReservationHistory;
 import gui.layout.main.check_in_window.CheckInLayout;
 import gui.layout.main.check_out_window.CheckOut;
 import gui.layout.main.cover.CoverLayout;
@@ -41,7 +42,7 @@ public class PrevBtnActionListener implements ActionListener {
 	JButton CheckTotalpayLayoutPrevBtn;
 	JButton ReservationLayoutPrevBtn;
 	JButton AdminChkResvPrevBtn;
-
+	JButton AdminReservationHistoryPrevBtn;
 	Customer customer;
 
 
@@ -90,6 +91,9 @@ public class PrevBtnActionListener implements ActionListener {
 			new LoginChkLayout();
 			mainFrame.dispose();
 		}  else if(e.getSource() == AdminChkResvPrevBtn) {
+			new AdminLayout();
+			mainFrame.dispose();
+		} else if(e.getSource() == AdminReservationHistoryPrevBtn) {
 			new AdminLayout();
 			mainFrame.dispose();
 		} 
@@ -170,5 +174,10 @@ public class PrevBtnActionListener implements ActionListener {
 	public PrevBtnActionListener(AdminChkResv mainFrame) {
 		this.mainFrame = mainFrame;
 		this.AdminChkResvPrevBtn = mainFrame.b1;
+	}
+	
+	public PrevBtnActionListener(AdminReservationHistory mainFrame) {
+		this.mainFrame = mainFrame;
+		this.AdminReservationHistoryPrevBtn = mainFrame.b1;
 	}
 }

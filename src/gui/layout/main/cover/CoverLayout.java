@@ -30,8 +30,11 @@ public class CoverLayout extends JFrame {
          "src/image/background_image/background2.png");
    public JButton coverBtn = new CoverBtn(mainImage1);
    int currentImgIndex = 0;
-   public final String[] btn = { "src/image/background_image/background1.png",
-         "src/image/background_image/background2.png" };
+   public final String[] btn = { 
+		   "src/image/background_image/background1.png",
+         "src/image/background_image/background2.png",
+         "src/image/background_image/baskin1.png",
+         "src/image/background_image/baskin2.jpg" };
 
    public CoverLayout() {
       setLayout(null);
