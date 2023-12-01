@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -47,24 +48,30 @@ public class ChkReservIsExistActionListener implements ActionListener{
 	         // 예약 번호
 	         String reservationNumber = displayField.getText();
 	         // 체크인 시작 날짜 
-	         String chkInStartDate = reservationDao.getChkInStartDate(reservationNumber);
-	         // 현재 날짜 가져오기
-	         String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(LocalDate.now());
-	         
-	         // 예약 시작 날짜와 현재 날짜 비교
-	         if (chkInStartDate.equals(currentDate)) {
-	            if (reservationDao.chkReservation(displayField.getText()) == 1 && mainFrame.getTitle().equals("예약확인")) {
-	               new ReservationInfo(reservationDao.getReservstion(displayField.getText()));
-	               mainFrame.dispose();
-	            } else if (reservationDao.chkReservation(displayField.getText()) == 1 && mainFrame.getTitle().equals("예약체크인")) {
-	               new ReservationChkIn(reservationDao.getReservstion(displayField.getText()));
-	               mainFrame.dispose();
-	            } else {
-	               info.showMessageDialog(mainFrame, "확인되는 예약이 없습니다.", "Message",JOptionPane.INFORMATION_MESSAGE );
-	            }
+	         if(reservationDao.getChkInStartDate(reservationNumber)==null) {
+	        	 info.showMessageDialog(mainFrame, "확인되는 예약이 없습니다.", "Message",JOptionPane.INFORMATION_MESSAGE );
 	         } else {
-	            info.showMessageDialog(mainFrame, "당일 외에는 체크인이 불가능합니다.", "Message",JOptionPane.INFORMATION_MESSAGE );
+	        	 String chkInStartDate = reservationDao.getChkInStartDate(reservationNumber);
+	        	 // 현재 날짜 가져오기
+	        	 String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(LocalDateTime.now());
+	        	 
+	        	 // 예약 시작 날짜와 현재 날짜 비교
+	        	 if (chkInStartDate.equals(currentDate)) {
+	        		 if (reservationDao.chkReservation(displayField.getText()) == 1 && mainFrame.getTitle().equals("예약확인")) {
+	        			 new ReservationInfo(reservationDao.getReservstion(displayField.getText()));
+	        			 mainFrame.dispose();
+	        		 } else if (reservationDao.chkReservation(displayField.getText()) == 1 && mainFrame.getTitle().equals("예약체크인")) {
+	        			 new ReservationChkIn(reservationDao.getReservstion(displayField.getText()));
+	        			 mainFrame.dispose();
+	        		 } else {
+	        			 info.showMessageDialog(mainFrame, "확인되는 예약이 없습니다.", "Message",JOptionPane.INFORMATION_MESSAGE );
+	        		 }
+	        	 } else {
+	        		 info.showMessageDialog(mainFrame, "당일 외에는 체크인이 불가능합니다.", "Message",JOptionPane.INFORMATION_MESSAGE );
+	        	 }
+	  
 	         }
+	         
 	         
 	      }
 	   }

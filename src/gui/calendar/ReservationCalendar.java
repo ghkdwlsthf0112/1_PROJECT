@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -141,25 +142,36 @@ public class ReservationCalendar extends JFrame implements ActionListener {
 
 	// 체크인 날짜 선택을 오늘보다 전으로 선택 하면 안됨
 	public int errorCheck() {
-		Date date = new Date();
-		int result = 0;
+	      Calendar currentDate = Calendar.getInstance();
+//	      Date date = new Date();
+	      int result = 0;
 
-		String selectDateStr = mainFrame.chkInDateTextField.getText();
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	      String selectDateStr = mainFrame.chkInDateTextField.getText();
+	      SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
-		try {
-			Date selectDate = format.parse(selectDateStr);
+	      try {
+	         Date selectDate = format.parse(selectDateStr);
 
-			if (selectDate != null) {
-				if (selectDate.before(date) && !selectDateStr.equals(cf.getToday())) {
-					result = 1;
-				}
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
+	         if (selectDate != null) {
+	            currentDate.set(Calendar.HOUR_OF_DAY, 0);
+	            currentDate.set(Calendar.MINUTE, 0);
+	            currentDate.set(Calendar.SECOND, 0);
+	            currentDate.set(Calendar.MILLISECOND, 0);
+	            
+//	            System.out.println("현재 날짜 : " + date);
+//	            System.out.println("선택 날짜 : " + selectDate);
+//	            System.out.println("-------------------------------");
+//	            System.out.println("현재 날짜 : " + currentDate.getTime());
+//	            System.out.println("선택 날짜 : " + selectDate);
+	            if (selectDate.before(currentDate.getTime()) && !selectDateStr.equals(cf.getToday())) {
+	               result = 1;
+	            }
+	         }
+	      } catch (ParseException e) {
+	         e.printStackTrace();
+	      }
+	      return result;
+	   }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
