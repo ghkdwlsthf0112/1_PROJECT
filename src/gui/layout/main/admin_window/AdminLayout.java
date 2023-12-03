@@ -9,6 +9,8 @@ import actions.HomeBtnActionListener;
 import actions.PrevBtnActionListener;
 import gui.buttons.HomeBtn;
 import gui.buttons.PrevBtn;
+import gui.layout.main.admin_window.actions.AdminChkCustomerBtnActionListiner;
+import gui.layout.main.admin_window.actions.AdminChkHistoryBtnActionListiner;
 import gui.layout.main.admin_window.actions.AdminChkResActionListiner;
 import gui.layout.main.admin_window.actions.ExitProgramActionListiner;
 import gui.layout.main.admin_window.buttons.AdminChkCustomerBtn;
@@ -44,11 +46,11 @@ public class AdminLayout extends JFrame{
 		
 		// 사용자 관리
 		label.add(b5);
-		b5.addActionListener(null);
+		b5.addActionListener(new AdminChkCustomerBtnActionListiner(this));
 		
 		// history 보기
 		label.add(b6);
-		b6.addActionListener(null);
+		b6.addActionListener(new AdminChkHistoryBtnActionListiner(this));
 		
 		// 뒤로가기 버튼
 		b1.addActionListener(new PrevBtnActionListener(this));
