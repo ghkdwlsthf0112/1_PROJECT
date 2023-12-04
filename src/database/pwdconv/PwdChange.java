@@ -1,4 +1,4 @@
-package pwdconv;
+package database.pwdconv;
 
 import java.security.MessageDigest;
 

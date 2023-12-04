@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import database.DBConnection;
-import pwdconv.PwdChange;
+import database.pwdconv.PwdChange;
 
 public class MemberDao {
 

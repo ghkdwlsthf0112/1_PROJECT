@@ -45,7 +45,7 @@ public class GuideMapLayout extends JFrame {
 		add(Label);
 	
 		
-		floorLabel.setIcon(new getImages().getImageIcon(650, 470, "src/image/guide_map/가이드맵예시1.jpg"));
+		floorLabel.setIcon(new getImages().getImageIcon(675, 470, "src/image/guide_map/가이드맵예시1.jpg"));
 		floorLabel.setBounds(50, 250, 650, 470);
 		Label.add(floorLabel);
 				

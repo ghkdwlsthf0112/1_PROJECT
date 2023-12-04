@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import database.dbObjects.Customer;
-import pwdconv.PwdChange;
+import database.pwdconv.PwdChange;
 
 public class CustomerDao {
 
