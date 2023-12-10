@@ -231,7 +231,4 @@ public class AdminReservationHistory extends JFrame {
 
 	}
 
-	public static void main(String[] args) {
-		new AdminReservationHistory();
-	}
 }
